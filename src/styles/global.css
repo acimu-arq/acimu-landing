@@ -8,7 +8,9 @@
   --century-gothic: 'century-gothic', sans-serif;
 
   --color-text: #12100f;
+  --color-text-light: #4a4a4a;
   --color-background: #f2f1f1;
+  --color-background-alt: #ffffff;
   --color-background-rgb: 242, 241, 241;
   --color-primary: #4d4229;
   --color-accent: #a08d61;
@@ -26,7 +28,9 @@
 
 [data-theme='dark'] {
   --color-text: #f3f4f6;
+  --color-text-light: #d1d5db;
   --color-background: #000;
+  --color-background-alt: #1a1a1a;
   --color-background-rgb: 242, 241, 241;
   --color-primary: #4d4229;
   --color-accent: #a08d61;

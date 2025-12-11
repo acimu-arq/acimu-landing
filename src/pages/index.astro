@@ -50,6 +50,18 @@ const slides = [
       <blockquote>¡Espacios que conectan y perduran!</blockquote>
     </div>
   </section>
+
+  <!-- FAQ Invitation -->
+  <section class="container faq-invite">
+    <div class="faq-invite-content">
+      <h2>¿Tienes preguntas?</h2>
+      <p>
+        Consulta nuestra sección de preguntas frecuentes para resolver tus dudas
+        sobre nuestros servicios, procesos y más.
+      </p>
+      <a href="/contact#faq" class="btn-primary">Ver Preguntas Frecuentes</a>
+    </div>
+  </section>
 </Layout>
 
 <style>
@@ -239,6 +251,41 @@ const slides = [
     .slide {
       min-width: 100%;
     }
+  }
+
+  /* FAQ Invite */
+  .faq-invite {
+    padding-bottom: var(--spacing-xl);
+    text-align: center;
+  }
+  .faq-invite-content {
+    background-color: var(--color-background-alt);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius);
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid var(--color-muted);
+  }
+  .faq-invite h2 {
+    margin-bottom: var(--spacing-md);
+  }
+  .faq-invite p {
+    margin-bottom: var(--spacing-lg);
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+  }
+  .btn-primary {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: white;
+    padding: var(--spacing-sm) var(--spacing-xl);
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+  }
+  .btn-primary:hover {
+    opacity: 0.9;
   }
 </style>
 

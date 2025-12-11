@@ -1,6 +1,12 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import { Mail, Phone, MapPin, MessageCircle } from 'lucide-astro';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  MessageCircle,
+  ChevronDown,
+} from 'lucide-astro';
 ---
 
 <Layout
@@ -158,8 +164,131 @@ import { Mail, Phone, MapPin, MessageCircle } from 'lucide-astro';
         <MessageCircle size={24} />
       </a>
     </section>
+
+    <section class="faq-section" id="faq">
+      <h2>Preguntas Frecuentes</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <h3>
+              ¿Cuánto tiempo toma realizar los planos y cuál es el tiempo
+              estimado de aprobación en el municipio?
+            </h3>
+            <ChevronDown class="faq-icon" size={24} />
+          </button>
+          <div class="faq-answer">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <h3>
+              ¿Qué información y documentos debo entregar para que se inicie el
+              diseño arquitectónico desde cero?
+            </h3>
+            <ChevronDown class="faq-icon" size={24} />
+          </button>
+          <div class="faq-answer">
+            <p>
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+              officia deserunt mollit anim id est laborum. Sed ut perspiciatis
+              unde omnis iste natus error sit voluptatem accusantium doloremque
+              laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+              veritatis.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <h3>
+              ¿Trabajan solo diseño arquitectónico o también construcción?
+            </h3>
+            <ChevronDown class="faq-icon" size={24} />
+          </button>
+          <div class="faq-answer">
+            <p>
+              Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
+              aut fugit, sed quia consequuntur magni dolores eos qui ratione
+              voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
+              ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
+              non numquam eius modi tempora incidunt.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <h3>¿Se encargan de tramitar permisos y licencias?</h3>
+            <ChevronDown class="faq-icon" size={24} />
+          </button>
+          <div class="faq-answer">
+            <p>
+              At vero eos et accusamus et iusto odio dignissimos ducimus qui
+              blanditiis praesentium voluptatum deleniti atque corrupti quos
+              dolores et quas molestias excepturi sint occaecati cupiditate non
+              provident, similique sunt in culpa qui officia deserunt mollitia
+              animi.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <h3>
+              ¿Quien se encarga de supervisar, una vez comenzada la obra ? ¿el
+              permiso de construccion garantiza que el municipio no paralice ni
+              multe la obra ?
+            </h3>
+            <ChevronDown class="faq-icon" size={24} />
+          </button>
+          <div class="faq-answer">
+            <p>
+              Nam libero tempore, cum soluta nobis est eligendi optio cumque
+              nihil impedit quo minus id quod maxime placeat facere possimus,
+              omnis voluptas assumenda est, omnis dolor repellendus. Temporibus
+              autem quibusdam et aut officiis debitis aut rerum necessitatibus
+              saepe eveniet.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+
+    faqQuestions.forEach((question) => {
+      question.addEventListener('click', () => {
+        const isExpanded = question.getAttribute('aria-expanded') === 'true';
+        const answer = question.nextElementSibling as HTMLElement;
+
+        // Close all other answers
+        faqQuestions.forEach((q) => {
+          if (q !== question) {
+            q.setAttribute('aria-expanded', 'false');
+            (q.nextElementSibling as HTMLElement).style.maxHeight = null;
+          }
+        });
+
+        // Toggle current answer
+        question.setAttribute('aria-expanded', !isExpanded ? 'true' : 'false');
+        if (!isExpanded) {
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        } else {
+          answer.style.maxHeight = null;
+        }
+      });
+    });
+  });
+</script>
 
 <style>
   .container {
@@ -185,6 +314,78 @@ import { Mail, Phone, MapPin, MessageCircle } from 'lucide-astro';
     .contact-content {
       grid-template-columns: 1fr;
     }
+  }
+
+  /* FAQ Section */
+  .faq-section {
+    padding: var(--spacing-xl) 0;
+    margin-bottom: var(--spacing-xl);
+    border-top: 1px solid var(--color-muted);
+  }
+
+  .faq-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .faq-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    background-color: var(--color-background);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-muted);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-family: var(--font-serif);
+    color: var(--color-text);
+  }
+
+  .faq-question h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    color: var(--color-primary);
+    padding-right: var(--spacing-md);
+  }
+
+  .faq-icon {
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    color: var(--color-primary);
+  }
+
+  .faq-question[aria-expanded='true'] .faq-icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+
+  .faq-answer p {
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+    margin: 0;
+    color: var(--color-text-light);
+    line-height: 1.6;
   }
 
   /* Actions */
