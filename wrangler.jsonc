@@ -2,6 +2,6 @@
   "name": "acimu",
   "compatibility_date": "2025-10-22",
   "assets": {
-    "directory": "./dist"
-  }
+    "directory": "./dist",
+  },
 }

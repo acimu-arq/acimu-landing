@@ -4,7 +4,8 @@ const projects = [
   {
     slug: 'loyaresidence',
     title: 'RESIDENCIA LOYA',
-    description: 'Para el desarrollo del proyecto se consideró principalmente las necesidad del cliente en el ámbito topográfico, ambiental, visual, funcional y de accesibilidad. La vivienda proyecta de dos pisos, alberga dos mini departamentos con los siguientes espacios: sala - comedor, cocina, dos dormitorios, un baño y una zona de lavado, la accesibilidad a cada departamento está dado por unas gradas de conexión externas. A su vez se consideró al exterior tres espacios independientes destinados a parqueaderos, y en el costado lateral derecho una proyección de camino hacia los terrenos colindantes.',
+    description:
+      'Para el desarrollo del proyecto se consideró principalmente las necesidad del cliente en el ámbito topográfico, ambiental, visual, funcional y de accesibilidad. La vivienda proyecta de dos pisos, alberga dos mini departamentos con los siguientes espacios: sala - comedor, cocina, dos dormitorios, un baño y una zona de lavado, la accesibilidad a cada departamento está dado por unas gradas de conexión externas. A su vez se consideró al exterior tres espacios independientes destinados a parqueaderos, y en el costado lateral derecho una proyección de camino hacia los terrenos colindantes.',
     location: 'Quito, Ecuador',
     startDate: '2025-01-15',
     type: 'Residential',
@@ -40,11 +41,13 @@ const projects = [
       },
       {
         url: `${CDN_URL}/portfolio/loya-residence/3-concept.webp`,
-        caption: 'Conceptualización del diseño arquitectónico (Dezplazamiento, Definición)',
+        caption:
+          'Conceptualización del diseño arquitectónico (Dezplazamiento, Definición)',
       },
       {
         url: `${CDN_URL}/portfolio/loya-residence/4-concept.webp`,
-        caption: 'Conceptualización del diseño arquitectónico (Volumenes en planta alta y planta baja)',
+        caption:
+          'Conceptualización del diseño arquitectónico (Volumenes en planta alta y planta baja)',
       },
       {
         url: `${CDN_URL}/portfolio/loya-residence/5-implantation.webp`,
@@ -76,11 +79,13 @@ const projects = [
       },
       {
         url: `${CDN_URL}/portfolio/loya-residence/12-construction-detail.webp`,
-        caption: 'Detalle constructivo del proyecto (General, Losa colaborante)',
+        caption:
+          'Detalle constructivo del proyecto (General, Losa colaborante)',
       },
       {
         url: `${CDN_URL}/portfolio/loya-residence/13-construction-detail.webp`,
-        caption: 'Detalle constructivo del proyecto (Columna-Viga, Anclaje-columna)',
+        caption:
+          'Detalle constructivo del proyecto (Columna-Viga, Anclaje-columna)',
       },
     ],
     url: '/portfolio/loyaresidence',
