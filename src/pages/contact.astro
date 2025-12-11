@@ -3,11 +3,17 @@ import Layout from '@/layouts/Layout.astro';
 import { Mail, Phone, MapPin, MessageCircle } from 'lucide-astro';
 ---
 
-<Layout title="Contact ACIMU" description="Get in touch with us for collaborations, inquiries, or to start your next project.">
+<Layout
+  title="Contact ACIMU"
+  description="Get in touch with us for collaborations, inquiries, or to start your next project."
+>
   <main class="container">
     <section class="contact-intro">
       <h1>Contactanos</h1>
-      <p>¿Tenemos alguna sugerencia? ¿Quieres saber más sobre nuestros servicios? ¿Quieres colaborar con nosotros? ¡Contáctanos!</p>
+      <p>
+        ¿Tenemos alguna sugerencia? ¿Quieres saber más sobre nuestros servicios?
+        ¿Quieres colaborar con nosotros? ¡Contáctanos!
+      </p>
     </section>
 
     <section class="contact-content">
@@ -15,25 +21,37 @@ import { Mail, Phone, MapPin, MessageCircle } from 'lucide-astro';
         <h2>Contactanos</h2>
         <div class="info-item">
           <Mail size={24} />
-          <a href="mailto:arquitectos.cinco.mas.uno@gmail.com">arquitectos.cinco.mas.uno@gmail.com</a>
+          <a href="mailto:arquitectos.cinco.mas.uno@gmail.com"
+            >arquitectos.cinco.mas.uno@gmail.com</a
+          >
         </div>
         <div class="info-item">
           <Phone size={24} />
           <a href="tel:+593962122527">096 212 2527</a>
         </div>
-        <div class="info-item">
-          <MapPin size={24} />
-          <span>Calle Montúfar, Sangolquí, Quito</span>
-        </div>
 
         <div class="contact-actions">
-          <a class="action-btn whatsapp" href="https://wa.me/593962122527?text=Hola%20ACIMU%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios" target="_blank" rel="noopener" aria-label="Chatear por WhatsApp">
+          <a
+            class="action-btn whatsapp"
+            href="https://wa.me/593962122527?text=Hola%20ACIMU%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios"
+            target="_blank"
+            rel="noopener"
+            aria-label="Chatear por WhatsApp"
+          >
             <MessageCircle size={20} /> WhatsApp
           </a>
-          <a class="action-btn call" href="tel:+593962122527" aria-label="Llamar">
+          <a
+            class="action-btn call"
+            href="tel:+593962122527"
+            aria-label="Llamar"
+          >
             <Phone size={20} /> Llamar
           </a>
-          <a class="action-btn email" href="mailto:arquitectos.cinco.mas.uno@gmail.com" aria-label="Enviar correo">
+          <a
+            class="action-btn email"
+            href="mailto:arquitectos.cinco.mas.uno@gmail.com"
+            aria-label="Enviar correo"
+          >
             <Mail size={20} /> Email
           </a>
         </div>
@@ -43,27 +61,42 @@ import { Mail, Phone, MapPin, MessageCircle } from 'lucide-astro';
         <div class="store-card">
           <div class="store-header">
             <h3>Estudio Sangolquí</h3>
-            <p>Calle Montúfar, Sangolquí, Rumiñahui</p>
-        <div class="info-item">
-          <Mail size={24} />
-          <a href="mailto:arquitectos.cinco.mas.uno@gmail.com">arquitectos.cinco.mas.uno@gmail.com</a>
-        </div>
-        <div class="info-item">
-          <Phone size={24} />
-          <a href="tel:+593962122527">096 212 2527</a>
-        </div>
-        <div class="info-item">
-          <MapPin size={24} />
-          <span>Calle Montúfar, Sangolquí, Quito</span>
-        </div>
+            <div class="store-description">
+              <div class="info-item">
+                <Mail size={24} />
+                <a href="mailto:arquitectos.cinco.mas.uno@gmail.com"
+                  >arquitectos.cinco.mas.uno@gmail.com</a
+                >
+              </div>
+              <div class="info-item">
+                <Phone size={24} />
+                <a href="tel:+593962122527">096 212 2527</a>
+              </div>
+              <div class="info-item">
+                <MapPin size={24} />
+                <span>Calle Montúfar, Sangolquí, Quito</span>
+              </div>
+            </div>
           </div>
           <div>
             <div class="store-map">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d467.54907209386823!2d-78.44626132658105!3d-0.33015420661073086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d5bd16d36801eb%3A0x418fa040ccbcc435!2sARQUITECTOS%20CINCO%20%2B%20UNO%20(ACIMU)!5e1!3m2!1ses-419!2sec!4v1757714744177!5m2!1ses-419!2sec" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d467.54907209386823!2d-78.44626132658105!3d-0.33015420661073086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d5bd16d36801eb%3A0x418fa040ccbcc435!2sARQUITECTOS%20CINCO%20%2B%20UNO%20(ACIMU)!5e1!3m2!1ses-419!2sec!4v1757714744177!5m2!1ses-419!2sec"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen></iframe>
             </div>
             <div class="store-actions">
-              <a href="https://maps.app.goo.gl/QmC49FoL3RrTswtt8" target="_blank" rel="noopener">Ver en Google Maps</a>
-              <a href="https://wa.me/593962122527?text=Hola%20ACIMU%2C%20quiero%20agendar%20una%20visita%20en%20Sangolqu%C3%AD" target="_blank" rel="noopener">Agendar visita</a>
+              <a
+                href="https://maps.app.goo.gl/QmC49FoL3RrTswtt8"
+                target="_blank"
+                rel="noopener">Ver en Google Maps</a
+              >
+              <a
+                href="https://wa.me/593962122527?text=Hola%20ACIMU%2C%20quiero%20agendar%20una%20visita%20en%20Sangolqu%C3%AD"
+                target="_blank"
+                rel="noopener">Agendar visita</a
+              >
             </div>
           </div>
         </div>
@@ -71,21 +104,57 @@ import { Mail, Phone, MapPin, MessageCircle } from 'lucide-astro';
         <div class="store-card">
           <div class="store-header">
             <h3>Estudio Quito</h3>
-            <p>Calle Gribaldo Miño, Conocoto, Quito</p>
+            <div class="store-description">
+              <div class="info-item">
+                <Mail size={24} />
+                <a href="mailto:arquitectos.cinco.mas.uno@gmail.com"
+                  >arquitectos.cinco.mas.uno@gmail.com</a
+                >
+              </div>
+              <div class="info-item">
+                <Phone size={24} />
+                <a href="tel:+593962122527">096 212 2527</a>
+              </div>
+              <div class="info-item">
+                <MapPin size={24} />
+                <span>Calle Gribaldo Miño, Conocoto, Quito</span>
+              </div>
+            </div>
           </div>
           <div>
             <div class="store-map">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d461.05609034814506!2d-78.473!3d-0.31344089999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d5bd350e69ebfb%3A0x4e2dc01d13d3fdb9!2sAkira!5e1!3m2!1sen!2sec!4v1762830125860!5m2!1sen!2sec" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d461.05609034814506!2d-78.473!3d-0.31344089999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d5bd350e69ebfb%3A0x4e2dc01d13d3fdb9!2sAkira!5e1!3m2!1sen!2sec!4v1762830125860!5m2!1sen!2sec"
+                width="600"
+                height="450"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="store-actions">
-              <a href="https://maps.app.goo.gl/uVcd1WUN5Ek8Deze7" target="_blank" rel="noopener">Ver en Google Maps</a>
-              <a href="https://wa.me/593962122527?text=Hola%20ACIMU%2C%20quiero%20agendar%20una%20visita%20en%20Sangolqu%C3%AD" target="_blank" rel="noopener">Agendar visita</a>
+              <a
+                href="https://maps.app.goo.gl/uVcd1WUN5Ek8Deze7"
+                target="_blank"
+                rel="noopener">Ver en Google Maps</a
+              >
+              <a
+                href="https://wa.me/593962122527?text=Hola%20ACIMU%2C%20quiero%20agendar%20una%20visita%20en%20Sangolqu%C3%AD"
+                target="_blank"
+                rel="noopener">Agendar visita</a
+              >
             </div>
           </div>
         </div>
       </div>
 
-      <a class="whatsapp-float" href="https://wa.me/593962122527?text=Hola%20ACIMU%2C%20quiero%20informaci%C3%B3n" target="_blank" rel="noopener" aria-label="Chat en WhatsApp">
+      <a
+        class="whatsapp-float"
+        href="https://wa.me/593962122527?text=Hola%20ACIMU%2C%20quiero%20informaci%C3%B3n"
+        target="_blank"
+        rel="noopener"
+        aria-label="Chat en WhatsApp"
+      >
         <MessageCircle size={24} />
       </a>
     </section>
@@ -135,9 +204,16 @@ import { Mail, Phone, MapPin, MessageCircle } from 'lucide-astro';
     font-weight: 600;
     border: 1px solid var(--color-muted);
   }
-  .action-btn.whatsapp { background-color: #25D36620; border-color: #25D36650; }
-  .action-btn.call { background-color: var(--color-background); }
-  .action-btn.email { background-color: var(--color-background); }
+  .action-btn.whatsapp {
+    background-color: #25d36620;
+    border-color: #25d36650;
+  }
+  .action-btn.call {
+    background-color: var(--color-background);
+  }
+  .action-btn.email {
+    background-color: var(--color-background);
+  }
 
   /* Info */
   .info-item {
@@ -155,21 +231,28 @@ import { Mail, Phone, MapPin, MessageCircle } from 'lucide-astro';
     flex-direction: column;
     gap: var(--spacing-xl);
   }
-  @media (max-width: 992px) {
-    .stores { grid-template-columns: 1fr; }
-  }
   .store-card {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     background-color: var(--color-background);
-    gap: var(--spacing-xl);
     border-radius: var(--border-radius);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     border: 1px solid var(--color-muted);
   }
-  .store-header { padding: var(--spacing-lg); }
-  .store-header h3 { margin-bottom: var(--spacing-xs); }
+  .store-header {
+    padding: var(--spacing-lg);
+  }
+  .store-header h3 {
+    margin-bottom: var(--spacing-md);
+  }
+  .store-description {
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--spacing-xs);
+  }
   .store-map iframe {
     width: 100%;
     height: 360px;
@@ -196,12 +279,24 @@ import { Mail, Phone, MapPin, MessageCircle } from 'lucide-astro';
     height: 56px;
     display: grid;
     place-items: center;
-    background-color: #25D366;
+    background-color: #25d366;
     color: white;
     border-radius: 50%;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     z-index: 50;
     text-decoration: none;
   }
-  .whatsapp-float:hover { filter: brightness(1.05); }
+  .whatsapp-float:hover {
+    filter: brightness(1.05);
+  }
+
+  @media screen and (max-width: 769px) {
+    .contact-actions {
+      flex-direction: column;
+      max-width: 150px;
+    }
+    .store-card {
+      grid-template-columns: 1fr;
+    }
+
 </style>
