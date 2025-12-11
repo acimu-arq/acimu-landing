@@ -1,7 +1,7 @@
 ---
 import { Layers, Menu, X } from "lucide-astro";
 import ThemeToggle from "./ThemeToggle.astro";
-import { CDN_URL } from "@/config";
+import { cdn } from "@/config";
 ---
 
 <header>
@@ -26,12 +26,12 @@ import { CDN_URL } from "@/config";
   </button>
   <div class="menu-image">
     <img
-      src={`${CDN_URL}/menu.png`}
+      src={`${cdn}/menu.png`}
       alt="Equipo Acimu"
       class="light-mode-img"
     />
     <img
-      src={`${CDN_URL}/menu-dark.png`}
+      src={`${cdn}/menu-dark.png`}
       alt="Equipo Acimu"
       class="dark-mode-img"
     />

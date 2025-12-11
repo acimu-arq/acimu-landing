@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import { CDN_URL } from '@/config';
+import { cdn } from '@/config';
 ---
 
 <Layout title="Casa Residencial Moderna - ACIMU" description="Proyecto residencial moderno con diseño contemporáneo y funcional.">
@@ -51,7 +51,7 @@ import { CDN_URL } from '@/config';
       
       <!-- Imagen principal - Lado derecho -->
       <div class="project-image">
-        <img src={CDN_URL + '/acimu/home.webp'} alt="Resedencia Loya - Vista Principal" />
+        <img src={cdn + '/acimu/home.webp'} alt="Resedencia Loya - Vista Principal" />
       </div>
     </div>
     
@@ -65,7 +65,7 @@ import { CDN_URL } from '@/config';
           <div class="concept-number">1</div>
           <h3>ÁREA DEL SITIO</h3>
           <div class="concept-image">
-            <img src={CDN_URL + '/acimu/proceso-1.webp'} alt="Área del sitio" />
+            <img src={cdn + '/acimu/proceso-1.webp'} alt="Área del sitio" />
           </div>
           <p>Área total de 339.41 m2, el 40% se destinara a la construcción, el 60% a espacios verdes y parqueadero.</p>
         </div>
@@ -75,7 +75,7 @@ import { CDN_URL } from '@/config';
           <div class="concept-number">2</div>
           <h3>VOLUMEN BASE</h3>
           <div class="concept-image">
-            <img src={CDN_URL + '/acimu/proceso-2.webp'} alt="Volumen base" />
+            <img src={cdn + '/acimu/proceso-2.webp'} alt="Volumen base" />
           </div>
           <p>Volumen inicial según la huella del sitio, los retiros determinados en la normativa y el número de pisos solicitados por el usuario.</p>
         </div>
@@ -85,7 +85,7 @@ import { CDN_URL } from '@/config';
           <div class="concept-number">3</div>
           <h3>PRIMERA ADICIÓN</h3>
           <div class="concept-image">
-            <img src={CDN_URL + '/acimu/proceso-3.webp'} alt="Primera adición" />
+            <img src={cdn + '/acimu/proceso-3.webp'} alt="Primera adición" />
           </div>
           <p>Añadiendo el volumen lateral para definir el acceso a planta alta y terraza, con el objetivo de activar la fachada.</p>
         </div>
@@ -95,7 +95,7 @@ import { CDN_URL } from '@/config';
           <div class="concept-number">4</div>
           <h3>DESPLAZAMIENTO VOLUMÉTRICO</h3>
           <div class="concept-image">
-            <img src={CDN_URL + '/acimu/proceso-4.webp'} alt="Desplazamiento volumétrico" />
+            <img src={cdn + '/acimu/proceso-4.webp'} alt="Desplazamiento volumétrico" />
           </div>
           <p>Se divide el volumen para retranquear una porción, generando dinamismo en el diseño.</p>
         </div>
@@ -105,7 +105,7 @@ import { CDN_URL } from '@/config';
           <div class="concept-number">5</div>
           <h3>DEFINICIÓN DE VOLÚMENES</h3>
           <div class="concept-image">
-            <img src={CDN_URL + '/acimu/proceso-5.webp'} alt="Definición de volúmenes" />
+            <img src={cdn + '/acimu/proceso-5.webp'} alt="Definición de volúmenes" />
           </div>
           <p>Desplazamientos de secciones para generar espacio funcionales como pórticos y balcones los cuales mejoran la relación del proyecto con el entorno cercano.</p>
         </div>
@@ -115,7 +115,7 @@ import { CDN_URL } from '@/config';
           <div class="concept-number">6</div>
           <h3>DEFINICIÓN DE VOLÚMENES</h3>
           <div class="concept-image">
-            <img src={CDN_URL + '/acimu/proceso-6.webp'} alt="Definición final" />
+            <img src={cdn + '/acimu/proceso-6.webp'} alt="Definición final" />
           </div>
           <p>Se incorporan varios elementos tanto prácticos como estéticos para la funcionalidad. La forma final expresa su relación arquitectónica con su entorno</p>
         </div>
@@ -125,14 +125,14 @@ import { CDN_URL } from '@/config';
           <h3>PLANTA BAJA</h3>
           <div class="concept-number">7</div>
           <div class="concept-image">
-            <img src={CDN_URL + '/acimu/proceso-7.webp'} alt="Definición final" />
+            <img src={cdn + '/acimu/proceso-7.webp'} alt="Definición final" />
           </div>
         </div>
         <div class="concept-item">
           <h3>PLANTA ALTA</h3>
           <div class="concept-number">8</div>
           <div class="concept-image">
-            <img src={CDN_URL + '/acimu/proceso-8.webp'} alt="Definición final" />
+            <img src={cdn + '/acimu/proceso-8.webp'} alt="Definición final" />
           </div>
         </div>
       </div>
@@ -143,13 +143,13 @@ import { CDN_URL } from '@/config';
       <h2>IMPLANTACIÓN</h2>
       <div class="gallery-grid gallery-3">
         <div class="gallery-item" data-image="/acimu/1-implantacion.webp">
-          <img src={CDN_URL + '/acimu/1-implantacion.webp'} alt="Implantación General" />
+          <img src={cdn + '/acimu/1-implantacion.webp'} alt="Implantación General" />
         </div>
         <div class="gallery-item" data-image="/acimu/1-planta-1.webp">
-          <img src={CDN_URL + '/acimu/1-planta-1.webp'} alt="Mini Departamento 1" />
+          <img src={cdn + '/acimu/1-planta-1.webp'} alt="Mini Departamento 1" />
         </div>
         <div class="gallery-item" data-image="/acimu/1-planta-2.webp">
-          <img src={CDN_URL + '/acimu/1-planta-2.webp'} alt="Mini Departamento 2" />
+          <img src={cdn + '/acimu/1-planta-2.webp'} alt="Mini Departamento 2" />
         </div>
       </div>
     </section>
@@ -159,13 +159,13 @@ import { CDN_URL } from '@/config';
       <h2>FACHADAS</h2>
       <div class="gallery-grid gallery-3">
         <div class="gallery-item" data-image="/acimu/2-fachada-frontal.webp">
-          <img src={CDN_URL + '/acimu/2-fachada-frontal.webp'} alt="Fachada principal" />
+          <img src={cdn + '/acimu/2-fachada-frontal.webp'} alt="Fachada principal" />
         </div>
         <div class="gallery-item" data-image="/acimu/2-fachada-derecha.webp">
-          <img src={CDN_URL + '/acimu/2-fachada-derecha.webp'} alt="Fachada Lateral Derecha" />
+          <img src={cdn + '/acimu/2-fachada-derecha.webp'} alt="Fachada Lateral Derecha" />
         </div>
         <div class="gallery-item" data-image="/acimu/2-fachada-izquierda.webp">
-          <img src={CDN_URL + '/acimu/2-fachada-izquierda.webp'} alt="Fachada Lateral Izquierda" />
+          <img src={cdn + '/acimu/2-fachada-izquierda.webp'} alt="Fachada Lateral Izquierda" />
         </div>
       </div>
     </section>
@@ -175,10 +175,10 @@ import { CDN_URL } from '@/config';
       <h2>CORTES</h2>
       <div class="gallery-grid gallery-2">
         <div class="gallery-item" data-image="/acimu/3-corte-longitudinal.webp">
-          <img src={CDN_URL + '/acimu/3-corte-longitudinal.webp'} alt="Corte longitudinal" />
+          <img src={cdn + '/acimu/3-corte-longitudinal.webp'} alt="Corte longitudinal" />
         </div>
         <div class="gallery-item" data-image="/acimu/3-corte-transversal.webp">
-          <img src={CDN_URL + '/acimu/3-corte-transversal.webp'} alt="Corte transversal" />
+          <img src={cdn + '/acimu/3-corte-transversal.webp'} alt="Corte transversal" />
         </div>
       </div>
     </section>
@@ -188,16 +188,16 @@ import { CDN_URL } from '@/config';
       <h2>DETALLES CONSTRUCTIVOS</h2>
       <div class="gallery-grid gallery-4">
         <div class="gallery-item" data-image="/acimu/4-detalles-general.webp">
-          <img src={CDN_URL + '/acimu/4-detalles-general.webp'} alt="Detalle Constructivo General" />
+          <img src={cdn + '/acimu/4-detalles-general.webp'} alt="Detalle Constructivo General" />
         </div>
         <div class="gallery-item" data-image="/acimu/4-detalles-losa-colaborante.webp">
-          <img src={CDN_URL + '/acimu/4-detalles-losa-colaborante.webp'} alt="Detalle constructivo Losa Colaborante" />
+          <img src={cdn + '/acimu/4-detalles-losa-colaborante.webp'} alt="Detalle constructivo Losa Colaborante" />
         </div>
         <div class="gallery-item" data-image="/acimu/4-detalle-columna-viga.webp">
-          <img src={CDN_URL + '/acimu/4-detalle-columna-viga.webp'} alt="Detalle Constructivo Columna Viga" />
+          <img src={cdn + '/acimu/4-detalle-columna-viga.webp'} alt="Detalle Constructivo Columna Viga" />
         </div>
         <div class="gallery-item" data-image="/acimu/4-detalles-anclaje-columna.webp">
-          <img src={CDN_URL + '/acimu/4-detalles-anclaje-columna.webp'} alt="Detalle Constructivo Anclaje Columna" />
+          <img src={cdn + '/acimu/4-detalles-anclaje-columna.webp'} alt="Detalle Constructivo Anclaje Columna" />
         </div>
       </div>
     </section>

@@ -2,7 +2,7 @@
 import "../styles/global.css";
 import Header from "../components/header.astro";
 import Footer from "../components/footer.astro";
-import { CDN_URL } from "@/config";
+import { cdn } from "@/config";
 
 interface Props {
   title: string;
@@ -49,19 +49,19 @@ const { title, description } = Astro.props;
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content="/placeholder-social.jpg" />
 
-    <link rel="preconnect" href={CDN_URL} crossorigin />
+    <link rel="preconnect" href={cdn} crossorigin />
 
     <!-- Preload de tus fuentes principales -->
     <link
       rel="preload"
-      href={`${CDN_URL}/fonts/complex.woff2`}
+      href={`${cdn}/fonts/complex.woff2`}
       as="font"
       type="font/woff2"
       crossorigin="anonymous"
     />
     <link
       rel="preload"
-      href={`${CDN_URL}/fonts/centurygothic.woff2`}
+      href={`${cdn}/fonts/centurygothic.woff2`}
       as="font"
       type="font/woff2"
       crossorigin="anonymous"
@@ -71,12 +71,12 @@ const { title, description } = Astro.props;
       set:html={`
       @font-face {
           font-family: "complex";
-          src: url('${CDN_URL}/fonts/complex.woff2');
+          src: url('${cdn}/fonts/complex.woff2');
           font-display: swap;
       }
       @font-face {
           font-family: "century-gothic";
-          src: url('${CDN_URL}/fonts/centurygothic.woff2');
+          src: url('${cdn}/fonts/centurygothic.woff2');
           font-weight: normal;
           font-style: normal;
           font-display: swap;

@@ -1,4 +1,4 @@
-import { CDN_URL } from '@/config';
+import { cdn } from '@/config';
 
 const projects = [
   {
@@ -9,81 +9,81 @@ const projects = [
     location: 'Quito, Ecuador',
     startDate: '2025-01-15',
     type: 'Residential',
-    imageUrl: `${CDN_URL}/portfolio/loya-residence/home.webp`,
+    imageUrl: `${cdn}/portfolio/loya-residence/home.webp`,
     images: [
       {
-        url: `${CDN_URL}/portfolio/loya-residence/home.webp`,
+        url: `${cdn}/portfolio/loya-residence/home.webp`,
         caption: 'Render principal de la residencia',
       },
       {
-        url: `${CDN_URL}/portfolio/loya-residence/1-render-front.webp`,
+        url: `${cdn}/portfolio/loya-residence/1-render-front.webp`,
         caption: 'Render frontal de la residencia',
       },
       {
-        url: `${CDN_URL}/portfolio/loya-residence/1-render-back.webp`,
+        url: `${cdn}/portfolio/loya-residence/1-render-back.webp`,
         caption: 'Render render posterior de la residencia',
       },
       {
-        url: `${CDN_URL}/portfolio/loya-residence/1-render-lateral.webp`,
+        url: `${cdn}/portfolio/loya-residence/1-render-lateral.webp`,
         caption: 'Render lateral de la residencia',
       },
       {
-        url: `${CDN_URL}/portfolio/loya-residence/1-render-inside.webp`,
+        url: `${cdn}/portfolio/loya-residence/1-render-inside.webp`,
         caption: 'Render interior de la residencia',
       },
       {
-        url: `${CDN_URL}/portfolio/loya-residence/1-description.webp`,
+        url: `${cdn}/portfolio/loya-residence/1-description.webp`,
         caption: 'Descripcion general del proyecto',
       },
       {
-        url: `${CDN_URL}/portfolio/loya-residence/2-concept.webp`,
+        url: `${cdn}/portfolio/loya-residence/2-concept.webp`,
         caption: 'Conceptualización del diseño arquitectónico (Area, Volumen)',
       },
       {
-        url: `${CDN_URL}/portfolio/loya-residence/3-concept.webp`,
+        url: `${cdn}/portfolio/loya-residence/3-concept.webp`,
         caption:
           'Conceptualización del diseño arquitectónico (Dezplazamiento, Definición)',
       },
       {
-        url: `${CDN_URL}/portfolio/loya-residence/4-concept.webp`,
+        url: `${cdn}/portfolio/loya-residence/4-concept.webp`,
         caption:
           'Conceptualización del diseño arquitectónico (Volumenes en planta alta y planta baja)',
       },
       {
-        url: `${CDN_URL}/portfolio/loya-residence/5-implantation.webp`,
+        url: `${cdn}/portfolio/loya-residence/5-implantation.webp`,
         caption: 'Implantación del proyecto en el terreno',
       },
       {
-        url: `${CDN_URL}/portfolio/loya-residence/6-floors.webp`,
+        url: `${cdn}/portfolio/loya-residence/6-floors.webp`,
         caption: 'Plantas arquitectónicas del proyecto',
       },
       {
-        url: `${CDN_URL}/portfolio/loya-residence/7-facade-front.webp`,
+        url: `${cdn}/portfolio/loya-residence/7-facade-front.webp`,
         caption: 'Elevación frontal del proyecto',
       },
       {
-        url: `${CDN_URL}/portfolio/loya-residence/8-facade-side.webp`,
+        url: `${cdn}/portfolio/loya-residence/8-facade-side.webp`,
         caption: 'Elevación lateral izquierda del proyecto',
       },
       {
-        url: `${CDN_URL}/portfolio/loya-residence/9-facade-side.webp`,
+        url: `${cdn}/portfolio/loya-residence/9-facade-side.webp`,
         caption: 'Elevación lateral derecha del proyecto',
       },
       {
-        url: `${CDN_URL}/portfolio/loya-residence/10-section-cross.webp`,
+        url: `${cdn}/portfolio/loya-residence/10-section-cross.webp`,
         caption: 'Corte transversal del proyecto',
       },
       {
-        url: `${CDN_URL}/portfolio/loya-residence/11-section-longitudinal.webp`,
+        url: `${cdn}/portfolio/loya-residence/11-section-longitudinal.webp`,
         caption: 'Corte longitudinal del proyecto',
       },
       {
-        url: `${CDN_URL}/portfolio/loya-residence/12-construction-detail.webp`,
+        url: `${cdn}/portfolio/loya-residence/12-construction-detail.webp`,
         caption:
           'Detalle constructivo del proyecto (General, Losa colaborante)',
       },
       {
-        url: `${CDN_URL}/portfolio/loya-residence/13-construction-detail.webp`,
+        url: `${cdn}/portfolio/loya-residence/13-construction-detail.webp`,
         caption:
           'Detalle constructivo del proyecto (Columna-Viga, Anclaje-columna)',
       },
