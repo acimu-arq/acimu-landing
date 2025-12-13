@@ -1,0 +1,126 @@
+---
+const services = [
+  {
+    category: "TRÁMITES MUNICIPALES",
+    items: [
+      "Regularizaciones de áreas",
+      "Subdivisiones",
+      "Aprobación de planos",
+      "Diseño arquitectónico e ingenierías",
+      "Propiedad Horizontal",
+      "Legalización de viviendas informales",
+    ],
+  },
+  {
+    category: "ESTUDIOS PRELIMINARES Y CONSTRUCCIÓN",
+    items: [
+      "Levantamientos topográficos",
+      "Replanteo - linderos",
+      "Remodelaciones y mantenimientos",
+      "Inspecciones y control de obra",
+      "Metalmecánica / Hormigón Armado",
+    ],
+  },
+  {
+    category: "CONSULTORIAS",
+    items: [
+      "Presupuestos y planificación de obra",
+      "Análisis de precios unitarios",
+      "Memorias estructurales",
+      "Modelado 3D",
+    ],
+  },
+];
+---
+
+<section class="services container">
+  <h2>Nuestros Servicios</h2>
+  <div class="services-grid">
+    {
+      services.map((group) => (
+        <div class="service-category">
+          <h3>{group.category}</h3>
+          <ul>
+            {group.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .services {
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xl);
+    color: var(--color-primary);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+  }
+
+  .service-category {
+    background-color: var(--color-background-alt);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    border: 1px solid var(--color-muted);
+  }
+
+  .service-category:hover {
+    transform: translateY(-5px);
+  }
+
+  h3 {
+    color: var(--color-primary);
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: var(--spacing-sm);
+    padding-left: var(--spacing-md);
+    position: relative;
+    color: var(--color-text-light);
+  }
+
+  li::before {
+    content: "•";
+    color: var(--color-accent);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 2rem;
+    }
+    
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

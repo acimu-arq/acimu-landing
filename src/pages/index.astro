@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { cdn } from "@/config";
+import Services from "@/components/Services.astro";
 
 const slides = [
   {
@@ -43,12 +44,17 @@ const slides = [
     <!-- </div> -->
   </section>
 
+  </section>
+
   <!-- Client Testimonials -->
   <section class="container testimonials">
     <div class="testimonial">
       <blockquote>¡Espacios que conectan y perduran!</blockquote>
     </div>
   </section>
+
+  <!-- Services Section -->
+  <Services />
 
   <!-- FAQ Invitation -->
   <section class="container faq-invite">
