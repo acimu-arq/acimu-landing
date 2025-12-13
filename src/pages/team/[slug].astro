@@ -1,0 +1,212 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import team from "@/data/team";
+import { Linkedin, Instagram, Globe } from "lucide-astro";
+
+export async function getStaticPaths() {
+  return team.map((member) => ({
+    params: { slug: member.slug },
+    props: { member },
+  }));
+}
+
+const { member } = Astro.props;
+
+const socialIcons: Record<string, any> = {
+  linkedin: Linkedin,
+  instagram: Instagram,
+  default: Globe,
+};
+---
+
+<Layout title={`${member.name} - ${member.rol}`} description={member.about} >
+  <section class="member-profile">
+    <div class="container">
+      <div class="profile-grid">
+        <div class="profile-image-container">
+          <img
+            src={member.image}
+            alt={member.alt}
+            class="profile-image"
+          />
+        </div>
+
+        <div class="profile-info">
+          <header class="profile-header">
+            <h1 class="name">{member.name}</h1>
+            <p class="role">{member.rol}</p>
+            <p class="approach">{member.approach}</p>
+          </header>
+
+          <div class="details-section">
+            <div class="detail-item">
+              <span class="value">{member.degree}</span>
+            </div>
+            <div class="detail-item">
+              <span class="value">{member.university}</span>
+            </div>
+          </div>
+
+          <div class="about-section">
+            <h2>Sobre mí</h2>
+            <p>{member.about}</p>
+          </div>
+
+          <div class="social-section">
+            {
+              member.socialNetworks.map((social) => {
+                const Icon =
+                  socialIcons[social.name.toLowerCase()] || socialIcons.default;
+                return (
+                  <a
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.name}
+                  >
+                    <Icon size={24} />
+                  </a>
+                );
+              })
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .container {
+    height: 90vh;
+  }
+  @media (max-width: 769px) {
+    .container {
+      height: 100%;
+      margin-top: 8rem;
+    }
+  }
+  .member-profile {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .profile-grid {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  @media (min-width: 768px) {
+    .profile-grid {
+      grid-template-columns: 1fr 2fr;
+      align-items: center;
+      gap: var(--spacing-lg);
+    }
+  }
+
+  .profile-image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    object-fit: cover;
+    aspect-ratio: 3/4;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .profile-header {
+    margin-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-muted);
+    padding-bottom: var(--spacing-md);
+  }
+
+  .name {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-primary);
+  }
+
+  .role {
+    font-size: 1.25rem;
+    color: var(--color-text-light);
+    font-family: var(--century-gothic);
+    margin: 0;
+  }
+    
+  .approach {
+     font-style: italic;
+     color: var(--color-muted);
+     margin-top: var(--spacing-xs);
+  }
+
+  .details-section {
+    display: grid;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    font-family: var(--century-gothic);
+  }
+
+  .detail-item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+  }
+
+  .label {
+    font-weight: bold;
+    color: var(--color-primary);
+  }
+
+  .about-section {
+    margin-bottom: var(--spacing-lg);
+    text-align: justify;
+  }
+    
+  .about-section h2, .skills-section h3 {
+      font-size: 1.5rem;
+      margin-bottom: var(--spacing-md);
+      color: var(--color-primary);
+  }
+
+  .skills-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  @media (min-width: 640px) {
+    .skills-section {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .skills-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .skills-column li {
+    background-color: rgba(var(--color-muted-rgb), 0.1);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+    border-radius: 4px;
+    font-family: var(--century-gothic);
+    font-size: 0.9rem;
+  }
+
+  .social-section {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+    
+  .social-section a {
+      color: var(--color-text);
+      transition: color 0.3s ease;
+  }
+    
+  .social-section a:hover {
+      color: var(--color-primary);
+  }
+</style>
