@@ -6,11 +6,6 @@ export default [
       'La elaboración de los planos para proyectos grandes se realiza en un plazo de aproximadamente 15 días laborables. Para proyectos más pequeños, el tiempo de elaboración puede ser menor, ajustándose a la complejidad del trabajo. Respecto a la aprobación municipal, los tiempos dependen de cada municipio, pero generalmente el proceso suele demorar entre tres y cuatro meses.',
   },
   {
-    question:
-      '¿Qué información y documentos debo entregar para que se inicie el diseño arquitectónico desde cero?',
-    answer: '',
-  },
-  {
     question: '¿Trabajan solo diseño arquitectónico o también construcción?',
     answer:
       'Trabajamos en ambas áreas, tanto el servicio de diseño arquitectónico como el de construcción. Contamos con una cuadrilla altamente capacitada que se encarga de ejecutar las obras, garantizando calidad y cumplimiento en cada proyecto.',

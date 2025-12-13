@@ -1,7 +1,9 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import ProjectCard from "@/components/projectCard.astro";
+import InfiniteCarousel from "@/components/InfiniteCarousel.astro";
 import projects from "@/data/projects.js";
+import renders from "@/data/projectsCollage.js";
 ---
 
 <Layout
@@ -13,6 +15,10 @@ import projects from "@/data/projects.js";
       <h1>Portafolio</h1>
     </section>
 
+    <section class="carousel">
+      <InfiniteCarousel images={renders} direction="left"/>
+      <InfiniteCarousel images={renders} direction="right"/>
+    </section>
     <section class="portfolio-container">
       {
         projects.map((project) => (
@@ -31,6 +37,9 @@ import projects from "@/data/projects.js";
 </Layout>
 
 <style>
+.carousel {
+  height: 70vh;
+}
   .portfolio-intro {
     text-align: center;
     padding: var(--spacing-xl) 0;
