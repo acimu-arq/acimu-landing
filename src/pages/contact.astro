@@ -1,12 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import {
-  Mail,
-  Phone,
-  MapPin,
-  MessageCircle,
-  ChevronDown,
-} from 'lucide-astro';
+import { Mail, Phone, MapPin, MessageCircle, ChevronDown } from 'lucide-astro';
+import faq from '@/data/faq';
 ---
 
 <Layout
@@ -88,6 +83,7 @@ import {
             <div class="store-map">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d467.54907209386823!2d-78.44626132658105!3d-0.33015420661073086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d5bd16d36801eb%3A0x418fa040ccbcc435!2sARQUITECTOS%20CINCO%20%2B%20UNO%20(ACIMU)!5e1!3m2!1ses-419!2sec!4v1757714744177!5m2!1ses-419!2sec"
+                class="map"
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
                 allowfullscreen></iframe>
@@ -136,7 +132,8 @@ import {
                 style="border:0;"
                 allowfullscreen=""
                 loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                referrerpolicy="no-referrer-when-downgrade"
+                class="map"></iframe>
             </div>
             <div class="store-actions">
               <a
@@ -168,94 +165,19 @@ import {
     <section class="faq-section" id="faq">
       <h2>Preguntas Frecuentes</h2>
       <div class="faq-grid">
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            <h3>
-              ¿Cuánto tiempo toma realizar los planos y cuál es el tiempo
-              estimado de aprobación en el municipio?
-            </h3>
-            <ChevronDown class="faq-icon" size={24} />
-          </button>
-          <div class="faq-answer">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
-            </p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            <h3>
-              ¿Qué información y documentos debo entregar para que se inicie el
-              diseño arquitectónico desde cero?
-            </h3>
-            <ChevronDown class="faq-icon" size={24} />
-          </button>
-          <div class="faq-answer">
-            <p>
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-              officia deserunt mollit anim id est laborum. Sed ut perspiciatis
-              unde omnis iste natus error sit voluptatem accusantium doloremque
-              laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-              veritatis.
-            </p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            <h3>
-              ¿Trabajan solo diseño arquitectónico o también construcción?
-            </h3>
-            <ChevronDown class="faq-icon" size={24} />
-          </button>
-          <div class="faq-answer">
-            <p>
-              Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-              aut fugit, sed quia consequuntur magni dolores eos qui ratione
-              voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
-              ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
-              non numquam eius modi tempora incidunt.
-            </p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            <h3>¿Se encargan de tramitar permisos y licencias?</h3>
-            <ChevronDown class="faq-icon" size={24} />
-          </button>
-          <div class="faq-answer">
-            <p>
-              At vero eos et accusamus et iusto odio dignissimos ducimus qui
-              blanditiis praesentium voluptatum deleniti atque corrupti quos
-              dolores et quas molestias excepturi sint occaecati cupiditate non
-              provident, similique sunt in culpa qui officia deserunt mollitia
-              animi.
-            </p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            <h3>
-              ¿Quien se encarga de supervisar, una vez comenzada la obra ? ¿el
-              permiso de construccion garantiza que el municipio no paralice ni
-              multe la obra ?
-            </h3>
-            <ChevronDown class="faq-icon" size={24} />
-          </button>
-          <div class="faq-answer">
-            <p>
-              Nam libero tempore, cum soluta nobis est eligendi optio cumque
-              nihil impedit quo minus id quod maxime placeat facere possimus,
-              omnis voluptas assumenda est, omnis dolor repellendus. Temporibus
-              autem quibusdam et aut officiis debitis aut rerum necessitatibus
-              saepe eveniet.
-            </p>
-          </div>
-        </div>
+        {
+          faq.map((item) => (
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                <h3>{item.question}</h3>
+                <ChevronDown class="faq-icon" size={24} />
+              </button>
+              <div class="faq-answer">
+                <p>{item.answer}</p>
+              </div>
+            </div>
+          ))
+        }
       </div>
     </section>
   </main>
@@ -499,5 +421,12 @@ import {
     .store-card {
       grid-template-columns: 1fr;
     }
-
+  }
+  .map {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+  }
 </style>
