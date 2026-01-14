@@ -1,6 +1,7 @@
 {
   "name": "acimu",
   "compatibility_date": "2025-10-22",
+  "compatibility_flags": ["nodejs_compat"],
   "assets": {
     "directory": "./dist",
   },

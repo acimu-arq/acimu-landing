@@ -12,10 +12,13 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
+    "@astrojs/cloudflare": "^12.6.12",
     "@astrojs/ts-plugin": "^1.10.4",
     "astro": "^5.12.4",
+    "google-auth-library": "^10.5.0",
     "lucide-astro": "^0.532.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "zod": "^4.2.1"
   },
   "devDependencies": {
     "prettier": "^3.7.4",
