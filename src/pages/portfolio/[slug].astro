@@ -1,7 +1,8 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import InfiniteCarousel from "@/components/InfiniteCarousel.astro";
-import projects from "@/data/projects";
+export const prerender = true;
+import Layout from '@/layouts/Layout.astro';
+import InfiniteCarousel from '@/components/InfiniteCarousel.astro';
+import projects from '@/data/projects';
 
 export async function getStaticPaths() {
   return projects.map((project) => ({
@@ -14,7 +15,7 @@ const { title, description, location, startDate, type, imageUrl, images } =
   Astro.props.project;
 
 const date = new Date(startDate);
-const month = date.toLocaleDateString("es-ES", { month: "long" });
+const month = date.toLocaleDateString('es-ES', { month: 'long' });
 const year = date.getFullYear();
 const capitalizedMonth = month.charAt(0).toUpperCase() + month.slice(1);
 const formattedDate = `${capitalizedMonth}, ${year}`;
@@ -26,16 +27,22 @@ const formattedDate = `${capitalizedMonth}, ${year}`;
       <h1>{title}</h1>
     </div>
     <article class="project-detail">
-      <div class="hero-image">
-        <InfiniteCarousel images={images} direction="left" />
-        <InfiniteCarousel images={images} direction="right" />
-        <h4>{location}</h4>
-      </div>
       <div class="info">
         <h1>Descripcion General</h1>
         <h4>Inicio del Proyecto: {formattedDate}</h4>
         <h4>Tipo de Construcción: {type}</h4>
         <p>{description}</p>
+      </div>
+      <div class="hero">
+        <div class="hero-image-container">
+          <div class="hero-image">
+            <InfiniteCarousel images={images} direction="up" />
+          </div>
+          <div class="hero-image">
+            <InfiniteCarousel images={images} direction="down" />
+          </div>
+        </div>
+        <h4>{location}</h4>
       </div>
     </article>
   </div>
@@ -53,23 +60,26 @@ const formattedDate = `${capitalizedMonth}, ${year}`;
     line-height: 1;
     margin-bottom: var(--spacing-sm);
   }
-
-  .project-detail .hero-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 2rem;
+  .project-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    place-items: center;
   }
 
-  .project-detail .hero-image h4 {
+  .hero-image-container {
+    display: flex;
+    justify-content: space-between;
+    width: 700px;
+    height: 70vh;
+  }
+
+  .hero-image {
+    width: 49%;
+  }
+
+  .hero {
     text-align: right;
-    margin-top: 1rem;
-    font-weight: normal;
-    margin: 0;
-  }
-
-  .project-detail .info {
-    padding-right: 25rem;
   }
 
   .project-detail .info h1 {
@@ -79,6 +89,7 @@ const formattedDate = `${capitalizedMonth}, ${year}`;
   .project-detail .info p {
     line-height: 1.7;
     white-space: pre-wrap;
+    text-align: justify;
   }
 
   @media (max-width: 768px) {

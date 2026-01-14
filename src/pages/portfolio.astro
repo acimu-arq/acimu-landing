@@ -1,9 +1,10 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import ProjectCard from "@/components/projectCard.astro";
-import InfiniteCarousel from "@/components/InfiniteCarousel.astro";
-import projects from "@/data/projects.js";
-import renders from "@/data/projectsCollage.js";
+export const prerender = true;
+import Layout from '@/layouts/Layout.astro';
+import ProjectCard from '@/components/projectCard.astro';
+import InfiniteCarousel from '@/components/InfiniteCarousel.astro';
+import projects from '@/data/projects.js';
+import renders from '@/data/projectsCollage.js';
 ---
 
 <Layout
@@ -16,8 +17,12 @@ import renders from "@/data/projectsCollage.js";
     </section>
 
     <section class="carousel">
-      <InfiniteCarousel images={renders} direction="left"/>
-      <InfiniteCarousel images={renders} direction="right"/>
+      <InfiniteCarousel images={renders} direction="left" enableModal={false} />
+      <InfiniteCarousel
+        images={renders}
+        direction="right"
+        enableModal={false}
+      />
     </section>
     <section class="portfolio-container">
       {
@@ -37,9 +42,11 @@ import renders from "@/data/projectsCollage.js";
 </Layout>
 
 <style>
-.carousel {
-  height: 70vh;
-}
+  .carousel {
+    height: 70vh;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+  }
   .portfolio-intro {
     text-align: center;
     padding: var(--spacing-xl) 0;
@@ -64,8 +71,10 @@ import renders from "@/data/projectsCollage.js";
 </style>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const items = document.querySelectorAll(".item");
+  document.addEventListener('DOMContentLoaded', () => {
+    const items = Array.from(
+      document.querySelectorAll('.item')
+    ) as HTMLElement[];
     if (items.length < 2) return;
 
     const onScroll = () => {
@@ -88,14 +97,14 @@ import renders from "@/data/projectsCollage.js";
           const scale = 1 - progress * 0.2;
           item.style.transform = `scale(${Math.max(0.8, scale)})`;
         } else if (nextItemTop <= endScaling) {
-          item.style.transform = "scale(0.8)";
+          item.style.transform = 'scale(0.8)';
         } else {
-          item.style.transform = "scale(1)";
+          item.style.transform = 'scale(1)';
         }
       });
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   });
 </script>

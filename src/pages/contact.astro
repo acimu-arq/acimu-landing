@@ -209,6 +209,29 @@ import faq from '@/data/faq';
         }
       });
     });
+    // FAQ Stagger Animation
+    const faqSection = document.querySelector('.faq-section');
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            faqItems.forEach((item, index) => {
+              setTimeout(() => {
+                item.classList.add('visible');
+              }, index * 150);
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (faqSection) {
+      observer.observe(faqSection);
+    }
   });
 </script>
 
@@ -264,6 +287,16 @@ import faq from '@/data/faq';
     border-radius: var(--border-radius);
     border: 1px solid var(--color-muted);
     overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 1.5s ease-out,
+      transform 1.5s ease-out;
+  }
+
+  .faq-item.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .faq-question {

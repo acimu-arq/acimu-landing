@@ -1,18 +1,24 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import { cdn } from "@/config";
-import Services from "@/components/Services.astro";
+export const prerender = true;
+import Layout from '@/layouts/Layout.astro';
+import { cdn } from '@/config';
+import Services from '@/components/Services.astro';
 
 const slides = [
   {
-    title: "",
-    subtitle: "",
+    title: '',
+    subtitle: '',
     imageUrl: `${cdn}/equipo.webp`,
   },
 ];
 ---
 
 <Layout title="ACIMU" description="Espacios que conectan y perduran">
+  <!-- Intro Animation -->
+  <div id="intro-overlay">
+    <img src={`${cdn}/menu-dark.png`} alt="ACIMU Logo" id="intro-logo" />
+  </div>
+
   <!-- Hero Section with Slideshow -->
   <section class="hero">
     <div class="slideshow-container">
@@ -42,8 +48,6 @@ const slides = [
     <!-- <button class="dot" data-index={index}></button> -->
     <!-- ))} -->
     <!-- </div> -->
-  </section>
-
   </section>
 
   <!-- Client Testimonials -->
@@ -294,14 +298,73 @@ const slides = [
   }
 </style>
 
+<style>
+  /* Intro Animation Styles */
+  #intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: overlaySlideUp 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    animation-delay: 2.2s;
+  }
+
+  #intro-logo {
+    width: 480px;
+    height: auto;
+    opacity: 0;
+    animation: logoSequence 2.2s ease-in-out forwards;
+  }
+
+  @media (max-width: 768px) {
+    #intro-logo {
+      width: 300px; /* Tamaño "mediano" */
+    }
+  }
+
+  @keyframes logoSequence {
+    0% {
+      opacity: 0;
+      transform: translateX(-100%) scale(1);
+    }
+    20% {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+    70% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes overlaySlideUp {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-100%);
+    }
+  }
+</style>
+
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const slideshow = document.querySelector(".slideshow");
-    const slides = document.querySelectorAll(".slide");
-    const prevButton = document.querySelector(".prev");
-    const nextButton = document.querySelector(".next");
-    const dotsContainer = document.querySelector(".dots");
-    const dots = document.querySelectorAll(".dot");
+  document.addEventListener('DOMContentLoaded', () => {
+    const slideshow = document.querySelector('.slideshow') as HTMLElement;
+    const slides = document.querySelectorAll('.slide');
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+    const dotsContainer = document.querySelector('.dots');
+    const dots = document.querySelectorAll('.dot');
 
     let currentIndex = 0;
     const totalSlides = slides.length;
@@ -314,10 +377,14 @@ const slides = [
         index = 0;
       }
 
-      slideshow.style.transform = `translateX(-${index * 100}%)`;
+      if (slideshow) {
+        slideshow.style.transform = `translateX(-${index * 100}%)`;
+      }
 
-      dots.forEach((dot) => dot.classList.remove("active"));
-      dots[index].classList.add("active");
+      dots.forEach((dot) => dot.classList.remove('active'));
+      if (dots[index]) {
+        dots[index].classList.add('active');
+      }
 
       currentIndex = index;
     }
@@ -333,19 +400,19 @@ const slides = [
       startSlideShow();
     }
 
-    prevButton.addEventListener("click", () => {
+    prevButton.addEventListener('click', () => {
       goToSlide(currentIndex - 1);
       resetSlideShow();
     });
 
-    nextButton.addEventListener("click", () => {
+    nextButton.addEventListener('click', () => {
       goToSlide(currentIndex + 1);
       resetSlideShow();
     });
 
-    dotsContainer.addEventListener("click", (e) => {
-      const target = e.target;
-      if (target.classList.contains("dot")) {
+    dotsContainer.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (target && target.classList.contains('dot')) {
         const index = parseInt(target.dataset.index, 10);
         goToSlide(index);
         resetSlideShow();
