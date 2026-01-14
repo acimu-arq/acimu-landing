@@ -1,7 +1,9 @@
 ---
+export const prerender = true;
 import Layout from '@/layouts/Layout.astro';
 import { Mail, Phone, MapPin, MessageCircle, ChevronDown } from 'lucide-astro';
 import faq from '@/data/faq';
+import BookingForm from '@/components/BookingForm.astro';
 ---
 
 <Layout
@@ -94,11 +96,12 @@ import faq from '@/data/faq';
                 target="_blank"
                 rel="noopener">Ver en Google Maps</a
               >
-              <a
-                href="https://wa.me/593962122527?text=Hola%20ACIMU%2C%20quiero%20agendar%20una%20visita%20en%20Sangolqu%C3%AD"
-                target="_blank"
-                rel="noopener">Agendar visita</a
+              <button
+                class="booking-trigger"
+                data-office="Sangolquí"
               >
+                Agendar visita
+              </button>
             </div>
           </div>
         </div>
@@ -141,11 +144,12 @@ import faq from '@/data/faq';
                 target="_blank"
                 rel="noopener">Ver en Google Maps</a
               >
-              <a
-                href="https://wa.me/593962122527?text=Hola%20ACIMU%2C%20quiero%20agendar%20una%20visita%20en%20Sangolqu%C3%AD"
-                target="_blank"
-                rel="noopener">Agendar visita</a
+              <button
+                class="booking-trigger"
+                data-office="Quito"
               >
+                Agendar visita
+              </button>
             </div>
           </div>
         </div>
@@ -161,6 +165,10 @@ import faq from '@/data/faq';
         <MessageCircle size={24} />
       </a>
     </section>
+
+    <div>
+      <BookingForm />
+    </div>
 
     <section class="faq-section" id="faq">
       <h2>Preguntas Frecuentes</h2>
@@ -232,6 +240,18 @@ import faq from '@/data/faq';
     if (faqSection) {
       observer.observe(faqSection);
     }
+
+    // Booking Triggers
+    const triggers = document.querySelectorAll('.booking-trigger');
+    triggers.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const office = target.dataset.office;
+        if (office && (window as any).openBookingModal) {
+          (window as any).openBookingModal(office);
+        }
+      });
+    });
   });
 </script>
 
@@ -265,7 +285,6 @@ import faq from '@/data/faq';
   .faq-section {
     padding: var(--spacing-xl) 0;
     margin-bottom: var(--spacing-xl);
-    border-top: 1px solid var(--color-muted);
   }
 
   .faq-section h2 {
@@ -424,6 +443,22 @@ import faq from '@/data/faq';
     text-decoration: none;
     font-weight: 600;
     color: var(--color-primary);
+  }
+
+  .booking-trigger {
+    background: none;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 99px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.3s ease;
+  }
+  .booking-trigger:hover {
+    background-color: var(--color-primary);
+    color: white;
   }
 
   /* Floating WhatsApp */

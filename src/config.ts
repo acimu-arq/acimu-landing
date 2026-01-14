@@ -7,4 +7,5 @@ export const {
   PUBLIC_PRICE_PLANOS_VOZ: voz = 0,
   PUBLIC_PRICE_APROBACION: approval = 0,
   PUBLIC_PRICE_VISITA: visit = 0,
+  PUBLIC_TURNSTILE_SITE_KEY: turnstileSiteKey = '',
 } = import.meta.env;

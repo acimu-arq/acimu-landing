@@ -3,22 +3,44 @@ import ImageModal from "./ImageModal.astro";
 
 interface Props {
     images: { url: string; caption: string }[];
-    direction?: "left" | "right";
+    direction?: "left" | "right" | "up" | "down";
+    orientation?: "horizontal" | "vertical";
+    enableModal?: boolean;
 }
 
-const { images, direction = "left" } = Astro.props;
-// Duplicate images to ensure seamless scrolling
+const {
+    images,
+    direction = "left",
+    orientation: propOrientation,
+    enableModal = true,
+} = Astro.props;
+
+// Determine orientation based on direction or prop
+const orientation =
+    propOrientation ||
+    (["up", "down"].includes(direction) ? "vertical" : "horizontal");
+
+// Double images for seamless infinite scroll
 const displayImages =
-    direction === "left" ? [...images] : [...images.reverse()];
+    direction === "left" || direction === "up"
+        ? [...images, ...images]
+        : [...images.reverse(), ...images.reverse()];
+
+// For 'right' and 'down', we reverse the animation direction in CSS
+// The array is reversed above so the content appears in the correct logical order for the reverse flow
 ---
 
-<div class="infinite-carousel-container">
-    <div class={`infinite-carousel-track ${direction}`}>
+<div class={`infinite-carousel-container ${orientation}`}>
+    <div class={`infinite-carousel-track ${orientation} ${direction}`}>
         {
             displayImages.map((image, index) => (
                 <div
-                    class="infinite-carousel-slide"
-                    onclick={`window.openImageModal(${index % images.length})`}
+                    class={`infinite-carousel-slide ${enableModal ? "clickable" : ""}`}
+                    onclick={
+                        enableModal
+                            ? `window.openImageModal(${index % images.length})`
+                            : undefined
+                    }
                 >
                     <img src={image.url} alt={image.caption} />
                 </div>
@@ -27,33 +49,64 @@ const displayImages =
     </div>
 </div>
 
-<ImageModal images={images} />
+{enableModal && <ImageModal images={images} />}
 
 <style>
     .infinite-carousel-container {
-        width: 100%;
         overflow: hidden;
         position: relative;
         margin: 1rem auto;
         border-radius: 8px;
     }
 
-    .infinite-carousel-track {
-        display: flex;
-        width: max-content;
-        animation: scroll 120s linear infinite;
+    .infinite-carousel-container.horizontal {
+        width: 100%;
     }
 
-    .infinite-carousel-track.right {
+    .infinite-carousel-container.vertical {
+        height: 100%; /* Default height for vertical mode */
+    }
+
+    .infinite-carousel-track {
+        display: flex;
+        animation: scroll 60s linear infinite; /* Adjusted speed for doubled content */
+    }
+
+    .infinite-carousel-track.horizontal {
+        flex-direction: row;
+        width: max-content;
+    }
+
+    .infinite-carousel-track.vertical {
+        flex-direction: column;
+        height: max-content;
+        width: 100%;
+        animation-name: scroll-vertical;
+    }
+
+    /* Direction modifiers */
+    .infinite-carousel-track.right,
+    .infinite-carousel-track.down {
         animation-direction: reverse;
     }
 
     .infinite-carousel-slide {
         flex: 0 0 auto;
-        width: 400px; /* Adjust width as needed */
-        height: 300px; /* Adjust height as needed */
-        margin-right: 20px;
+        width: 400px;
+        height: 300px;
+    }
+
+    .infinite-carousel-slide.clickable {
         cursor: pointer;
+    }
+
+    /* Spacing based on orientation */
+    .infinite-carousel-track.horizontal .infinite-carousel-slide {
+        margin-right: 20px;
+    }
+
+    .infinite-carousel-track.vertical .infinite-carousel-slide {
+        margin-bottom: 20px;
     }
 
     .infinite-carousel-slide img {
@@ -63,14 +116,23 @@ const displayImages =
         border-radius: 4px;
     }
 
+    /* Horizontal Scroll Animation */
     @keyframes scroll {
         0% {
             transform: translateX(0);
         }
         100% {
-            transform: translateX(
-                -50%
-            ); /* Move by half the total width (original set) */
+            transform: translateX(-50%);
+        }
+    }
+
+    /* Vertical Scroll Animation */
+    @keyframes scroll-vertical {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(-50%);
         }
     }
 
@@ -78,6 +140,11 @@ const displayImages =
         .infinite-carousel-slide {
             width: 300px;
             height: 225px;
+        }
+        
+        /* Adjust container height for mobile vertical */
+        .infinite-carousel-container.vertical {
+            height: 450px; 
         }
     }
 </style>

@@ -1,0 +1,385 @@
+---
+import { turnstileSiteKey } from '@/config';
+---
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+<dialog id="booking-modal" class="booking-modal">
+  <div class="booking-container">
+    <button id="close-modal" class="close-btn" aria-label="Cerrar">&times;</button>
+    <h3>Agendar Cita</h3>
+    <p id="office-display" class="office-tag"></p>
+    
+    <form id="booking-form" class="booking-form">
+      <input type="hidden" id="office" name="office" />
+      
+      <!-- Tipo de Cita -->
+      <div class="form-group">
+        <label for="type">Tipo de Cita</label>
+        <select id="type" name="type" required>
+          <option value="oficina">En Oficina</option>
+          <option value="campo">Visita de Campo</option>
+          <option value="virtual">Reunión Virtual</option>
+        </select>
+      </div>
+
+      <!-- Fecha y Hora -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="date">Fecha</label>
+          <input type="date" id="date" name="date" required min="" />
+        </div>
+        
+        <div class="form-group">
+          <label for="time">Hora</label>
+          <select id="time" name="time" required>
+            <option value="">Seleccionar hora</option>
+            <!-- Generado por JS: 8am - 5pm -->
+            <option value="08:00">08:00 AM</option>
+            <option value="09:00">09:00 AM</option>
+            <option value="10:00">10:00 AM</option>
+            <option value="11:00">11:00 AM</option>
+            <option value="12:00">12:00 PM</option>
+            <option value="13:00">01:00 PM</option>
+            <option value="14:00">02:00 PM</option>
+            <option value="15:00">03:00 PM</option>
+            <option value="16:00">04:00 PM</option>
+            <option value="17:00">05:00 PM</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Datos Personales -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Nombre Completo</label>
+          <input type="text" id="name" name="name" required placeholder="Juan Pérez" />
+        </div>
+        <div class="form-group">
+          <label for="phone">Celular</label>
+          <input type="tel" id="phone" name="phone" required placeholder="099 123 4567" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Correo Electrónico</label>
+        <input type="email" id="email" name="email" required placeholder="juan@ejemplo.com" />
+      </div>
+
+      <!-- Sector (Condicional) -->
+      <div class="form-group" id="sector-group" style="display: none;">
+        <label for="sector">Sector de la Visita</label>
+        <input type="text" id="sector" name="sector" placeholder="Ej: Amaguana, barrio Cuendina" />
+      </div>
+
+      <div class="form-group">
+        <label for="reason">Motivo de la Reunión</label>
+        <textarea id="reason" name="reason" rows="3" required placeholder="Describa brevemente el proyecto..."></textarea>
+      </div>
+
+      <!-- Turnstile Widget -->
+      <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light"></div>
+
+      <button type="submit" class="btn-submit" id="submit-btn">
+        <span class="btn-text">Confirmar Cita</span>
+        <span class="loader" style="display: none;"></span>
+      </button>
+
+      <div id="form-message" class="message"></div>
+    </form>
+  </div>
+</dialog>
+
+<style>
+  .booking-modal {
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    background: transparent;
+    max-width: 90vw;
+    width: 600px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .booking-modal::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  .booking-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--color-text-light);
+    line-height: 1;
+    z-index: 10;
+  }
+  
+  h3 {
+    text-align: center;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+  }
+
+  .office-tag {
+    text-align: center;
+    color: var(--color-text-light);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    background: var(--color-background);
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 99px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  /* Rest of styles remain mostly the same */
+  .booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--color-text);
+  }
+
+  input, select, textarea {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+
+  .btn-submit {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .btn-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .message {
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 6px;
+    display: none;
+    font-size: 0.9rem;
+  }
+  .message.error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    display: block;
+  }
+  .message.success {
+    background-color: #dcfce7;
+    color: #166534;
+    display: block;
+  }
+
+  /* Simple Loader */
+  .loader {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #fff;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
+
+<script>
+  // Modal Logic
+  const modal = document.getElementById('booking-modal') as HTMLDialogElement;
+  const closeBtn = document.getElementById('close-modal');
+  const officeInput = document.getElementById('office') as HTMLInputElement;
+  const officeDisplay = document.getElementById('office-display');
+
+  // Expose function to window for external triggering
+  (window as any).openBookingModal = (officeName: string) => {
+    if (modal && officeInput && officeDisplay) {
+      officeInput.value = officeName;
+      officeDisplay.textContent = `📍 Sede: ${officeName}`;
+      modal.showModal();
+    }
+  };
+
+  if (closeBtn && modal) {
+    closeBtn.addEventListener('click', () => {
+      modal.close();
+    });
+
+    // Close on backdrop click
+    modal.addEventListener('click', (e) => {
+      const rect = modal.getBoundingClientRect();
+      const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
+      if (!isInDialog) {
+        modal.close();
+      }
+    });
+  }
+
+  // Set min date to today and default value
+  const dateInput = document.getElementById('date') as HTMLInputElement;
+  if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+    dateInput.value = today;
+  }
+
+  // Handle Type Change
+  const typeSelect = document.getElementById('type') as HTMLSelectElement;
+  const sectorGroup = document.getElementById('sector-group');
+  const sectorInput = document.getElementById('sector') as HTMLInputElement;
+
+  if (typeSelect && sectorGroup && sectorInput) {
+    typeSelect.addEventListener('change', () => {
+      if (typeSelect.value === 'campo') {
+        sectorGroup.style.display = 'flex';
+        sectorInput.required = true;
+      } else {
+        sectorGroup.style.display = 'none';
+        sectorInput.required = false;
+        sectorInput.value = '';
+      }
+    });
+  }
+
+  // Handle Form Submit
+  const form = document.getElementById('booking-form') as HTMLFormElement;
+  const messageDiv = document.getElementById('form-message');
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const btnText = submitBtn?.querySelector('.btn-text') as HTMLElement;
+  const loader = submitBtn?.querySelector('.loader') as HTMLElement;
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // Reset UI
+      messageDiv!.className = 'message';
+      messageDiv!.textContent = '';
+      submitBtn.disabled = true;
+      btnText.style.display = 'none';
+      loader.style.display = 'inline-block';
+
+      try {
+        const formData = new FormData(form);
+        const turnstileToken = formData.get('cf-turnstile-response');
+
+        if (!turnstileToken) {
+          throw new Error('Por favor completa la verificación de seguridad');
+        }
+
+        const data = {
+          type: formData.get('type'),
+          office: formData.get('office'), // Include office
+          date: formData.get('date'),
+          time: formData.get('time'),
+          name: formData.get('name'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          reason: formData.get('reason'),
+          sector: formData.get('sector'),
+          turnstileToken
+        };
+
+        const response = await fetch('/api/calendar/book', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Error al agendar la cita');
+        }
+
+        // Success
+        messageDiv!.textContent = '¡Cita agendada con éxito! Te hemos enviado un correo de confirmación.';
+        messageDiv!.classList.add('success');
+        form.reset();
+        
+        // Reset Turnstile (needs global TS types or simple ignore)
+        // @ts-ignore
+        if (window.turnstile) window.turnstile.reset();
+        
+        // Close modal after delay
+        setTimeout(() => modal.close(), 3000);
+
+      } catch (err: any) {
+        messageDiv!.textContent = err.message;
+        messageDiv!.classList.add('error');
+      } finally {
+        submitBtn.disabled = false;
+        btnText.style.display = 'inline';
+        loader.style.display = 'none';
+      }
+    });
+  }
+</script>
