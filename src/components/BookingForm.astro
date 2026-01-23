@@ -8,6 +8,7 @@ import { turnstileSiteKey } from '@/config';
     <button id="close-modal" class="close-btn" aria-label="Cerrar">&times;</button>
     <h3>Agendar Cita</h3>
     <p id="office-display" class="office-tag"></p>
+    <div id="form-message" class="message"></div>
     
     <form id="booking-form" class="booking-form">
       <input type="hidden" id="office" name="office" />
@@ -76,15 +77,15 @@ import { turnstileSiteKey } from '@/config';
         <textarea id="reason" name="reason" rows="3" required placeholder="Describa brevemente el proyecto..."></textarea>
       </div>
 
-      <!-- Turnstile Widget -->
-      <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light"></div>
-
       <button type="submit" class="btn-submit" id="submit-btn">
         <span class="btn-text">Confirmar Cita</span>
         <span class="loader" style="display: none;"></span>
       </button>
 
-      <div id="form-message" class="message"></div>
+      <!-- Turnstile Widget -->
+      <div class="trunstile-container">
+        <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light"></div>
+      </div>
     </form>
   </div>
 </dialog>
@@ -98,6 +99,7 @@ import { turnstileSiteKey } from '@/config';
     max-width: 90vw;
     width: 600px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
   }
   
   .booking-modal::backdrop {
@@ -172,6 +174,12 @@ import { turnstileSiteKey } from '@/config';
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  .trunstile-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
   }
 
   label {
@@ -361,7 +369,7 @@ import { turnstileSiteKey } from '@/config';
         }
 
         // Success
-        messageDiv!.textContent = '¡Cita agendada con éxito! Te hemos enviado un correo de confirmación.';
+        messageDiv!.textContent = '¡Cita agendada con éxito! En breve un asesor se comunicará contigo.';
         messageDiv!.classList.add('success');
         form.reset();
         

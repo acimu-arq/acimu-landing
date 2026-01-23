@@ -119,10 +119,13 @@ export const POST: APIRoute = async ({ request, locals }) => {
       description: eventDescription,
       start: { dateTime: startTime.toISOString() },
       end: { dateTime: endTime.toISOString() },
-      attendees: [{ email: validatedData.email }],
+      // attendees: [{ email: validatedData.email }], // Service accounts cannot invite attendees without Domain-Wide Delegation
     };
 
     // Add Google Meet link if virtual
+    // Note: Service accounts often cannot create Google Meets without G Suite/Workspace licensing and delegation.
+    // We are disabling this to prevent "Invalid conference type value" errors.
+    /*
     if (validatedData.type === 'virtual') {
       eventBody.conferenceData = {
         createRequest: {
@@ -131,8 +134,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
         },
       };
     }
+    */
 
-    const insertUrl = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events?conferenceDataVersion=1`;
+    const insertUrl = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events`;
     await client.request({
       url: insertUrl,
       method: 'POST',

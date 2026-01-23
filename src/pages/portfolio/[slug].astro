@@ -2,6 +2,7 @@
 export const prerender = true;
 import Layout from '@/layouts/Layout.astro';
 import InfiniteCarousel from '@/components/InfiniteCarousel.astro';
+import ImageModal from '@/components/ImageModal.astro';
 import projects from '@/data/projects';
 
 export async function getStaticPaths() {
@@ -33,19 +34,52 @@ const formattedDate = `${capitalizedMonth}, ${year}`;
         <h4>Tipo de Construcción: {type}</h4>
         <p>{description}</p>
       </div>
-      <div class="hero">
+
+      <!-- Hero para Desktop (width > 1024px) -->
+      <div class="hero hero-desktop">
         <div class="hero-image-container">
           <div class="hero-image">
-            <InfiniteCarousel images={images} direction="up" />
+            <InfiniteCarousel
+              images={images}
+              direction="up"
+              enableModal={false}
+            />
           </div>
           <div class="hero-image">
-            <InfiniteCarousel images={images} direction="down" />
+            <InfiniteCarousel
+              images={images}
+              direction="down"
+              enableModal={false}
+            />
+          </div>
+        </div>
+        <h4>{location}</h4>
+      </div>
+
+      <!-- Hero para Mobile (width ≤ 1024px) -->
+      <div class="hero hero-mobile">
+        <div class="hero-image-container">
+          <div class="hero-image">
+            <InfiniteCarousel
+              images={images}
+              direction="left"
+              enableModal={false}
+            />
+          </div>
+          <div class="hero-image">
+            <InfiniteCarousel
+              images={images}
+              direction="right"
+              enableModal={false}
+            />
           </div>
         </div>
         <h4>{location}</h4>
       </div>
     </article>
   </div>
+
+  <ImageModal images={images} />
 </Layout>
 
 <style>
@@ -82,6 +116,14 @@ const formattedDate = `${capitalizedMonth}, ${year}`;
     text-align: right;
   }
 
+  .hero-desktop {
+    display: block;
+  }
+
+  .hero-mobile {
+    display: none;
+  }
+
   .project-detail .info h1 {
     margin-bottom: 1rem;
   }
@@ -92,12 +134,60 @@ const formattedDate = `${capitalizedMonth}, ${year}`;
     text-align: justify;
   }
 
+  @media (max-width: 1024px) {
+    .title {
+      margin-top: 15rem;
+    }
+
+    .project-detail {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .hero-desktop {
+      display: none;
+    }
+
+    .hero-mobile {
+      display: block;
+      order: -1;
+    }
+
+    .info {
+      order: 1;
+    }
+
+    .hero-image-container {
+      display: block;
+      width: 95vw;
+      height: 100%;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 225px;
+    }
+  }
+
   @media (max-width: 768px) {
+    .title {
+      margin-top: 15rem;
+    }
+
+    .title h1 {
+      font-size: 1.5rem;
+    }
+
     .project-detail .info {
       padding-right: 0;
     }
-    .title h1 {
-      font-size: 2rem;
+
+    .hero-image-container {
+      display: block;
+    }
+
+    .hero-image {
+      height: 225px;
     }
   }
 </style>
