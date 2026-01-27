@@ -3,12 +3,12 @@ export default [
     question:
       '¿Cuánto tiempo toma realizar los planos y cuál es el tiempo estimado de aprobación en el municipio?',
     answer:
-      'La elaboración de los planos para proyectos grandes se realiza en un plazo de aproximadamente 15 días laborables. Para proyectos más pequeños, el tiempo de elaboración puede ser menor, ajustándose a la complejidad del trabajo. Respecto a la aprobación municipal, los tiempos dependen de cada municipio, pero generalmente el proceso suele demorar entre 60 a 90 días laborables.',
+      'La elaboración de los planos para proyectos grandes se realiza en un plazo de aproximadamente 15 días laborables. Para proyectos más pequeños, el tiempo de elaboración puede ser menor, ajustándose a la complejidad del trabajo. Respecto a la aprobación municipal, los tiempos dependen de cada municipio, pero generalmente el proceso suele demorar entre 60 y 90 días laborables.',
   },
   {
     question: '¿Trabajan solo diseño arquitectónico o también construcción?',
     answer:
-      'Trabajamos en ambas áreas, tanto el servicio de diseño arquitectónico como el de construcción. Contamos con personal altamente capacitado que se encarga de ejecutar las obras, garantizando calidad y cumplimiento en cada proyecto.',
+      'Trabajamos en ambas áreas, tanto el servicio de diseño arquitectónico como el de construcción. Contamos con personal altamente capacitada que se encarga de ejecutar las obras, garantizando calidad y cumplimiento en cada proyecto.',
   },
   {
     question: '¿Se encargan de tramitar permisos y licencias?',
@@ -30,13 +30,13 @@ export default [
     question:
       '¿Los costos del diseño arquitectónico pueden cambiar dependiendo de algún factor?',
     answer:
-      'Disponemos de un amplio catálogo de servicios cada uno con su rango de precio óptimo. Cada obra se le asigna el precio más justo dependiendo del caso.',
+      'Disponemos de un amplio catálogo de servicios, cada uno con su rango de precio optimo. Cada obra se le asigna el precio más justo dependiendo del caso.',
   },
   {
     question:
       '¿El estudio ofrece asesoría para cumplir con las normativas municipales y evitar contratiempos durante la construcción?',
     answer:
-      'Todos los trabajos que tengan el fin de obtener la licencia de construcción cumple con la normativa vigente en cada municipio e institución (NEC, RTAU, INEN, Bomberos, entre otros). En el caso que el cliente requiera únicamente el diseño del proyecto, este cumplirá con las normativas técnicas del caso.',
+      'Todos los trabajos que tenga el fin de obtener la licencia de construcción cumplen con la normativa vigente de cada municipio e institución (NEC, RTAU, INEN, Bomberos, entre otros). En caso de que el cliente requiera únicamente el diseño del proyecto, este cumplirá con las normativas técnicas del caso.',
   },
   {
     question:

@@ -1,0 +1,111 @@
+---
+import "../styles/global.css";
+import { cdn } from "@/config";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="/icon/favicon-96x96.png"
+      sizes="96x96"
+    />
+    <link rel="icon" type="image/svg+xml" href="/icon/favicon.svg" />
+    <link rel="shortcut icon" href="/icon/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/icon/apple-touch-icon.png"
+    />
+    <meta name="apple-mobile-web-app-title" content="Acimu" />
+    <link rel="manifest" href="/icon/site.webmanifest" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/placeholder-social.jpg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content="/placeholder-social.jpg" />
+
+    <link rel="preconnect" href={cdn} crossorigin />
+
+    <!-- Preload de tus fuentes principales -->
+    <link
+      rel="preload"
+      href={`${cdn}/fonts/complex.woff2`}
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href={`${cdn}/fonts/centurygothic.woff2`}
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <style
+      is:inline
+      set:html={`
+      @font-face {
+          font-family: "complex";
+          src: url('${cdn}/fonts/complex.woff2');
+          font-display: swap;
+      }
+      @font-face {
+          font-family: "century-gothic";
+          src: url('${cdn}/fonts/centurygothic.woff2');
+          font-weight: normal;
+          font-style: normal;
+          font-display: swap;
+      }
+    `}
+    ></style>
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+    <script is:inline>
+      const theme = (() => {
+        if (
+          typeof localStorage !== "undefined" &&
+          localStorage.getItem("theme")
+        ) {
+          return localStorage.getItem("theme");
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          return "dark";
+        }
+        return "light";
+      })();
+
+      if (theme === "light") {
+        document.documentElement.removeAttribute("data-theme");
+      } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+      window.localStorage.setItem("theme", theme);
+    </script>
+  </body>
+</html>

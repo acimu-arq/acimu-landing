@@ -11,8 +11,7 @@ const team = [
     degree: 'Arquitectura y  Urbanismo',
     university: 'Universidad Central del Ecuador',
     licenceNumber: '2023-001',
-    about:
-      'Soy arquitecta apasionada por combinar precisión técnica con visión creativa en cada proyecto que emprendo. Reconocida por mi atención al detalle y compromiso con los proyectos, trabajo continuamente para expandir mis conocimientos en diseño arquitectónico y planificación urbana. Con experiencia en software como AutoCAD, Illustrator, Photoshop, Lumion y SketchUp, he contribuido al éxito de diversos proyectos y estoy lista para enfrentar nuevos desafíos en entornos dinámicos y multidisciplinarios. Comprometida con el aprendizaje continuo, busco siempre aportar valor positivo a cada equipo en el que participo.',
+    about: 'Soy arquitecta apasionada por combinar precisión técnica con visión creativa en cada proyecto que emprendo. Reconocida por mi atención al detalle y compromiso con los proyectos, trabajo continuamente para expandir mis conocimientos en diseño arquitectónico. Con experiencia en software como AutoCAD, Illustrator, Photoshop, Lumion y SketchUp, he contribuido al éxito de diversos proyectos y estoy lista para enfrentar nuevos desafíos en entornos dinámicos y multidisciplinarios. Comprometida con el aprendizaje continuo, busco siempre aportar valor positivo a cada equipo en el que participo.',
     socialNetworks: [
       {
         name: 'linkedin',
@@ -30,8 +29,7 @@ const team = [
     degree: 'Arquitectura y  Urbanismo',
     university: 'Universidad Central del Ecuador',
     licenceNumber: '2023-001',
-    about:
-      'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
+    about: 'Arquitecta con experiencia en el desarrollo de proyectos de vivienda, orientada a brindar soluciones arquitectónicas eficientes y alineadas a las necesidades específicas de cada cliente. Su enfoque principal es la planificación y ejecución de proyectos en estructura metálica, garantizando altos estándares de calidad, optimización de tiempos y eficiencia constructiva. Se distingue por su compromiso profesional, paciencia y atención al detalle, asegurando un acompañamiento integral durante todo el proceso de diseño y desarrollo del proyecto.',
     socialNetworks: [
       {
         name: 'linkedin',
@@ -49,8 +47,7 @@ const team = [
     degree: 'Arquitectura y  Urbanismo',
     university: 'Universidad Central del Ecuador',
     licenceNumber: '2023-001',
-    about:
-      'Arquitecta aplicada y creativa con ansias de superación. Involucrada en el diseño, la planificación, la supervisión de obras y la rehabilitación de construc ciones. Me caracterizo por mi dinamismo, proactividad y entusiasmo. Poseo buenos conocimientos digitales y habilidad en atención al cliente. Busco desarrollarme profesionalmente',
+    about: 'Soy una profesional comprometida con la excelencia, la responsabilidad y el trabajo bien hecho. Cuento con experiencia en la gestión, desarrollo y seguimiento de proyectos, asegurando el cumplimiento de los requerimientos técnicos, normativos y administrativos en cada etapa del proceso. Me caracterizo por mi organización, atención al detalle y capacidad para coordinar actividades de manera eficiente, manteniendo siempre una comunicación clara y profesional con clientes, proveedores y entidades correspondientes. Mi enfoque está orientado a brindar soluciones prácticas y efectivas, priorizando la calidad, el cumplimiento de plazos y la mejora continua. Creo firmemente en el trabajo ético, la planificación adecuada y el aprendizaje constante como pilares para ofrecer resultados confiables y sostenibles. Mi objetivo es aportar valor en cada proyecto, generando confianza y relaciones profesionales a largo plazo.',
     socialNetworks: [
       {
         name: 'linkedin',
@@ -68,8 +65,7 @@ const team = [
     degree: 'Arquitectura y  Urbanismo',
     university: 'Universidad Central del Ecuador',
     licenceNumber: '2023-001',
-    about:
-      'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
+    about: 'Arquitecto graduado a inicios de 2025, con conocimientos en normativa urbana y nociones en intervención patrimonial. Cuenta con capacidad de análisis numérico y gráfico, manejo de documentación técnica y apoyo en procesos de diseño y regularización. Orientado al aprendizaje continuo y al desarrollo profesional.',
     socialNetworks: [
       {
         name: 'linkedin',
@@ -87,8 +83,7 @@ const team = [
     degree: 'Arquitectura y  Urbanismo',
     university: 'Universidad Central del Ecuador',
     licenceNumber: '2023-001',
-    about:
-      'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
+    about: 'Gestor de proyectos en búsqueda constante de mejora en procesos, optimización de recursos y tiempo, una mente calmada para toma de decisiones importantes.',
     socialNetworks: [
       {
         name: 'linkedin',
