@@ -26,12 +26,35 @@ interface Env {
 }
 
 export const POST: APIRoute = async ({ request, locals }) => {
-  const env = (locals as any).runtime?.env as Env;
+  // Access env from Cloudflare runtime
+  const runtime = (locals as any).runtime;
+  const env = runtime?.env as Env;
+
+  // Debug logging
+  console.log('Runtime available:', !!runtime);
+  console.log('Env available:', !!env);
+  console.log('GOOGLE_PRIVATE_KEY exists:', !!env?.GOOGLE_PRIVATE_KEY);
+  console.log('TURNSTILE_SECRET_KEY exists:', !!env?.TURNSTILE_SECRET_KEY);
 
   // 1. Check Env Vars
-  if (!env?.GOOGLE_PRIVATE_KEY || !env?.TURNSTILE_SECRET_KEY) {
+  if (!env) {
     return new Response(
-      JSON.stringify({ error: 'Server configuration error' }),
+      JSON.stringify({
+        error: 'Server configuration error',
+        debug: 'Runtime env not available',
+      }),
+      { status: 500 }
+    );
+  }
+
+  if (!env.GOOGLE_PRIVATE_KEY || !env.TURNSTILE_SECRET_KEY) {
+    return new Response(
+      JSON.stringify({
+        error: 'Server configuration error',
+        debug: 'Missing environment variables',
+        hasPrivateKey: !!env.GOOGLE_PRIVATE_KEY,
+        hasTurnstileKey: !!env.TURNSTILE_SECRET_KEY,
+      }),
       { status: 500 }
     );
   }
