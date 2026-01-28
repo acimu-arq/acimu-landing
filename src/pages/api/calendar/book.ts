@@ -28,15 +28,8 @@ interface Env {
 export const POST: APIRoute = async ({ request, locals }) => {
   // Access env from Cloudflare runtime
   const runtime = (locals as any).runtime;
-  const env = runtime?.env as Env;
+  const env = (runtime?.env || import.meta.env) as Env;
 
-  // Debug logging
-  console.log('Runtime available:', !!runtime);
-  console.log('Env available:', !!env);
-  console.log('GOOGLE_PRIVATE_KEY exists:', !!env?.GOOGLE_PRIVATE_KEY);
-  console.log('TURNSTILE_SECRET_KEY exists:', !!env?.TURNSTILE_SECRET_KEY);
-
-  // 1. Check Env Vars
   if (!env) {
     return new Response(
       JSON.stringify({
@@ -52,8 +45,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
       JSON.stringify({
         error: 'Server configuration error',
         debug: 'Missing environment variables',
-        hasPrivateKey: !!env.GOOGLE_PRIVATE_KEY,
-        hasTurnstileKey: !!env.TURNSTILE_SECRET_KEY,
       }),
       { status: 500 }
     );
@@ -93,7 +84,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const auth = new GoogleAuth({
       credentials: {
         client_email: env.GOOGLE_CLIENT_EMAIL,
-        private_key: env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'), // Fix Cloudflare newline issue
+        private_key: env.GOOGLE_PRIVATE_KEY,
         project_id: env.GOOGLE_PROJECT_ID,
       },
       scopes: ['https://www.googleapis.com/auth/calendar'],

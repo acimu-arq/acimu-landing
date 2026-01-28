@@ -83,7 +83,7 @@ const team = [
     degree: 'Arquitectura y  Urbanismo',
     university: 'Universidad Central del Ecuador',
     licenceNumber: '2023-001',
-    about: 'Gestor de proyectos en búsqueda constante de mejora en procesos, optimización de recursos y tiempo, una mente calmada para toma de decisiones importantes.',
+    about: 'Gestor de proyectos en búsqueda constante de mejora en procesos, optimización de recursos y tiempo.',
     socialNetworks: [
       {
         name: 'linkedin',
