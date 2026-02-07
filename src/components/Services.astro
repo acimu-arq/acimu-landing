@@ -2,29 +2,45 @@
 const services = [
   {
     number: "01",
+    title: "Diseño Arquitectónico",
+    description: "Cada proyecto es único. Nos tomamos el tiempo para entender tus necesidades, sueños y desafíos, ofreciendo soluciones a medida que reflejan tu visión y se adaptan a tu realidad.",
+  },
+  {
+    number: "02",
     title: "Trámites Municipales",
     description: "Regularizaciones de áreas, subdivisiones, aprobación de planos, diseño arquitectónico e ingenierías, propiedad horizontal y legalización de viviendas informales.",
   },
   {
-    number: "02",
+    number: "03",
     title: "Estudios Preliminares y Construcción",
     description: "Levantamientos topográficos, replanteo de linderos, remodelaciones y mantenimientos, inspecciones y control de obra, metalmecánica y hormigón armado.",
   },
   {
-    number: "03",
+    number: "04",
     title: "Consultorias",
     description: "Acompañamos cada fase de tu proyecto con asesoría experta en normativa, materiales, sustentabilidad y viabilidad constructiva. Presupuestos, planificación de obra, análisis de precios unitarios, memorias estructurales y modelado 3D.",
   },
+  {
+    number: "05",
+    title: "Remodelación",
+    description: "Damos nueva vida a lo existente. Reimaginamos estructuras con respeto por su historia y ambicion por su futuro.",
+  },
+  {
+    number: "06",
+    title: "Diseño de Interiores",
+    description: "Cada espacio interior es un ecosistema. Trabajamos con luz, textura y proporcion para crear ambientes que respiran y se sienten como hogar.",
+  },
+  
 ];
 ---
 
 <section id="services-section" class="services container">
   <p class="services-subtitle">NUESTROS SERVICIOS</p>
-  <h2>Lo que hacemos, con intencion</h2>
+  <h2>Lo que hacemos</h2>
   <div class="services-list">
     {
-      services.map((service) => (
-        <div class="service-item">
+      services.map((service, index) => (
+        <div class="service-item" data-index={index}>
           <div class="service-number">{service.number}</div>
           <h3 class="service-title">{service.title}</h3>
           <p class="service-description">{service.description}</p>
@@ -72,6 +88,16 @@ const services = [
     padding-bottom: var(--spacing-xl);
     border-bottom: 1px solid var(--color-muted);
     align-items: start;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(48px);
+  }
+
+  .service-item.fade-up {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
   }
 
   .service-item:last-child {
@@ -82,6 +108,11 @@ const services = [
     font-size: 0.875rem;
     color: var(--color-text-light);
     font-weight: 400;
+    transition: color 0.3s ease;
+  }
+
+  .service-item:hover .service-number {
+    color: var(--color-primary);
   }
 
   .service-title {
@@ -90,6 +121,12 @@ const services = [
     color: var(--color-primary);
     margin: 0;
     line-height: 1.3;
+    transition: font-size 0.3s ease, transform 0.3s ease;
+  }
+
+  .service-item:hover .service-title {
+    font-size: 2rem;
+    transform: translateX(5px);
   }
 
   .service-description {
@@ -117,8 +154,45 @@ const services = [
       font-size: 1.5rem;
     }
 
+    .service-item:hover .service-title {
+      font-size: 1.65rem;
+    }
+
     .service-description {
       font-size: 0.95rem;
     }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const serviceItems = document.querySelectorAll('.service-item');
+    
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const item = entry.target as HTMLElement;
+          const index = parseInt(item.dataset.index || '0', 10);
+          
+          // Aplicar delay escalonado basado en el índice
+          setTimeout(() => {
+            item.classList.add('fade-up');
+          }, index * 150); // 150ms de delay entre cada servicio
+          
+          // Dejar de observar una vez que se haya animado
+          observer.unobserve(item);
+        }
+      });
+    }, observerOptions);
+
+    // Observar todos los servicios
+    serviceItems.forEach(item => {
+      observer.observe(item);
+    });
+  });
+</script>

@@ -92,14 +92,10 @@ const servicesText = [
   <Services />
 
   <!-- FAQ Invitation -->
-  <section class="container faq-invite">
+  <section class="faq-invite">
     <div class="faq-invite-content">
-      <h2>¿Tienes preguntas?</h2>
-      <p>
-        Consulta nuestra sección de preguntas frecuentes para resolver tus dudas
-        sobre nuestros servicios, procesos y más.
-      </p>
-      <a href="/contact#faq" class="btn-primary">Ver Preguntas Frecuentes</a>
+      <p class="faq-question">¿Necesitas más información?<p>
+      <a href="/contact#faq" class="faq-cta">Preguntas frecuentes →</a>
     </div>
   </section>
 </Layout>
@@ -217,10 +213,23 @@ const servicesText = [
     margin-bottom: var(--spacing-lg);
   }
 
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
   /* Philosophy Section */
   .philosophy-section {
     background-color: var(--color-background-alt, #f5f5f5);
     padding: var(--spacing-xl) var(--spacing-md);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .philosophy-section.fade-in-up {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .philosophy-container {
@@ -282,7 +291,8 @@ const servicesText = [
     padding-bottom: 0.25rem;
     border-bottom: 2px solid currentColor;
     width: fit-content;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.5s ease;
+    scroll-behavior: smooth;
   }
 
   .philosophy-cta:hover {
@@ -409,25 +419,42 @@ const servicesText = [
 
   /* FAQ Invite */
   .faq-invite {
-    padding-bottom: var(--spacing-xl);
+    padding: var(--spacing-xl) var(--spacing-md);
+    background-color: var(--color-background-alt);
     text-align: center;
   }
+  
   .faq-invite-content {
-    background-color: var(--color-background-alt);
-    padding: var(--spacing-xl);
-    border-radius: var(--border-radius);
-    max-width: 800px;
+    max-width: 600px;
     margin: 0 auto;
-    border: 1px solid var(--color-muted);
+    padding: var(--spacing-lg) 0;
   }
-  .faq-invite h2 {
-    margin-bottom: var(--spacing-md);
-  }
-  .faq-invite p {
-    margin-bottom: var(--spacing-lg);
-    font-size: 1.1rem;
+  
+  .faq-question {
+    font-size: 1rem;
     color: var(--color-text-light);
+    margin-bottom: var(--spacing-lg);
+    font-weight: 400;
   }
+  
+  .faq-cta {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.15em;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border: 2px solid var(--color-text);
+    border-radius: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .faq-cta:hover {
+    background-color: var(--color-text);
+    color: var(--color-background);
+  }
+  
   .btn-primary {
     display: inline-block;
     background-color: var(--color-primary);
@@ -513,7 +540,7 @@ const servicesText = [
 
     let currentIndex = 0;
     const totalSlides = slides.length;
-    let slideInterval;
+    let slideInterval: ReturnType<typeof setInterval>;
 
     function goToSlide(index: number) {
       if (index < 0) {
@@ -537,7 +564,7 @@ const servicesText = [
     function startSlideShow() {
       slideInterval = setInterval(() => {
         goToSlide(currentIndex + 1);
-      }, 10000); // Change slide every 5 seconds
+      }, 10000);
     }
 
     function resetSlideShow() {
@@ -545,27 +572,54 @@ const servicesText = [
       startSlideShow();
     }
 
-    prevButton.addEventListener('click', () => {
-      goToSlide(currentIndex - 1);
-      resetSlideShow();
-    });
-
-    nextButton.addEventListener('click', () => {
-      goToSlide(currentIndex + 1);
-      resetSlideShow();
-    });
-
-    dotsContainer.addEventListener('click', (e) => {
-      const target = e.target as HTMLElement;
-      if (target && target.classList.contains('dot')) {
-        const index = parseInt(target.dataset.index, 10);
-        goToSlide(index);
+    if (prevButton) {
+      prevButton.addEventListener('click', () => {
+        goToSlide(currentIndex - 1);
         resetSlideShow();
-      }
-    });
+      });
+    }
+
+    if (nextButton) {
+      nextButton.addEventListener('click', () => {
+        goToSlide(currentIndex + 1);
+        resetSlideShow();
+      });
+    }
+
+    if (dotsContainer) {
+      dotsContainer.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (target && target.classList.contains('dot')) {
+          const index = parseInt(target.dataset.index, 10);
+          goToSlide(index);
+          resetSlideShow();
+        }
+      });
+    }
 
     // Initialize the first slide and start the automatic slideshow
-    goToSlide(0);
-    startSlideShow();
+    if (totalSlides > 0) {
+      goToSlide(0);
+      startSlideShow();
+    }
+
+    // Intersection Observer for fade-in-up animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in-up');
+        }
+      });
+    }, observerOptions);
+
+    const philosophySection = document.querySelector('.philosophy-section');
+    if (philosophySection) {
+      observer.observe(philosophySection);
+    }
   });
 </script>
