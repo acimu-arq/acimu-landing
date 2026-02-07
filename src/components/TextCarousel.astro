@@ -1,0 +1,106 @@
+---
+interface Props {
+  items: string[];
+  speed?: number;
+}
+
+const { items, speed = 30 } = Astro.props;
+
+// Duplicar los items para el efecto de loop infinito
+const displayItems = [...items, ...items];
+---
+
+<div class="text-carousel-wrapper">
+  <div class="text-carousel-track">
+    {
+      displayItems.map((item, index) => (
+        <div class="text-carousel-item">
+          <span class="item-text">{item}</span>
+          {index < displayItems.length - 1 && <span class="item-separator">•</span>}
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style define:vars={{ speed: `${speed}s` }}>
+  .text-carousel-wrapper {
+    background-color: #000;
+    color: #fff;
+    overflow: hidden;
+    padding: var(--spacing-lg) 0;
+    position: relative;
+    width: 100%;
+  }
+
+  .text-carousel-track {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    animation: scroll-horizontal var(--speed) linear infinite;
+    width: max-content;
+  }
+
+  .text-carousel-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    white-space: nowrap;
+  }
+
+  .item-text {
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .item-separator {
+    font-size: 1.5rem;
+    opacity: 0.6;
+  }
+
+  @keyframes scroll-horizontal {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Pause on hover */
+  .text-carousel-wrapper:hover .text-carousel-track {
+    animation-play-state: paused;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .text-carousel-wrapper {
+      padding: var(--spacing-md) 0;
+    }
+
+    .item-text {
+      font-size: 0.875rem;
+    }
+
+    .text-carousel-track {
+      gap: var(--spacing-md);
+    }
+
+    .text-carousel-item {
+      gap: var(--spacing-md);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .item-text {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+
+    .item-separator {
+      font-size: 1.25rem;
+    }
+  }
+</style>

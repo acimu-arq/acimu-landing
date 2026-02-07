@@ -1,50 +1,33 @@
 ---
 const services = [
   {
-    category: "TRÁMITES MUNICIPALES",
-    items: [
-      "Regularizaciones de áreas",
-      "Subdivisiones",
-      "Aprobación de planos",
-      "Diseño arquitectónico e ingenierías",
-      "Propiedad Horizontal",
-      "Legalización de viviendas informales",
-    ],
+    number: "01",
+    title: "Trámites Municipales",
+    description: "Regularizaciones de áreas, subdivisiones, aprobación de planos, diseño arquitectónico e ingenierías, propiedad horizontal y legalización de viviendas informales.",
   },
   {
-    category: "ESTUDIOS PRELIMINARES Y CONSTRUCCIÓN",
-    items: [
-      "Levantamientos topográficos",
-      "Replanteo - linderos",
-      "Remodelaciones y mantenimientos",
-      "Inspecciones y control de obra",
-      "Metalmecánica / Hormigón Armado",
-    ],
+    number: "02",
+    title: "Estudios Preliminares y Construcción",
+    description: "Levantamientos topográficos, replanteo de linderos, remodelaciones y mantenimientos, inspecciones y control de obra, metalmecánica y hormigón armado.",
   },
   {
-    category: "CONSULTORIAS",
-    items: [
-      "Presupuestos y planificación de obra",
-      "Análisis de precios unitarios",
-      "Memorias estructurales",
-      "Modelado 3D",
-    ],
+    number: "03",
+    title: "Consultorias",
+    description: "Acompañamos cada fase de tu proyecto con asesoría experta en normativa, materiales, sustentabilidad y viabilidad constructiva. Presupuestos, planificación de obra, análisis de precios unitarios, memorias estructurales y modelado 3D.",
   },
 ];
 ---
 
-<section class="services container">
-  <h2>Nuestros Servicios</h2>
-  <div class="services-grid">
+<section id="services-section" class="services container">
+  <p class="services-subtitle">NUESTROS SERVICIOS</p>
+  <h2>Lo que hacemos, con intencion</h2>
+  <div class="services-list">
     {
-      services.map((group) => (
-        <div class="service-category">
-          <h3>{group.category}</h3>
-          <ul>
-            {group.items.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
+      services.map((service) => (
+        <div class="service-item">
+          <div class="service-number">{service.number}</div>
+          <h3 class="service-title">{service.title}</h3>
+          <p class="service-description">{service.description}</p>
         </div>
       ))
     }
@@ -57,61 +40,63 @@ const services = [
     padding-bottom: var(--spacing-xl);
   }
 
+  .services-subtitle {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 500;
+  }
+
   h2 {
-    text-align: center;
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin-bottom: var(--spacing-xl);
     color: var(--color-primary);
+    font-weight: 700;
+    line-height: 1.2;
+    max-width: 600px;
   }
 
-  .services-grid {
+  .services-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+    margin-top: 4rem;
+  }
+
+  .service-item {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: 60px 1fr 2fr;
     gap: var(--spacing-lg);
+    padding-bottom: var(--spacing-xl);
+    border-bottom: 1px solid var(--color-muted);
+    align-items: start;
   }
 
-  .service-category {
-    background-color: var(--color-background-alt);
-    padding: var(--spacing-lg);
-    border-radius: var(--border-radius);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
-    border: 1px solid var(--color-muted);
+  .service-item:last-child {
+    border-bottom: none;
   }
 
-  .service-category:hover {
-    transform: translateY(-5px);
-  }
-
-  h3 {
-    color: var(--color-primary);
-    font-size: 1.25rem;
-    margin-bottom: var(--spacing-md);
-    border-bottom: 2px solid var(--color-accent);
-    padding-bottom: var(--spacing-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  li {
-    margin-bottom: var(--spacing-sm);
-    padding-left: var(--spacing-md);
-    position: relative;
+  .service-number {
+    font-size: 0.875rem;
     color: var(--color-text-light);
+    font-weight: 400;
   }
 
-  li::before {
-    content: "•";
-    color: var(--color-accent);
-    position: absolute;
-    left: 0;
-    font-weight: bold;
+  .service-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .service-description {
+    color: var(--color-text-light);
+    line-height: 1.7;
+    margin: 0;
+    font-size: 1rem;
   }
 
   @media (max-width: 768px) {
@@ -119,8 +104,21 @@ const services = [
       font-size: 2rem;
     }
     
-    .services-grid {
+    .service-item {
       grid-template-columns: 1fr;
+      gap: var(--spacing-sm);
+    }
+
+    .service-number {
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .service-title {
+      font-size: 1.5rem;
+    }
+
+    .service-description {
+      font-size: 0.95rem;
     }
   }
 </style>
