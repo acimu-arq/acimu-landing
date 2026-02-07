@@ -2,31 +2,62 @@
 export const prerender = true;
 import Layout from '@/layouts/Layout.astro';
 import { cdn } from '@/config';
+
+const teamMembers = [
+  { name: 'Lizeth Narvaez', image: 'lizeth_narvaez.webp', link: '/team/lizeth-narvaez' },
+  { name: 'Dayana Chiguano', image: 'dayana_chiguano.webp', link: '/team/dayana-chiguano' },
+  { name: 'Tatiana Paucar', image: 'tatiana_paucar.webp', link: '/team/tatiana-paucar' },
+  { name: 'Esteban Caiza', image: 'esteban_caiza.webp', link: '/team/esteban-caiza' },
+  { name: 'Byron Peralta', image: 'byron_peralta.webp', link: '/team/byron-peralta' },
+  { name: 'Bryan Silva', image: 'bryan_silva.webp', link: '' },
+];
 ---
 
 <Layout
   title="About ACIMU"
-  description="Learn about our mission, vision, and the talented team behind our award-winning designs."
+  description="Conoce nuestra misión, visión y al talentoso equipo detrás de nuestros diseños."
 >
-  <div class="about-page container">
-    <section class="about-intro">
-      <!-- <h1>Acerca de nosotros</h1> -->
-      <p>
-        En ARQUITECTOS CINCO+UNO buscamos plasmar las ideas de nuestros clientes
-        en espacios confortables. Somos un equipo de seis profesionales
-        enfocados en crear soluciones eficientes e innovadoras que se ajusten a
-        los requerimientos de cada persona. En cada proyecto buscamos fusionar
-        la estética, técnica y funcionalidad, trabajamos de la mano con cada
-        usuario a fin de mejorar su calidad de vida y habitabilidad.
-      </p>
-    </section>
+  <!-- Intro Section -->
+  <section class="intro-section fade-in-section">
+    <div class="container">
+      <div class="intro-content">
+        <div>
 
-    <section class="about-team">
-      <img src={`${cdn}/equipo/equipo-about.webp`} alt="Equipo ACIMU" />
-    </section>
+        <span class="label">EL ESTUDIO</span>
+        <h1 class="intro-title">
+          Espacios <br/>
+          que <em>conectan</em> <br/>
+          y perduran.
+        </h1>
+        </div>
+        <div class="intro-text-block">
+          <p>
+            En <strong>ARQUITECTOS CINCO+UNO</strong> buscamos plasmar las ideas de nuestros clientes
+            en espacios únicos. Somos un equipo de seis profesionales
+            enfocados en crear soluciones eficientes e innovadoras que se ajusten a
+            los requerimientos de cada persona.
+          </p>
+          <p>
+            En cada proyecto buscamos fusionar la estética, técnica y funcionalidad,
+            trabajamos de la mano con cada usuario a fin de mejorar su calidad de vida y habitabilidad.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section class="mission-vision">
-      <div class="item">
+  <!-- Team Image Full Width -->
+  <section class="team-image-section fade-in-section delay-1">
+    <div class="parallax-container">
+      <img src={`${cdn}/equipo/equipo-about.webp`} alt="Equipo ACIMU" class="team-hero-img" />
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="philosophy-grid">
+    <div class="philosophy-item light fade-in-section">
+      <div class="content-wrapper">
+        <span class="label">NUESTRO PROPÓSITO</span>
         <h2>Misión</h2>
         <p>
           Construir el bienestar de quienes confían en nosotros aportando
@@ -34,7 +65,10 @@ import { cdn } from '@/config';
           eficientes.
         </p>
       </div>
-      <div class="item">
+    </div>
+    <div class="philosophy-item dark fade-in-section delay-1">
+      <div class="content-wrapper">
+        <span class="label">HACIA DÓNDE VAMOS</span>
         <h2>Visión</h2>
         <p>
           Posicionarnos como referentes en la arquitectura para el bienestar,
@@ -42,199 +76,405 @@ import { cdn } from '@/config';
           su futuro.
         </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="team">
-      <h2>Nuestro Equipo</h2>
-      <div class="grid">
-        <div class="team-member">
-          <a href="/team/lizeth-narvaez">
-            <img
-              src={`${cdn}/equipo/lizeth_narvaez.webp`}
-              alt="Team Member - Lizeth Narvaez"
-            />
-            <h3>Lizeth Narvaez</h3>
-          </a>
-        </div>
-        <div class="team-member">
-          <a href="/team/dayana-chiguano">
-            <img
-              src={`${cdn}/equipo/dayana_chiguano.webp`}
-              alt="Team Member - Dayana Chiguano"
-            />
-            <h3>Dayana Chiguano</h3>
-          </a>
-        </div>
-        <div class="team-member">
-          <a href="/team/tatiana-paucar">
-            <img
-              src={`${cdn}/equipo/tatiana_paucar.webp`}
-              alt="Team Member - Tatiana Paucar"
-            />
-            <h3>Tatiana Paucar</h3>
-          </a>
-        </div>
-        <div class="team-member">
-          <a href="/team/esteban-caiza">
-            <img
-              src={`${cdn}/equipo/esteban_caiza.webp`}
-              alt="Team Member - Esteban Caiza"
-            />
-            <h3>Esteban Caiza</h3>
-          </a>
-        </div>
-        <div class="team-member">
-          <a href="/team/byron-peralta">
-            <img
-              src={`${cdn}/equipo/byron_peralta.webp`}
-              alt="Team Member - Byron Peralta"
-            />
-            <h3>Byron Peralta</h3>
-          </a>
-        </div>
-        <div class="team-member">
-          <a href="">
-            <img
-              src={`${cdn}/equipo/bryan_silva.webp`}
-              alt="Team Member - Bryan Silva"
-            />
-            <h3>Bryan Silva</h3>
-          </a>
-        </div>
+  <!-- Team Grid -->
+  <section class="team-section">
+    <div class="container">
+      <div class="section-header fade-in-section">
+        <span class="label">EL EQUIPO</span>
+        <h2 class="section-title">Conoce a las mentes creativas</h2>
       </div>
-    </section>
+      
+      <div class="team-grid">
+        {teamMembers.map((member, index) => (
+          <div class={`team-member fade-in-section delay-${index % 3}`}>
+            <a href={member.link || '#'} class={member.link ? '' : 'disabled-link'}>
+              <div class="member-image-wrapper">
+                <img
+                  src={`${cdn}/equipo/${member.image}`}
+                  alt={`Team Member - ${member.name}`}
+                  loading="lazy"
+                />
+                <div class="member-overlay">
+                  <span class="view-profile">Ver Perfil</span>
+                </div>
+              </div>
+              <h3>{member.name}</h3>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
-    <!-- <section class="awards">
-        <h2>Awards & Recognitions</h2>
-        <ul>
-            <li><span>2023</span> Global Design Award for Sustainable Architecture</li>
-            <li><span>2022</span> National Architects Guild - Firm of the Year</li>
-            <li><span>2021</span> "Golden Pillar" for Innovative Commercial Design</li>
-            <li><span>2020</span> "Green Build" Award for Eco-Friendly Construction</li>
-        </ul>
-    </section> -->
-  </div>
+  <!-- CTA Section (New) -->
+  <section class="cta-section fade-in-section">
+    <div class="cta-container">
+      <span class="cta-label">TRABAJEMOS JUNTOS</span>
+      <h2 class="cta-title">
+        Tu proximo espacio<br />
+        <em>comienza aqui</em>
+      </h2>
+      <p class="cta-description">
+        Nos encantaria escuchar tu proyecto. Cada gran espacio empieza con una conversacion.
+      </p>
+      <a href="/contact" class="cta-button">INICIAR CONVERSACION →</a>
+    </div>
+  </section>
+
 </Layout>
 
 <style>
-  .about-page {
-    padding: var(--spacing-xl) 0;
-  }
-  .team,
-  .awards,
-  .about-team {
-    padding: var(--spacing-xl) 0;
-  }
-  .about-intro {
-    height: 35vh;
-    display: flex;
-    padding-top: var(--spacing-xl);
-    align-items: flex-end;
-    justify-content: flex-end;
-  }
-  h1,
-  h2 {
-    text-align: center;
-    margin-bottom: var(--spacing-lg);
-  }
-  h1 {
-    font-size: 3.5rem;
-  }
-  h2 {
-    font-size: 2.5rem;
-  }
-  .about-intro p {
-    max-width: 700px;
-    text-align: justify;
-    font-size: 1.2rem;
-  }
-  .about-team img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    object-position: center;
-    border-radius: var(--border-radius);
+  :root {
+    --bg-alt: #f5f5f5;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666;
   }
 
-  .mission-vision {
+  /* General Layout */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  /* Animations */
+  .fade-in-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .delay-1 { transition-delay: 0.2s; }
+  .delay-2 { transition-delay: 0.4s; }
+
+  /* Intro Section */
+  .intro-section {
+    padding: 25vh 0 10vh;
+  }
+  .intro-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+  @media (min-width: 900px) {
+    .intro-content {
+      grid-template-columns: 1.2fr 1fr;
+      align-items: end;
+    }
+  }
+  .intro-title {
+    font-size: 3rem;
+    line-height: 1.1;
+    font-weight: 700;
+    margin: 0;
+  }
+  .intro-title em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .intro-text-block p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+    text-align: justify;
+  }
+
+  /* Team Image Section */
+  .team-image-section {
+    width: 100%;
+    height: 80vh;
+    overflow: hidden;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .parallax-container {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .team-hero-img {
+    width: 100%;
+    height: 130%; /* Taller than container for parallax effect */
+    object-fit: cover;
+    object-position: top center;
+    position: absolute;
+    top: -15%; /* Center the overflow */
+    left: 0;
+    will-change: transform;
+  }
+
+  /* Mission & Vision Grid */
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 768px) {
+    .philosophy-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .philosophy-item {
+    padding: var(--spacing-xl) var(--spacing-lg);
+    min-height: 400px;
     display: flex;
-    height: 70vh;
-    gap: var(--spacing-lg);
+    align-items: center;
+    justify-content: center;
+  }
+  .philosophy-item.light {
+    background-color: var(--bg-alt);
+    color: var(--text-primary);
+  }
+  .philosophy-item.dark {
+    background-color: #1a1a1a;
+    color: white;
+  }
+  .content-wrapper {
+    max-width: 400px;
+    text-align: left;
+  }
+  .philosophy-item .label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    margin-bottom: var(--spacing-md);
+    opacity: 0.7;
+    text-transform: uppercase;
+  }
+  .philosophy-item h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+    font-weight: 400;
+  }
+  .philosophy-item p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  /* Team Grid Section */
+  .team-section {
+    padding: var(--spacing-xl) 0;
+  }
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+  }
+  .section-header .label {
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-size: 2.5rem;
+    margin-top: var(--spacing-sm);
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px;
+  }
+  
+  .team-member a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .team-member.disabled-link a {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .member-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: var(--spacing-md);
+    aspect-ratio: 3/4;
+  }
+  
+  .member-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    filter: grayscale(100%);
+  }
+  
+  .member-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .view-profile {
+    color: white;
+    border: 1px solid white;
+    padding: 10px 20px;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+  }
+
+  /* Hover Effects for Team */
+  .team-member a:hover .member-image-wrapper img {
+    transform: scale(1.05);
+    filter: grayscale(0%);
+  }
+  .team-member a:not(.disabled-link):hover .member-overlay {
+    opacity: 1;
+  }
+  .team-member a:hover .view-profile {
+    transform: translateY(0);
+  }
+
+  .team-member h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0;
+    text-align: center;
+  }
+
+  /* CTA Section (Bottom) */
+  .cta-section {
+    background-color: #f9f9f9; /* Color similar a la imagen */
+    padding: 120px 20px;
+    text-align: center;
+    display: flex;
     justify-content: center;
     align-items: center;
   }
-  .mission-vision .item {
-    max-width: 400px;
-    text-align: center;
+  
+  .cta-container {
+    max-width: 800px;
   }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(250px, 1fr));
-    gap: var(--spacing-lg);
+  .cta-label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    color: #888;
+    margin-bottom: var(--spacing-lg);
+    text-transform: uppercase;
   }
-  .team-member {
-    text-align: center;
-  }
-  .team-member img {
-    width: 100%;
-    max-width: 250px;
-    height: auto;
+
+  .cta-title {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    color: #1a1a1a;
     margin-bottom: var(--spacing-md);
+    font-family: var(--font-sans); /* O serif si el diseño global lo prefiere */
   }
-  .team-member h3 {
-    margin: 0;
+  
+  .cta-title em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
   }
 
-  .awards ul {
+  .cta-description {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 40px;
     max-width: 600px;
-    margin: 0 auto;
-    list-style: none;
-    padding: 0;
-  }
-  .awards li {
-    border-bottom: 1px solid var(--color-muted);
-    padding: var(--spacing-md) 0;
-  }
-  .awards li span {
-    font-weight: bold;
-    color: var(--color-primary);
-    margin-right: var(--spacing-md);
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  @media screen and (max-width: 769px) {
-    .about-intro {
-      margin-top: var(--spacing-xl);
-      padding: var(--spacing-xl) 0;
-      height: auto;
-      align-items: center;
-      text-align: center;
-    }
-
-    .grid {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-    .about-team {
-      padding: var(--spacing-lg) 0;
-    }
-
-    .about-intro p {
-      padding: 0 var(--spacing-md);
-      text-align: justify;
-      font-size: 1rem;
-    }
-    .mission-vision {
-      height: 90vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      align-items: center;
-    }
+  .cta-button {
+    display: inline-block;
+    background-color: #1a1a1a;
+    color: white;
+    text-decoration: none;
+    padding: 16px 32px;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .cta-button:hover {
+    background-color: #333;
+    transform: translateY(-2px);
   }
 
-  @media screen and (min-width: 769px) and (max-width: 1920px) {
-    .about-intro {
-      height: 40vh;
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .intro-title {
+      font-size: 2.2rem;
+    }
+    .cta-title {
+      font-size: 2.5rem;
+    }
+    .philosophy-item {
+      padding: var(--spacing-lg);
+      min-height: auto;
+    }
+    .cta-section {
+      padding: 80px 20px;
     }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Parallax Effect
+    const parallaxImage = document.querySelector('.team-hero-img') as HTMLElement;
+    const parallaxSection = document.querySelector('.team-image-section') as HTMLElement;
+
+    if (parallaxImage && parallaxSection) {
+      window.addEventListener('scroll', () => {
+        const sectionTop = parallaxSection.offsetTop;
+        const sectionHeight = parallaxSection.offsetHeight;
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+
+        // Check if section is in view
+        if (scrollY + windowHeight > sectionTop && scrollY < sectionTop + sectionHeight) {
+          const speed = 0.2; // Adjust speed
+          const yPos = (scrollY - sectionTop) * speed;
+          parallaxImage.style.transform = `translateY(${yPos}px)`;
+        }
+      });
+    }
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          // Optional: Stop observing once visible
+          // observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const sections = document.querySelectorAll('.fade-in-section');
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  });
+</script>
