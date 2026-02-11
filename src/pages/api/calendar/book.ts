@@ -92,6 +92,19 @@ export const POST: APIRoute = async ({ request, locals }) => {
     );
   }
 
+  // Fix: Replace escaped newlines with actual newlines in private key
+  // Cloudflare stores \n as literal \\n, so we need to convert them back
+  const privateKey = env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
+
+  console.log('[DEBUG] Private key fix applied:', {
+    originalLength: env.GOOGLE_PRIVATE_KEY.length,
+    fixedLength: privateKey.length,
+    hasEscapedNewlines: env.GOOGLE_PRIVATE_KEY.includes('\\n'),
+    hasRealNewlines: privateKey.includes('\n'),
+    startsCorrectly: privateKey.startsWith('-----BEGIN PRIVATE KEY-----'),
+    endsCorrectly: privateKey.trim().endsWith('-----END PRIVATE KEY-----'),
+  });
+
   try {
     const data = await request.json();
 
