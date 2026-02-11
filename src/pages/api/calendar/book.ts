@@ -123,10 +123,19 @@ export const POST: APIRoute = async ({ request, locals }) => {
     }
 
     // 4. Authenticate Google
+    // Fix: Replace escaped newlines with actual newlines in private key
+    // Cloudflare stores \n as literal \\n, so we need to convert them back
+    const privateKey = env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
+
+    console.log(
+      '[DEBUG] Private key after fix starts with:',
+      privateKey.substring(0, 40)
+    );
+
     const auth = new GoogleAuth({
       credentials: {
         client_email: env.GOOGLE_CLIENT_EMAIL,
-        private_key: env.GOOGLE_PRIVATE_KEY,
+        private_key: privateKey,
         project_id: env.GOOGLE_PROJECT_ID,
       },
       scopes: ['https://www.googleapis.com/auth/calendar'],
