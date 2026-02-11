@@ -177,9 +177,19 @@ export const POST: APIRoute = async ({ request, locals }) => {
       },
     });
 
-    console.log('[DEBUG] FreeBusy response:', JSON.stringify(freeBusyRes.data));
+    // Parse response data - it might come as string or object depending on the client
+    const responseData =
+      typeof freeBusyRes.data === 'string'
+        ? JSON.parse(freeBusyRes.data)
+        : freeBusyRes.data;
 
-    const calendarsData = (freeBusyRes.data as any).calendars;
+    console.log('[DEBUG] FreeBusy response type:', typeof freeBusyRes.data);
+    console.log(
+      '[DEBUG] FreeBusy parsed calendars:',
+      Object.keys(responseData.calendars || {})
+    );
+
+    const calendarsData = responseData.calendars;
     if (!calendarsData || !calendarsData[calendarId]) {
       console.error(
         '[ERROR] Calendar not found in response. Available calendars:',
