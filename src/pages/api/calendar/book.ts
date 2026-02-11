@@ -28,7 +28,7 @@ interface Env {
 export const POST: APIRoute = async ({ request, locals }) => {
   // Access env from Cloudflare runtime
   const runtime = (locals as any).runtime;
-  const env = (runtime?.env || import.meta.env) as Env;
+  const env = (runtime?.env || import.meta.env || process.env) as Env;
 
   if (!env) {
     return new Response(
