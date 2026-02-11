@@ -26,25 +26,67 @@ interface Env {
 }
 
 export const POST: APIRoute = async ({ request, locals }) => {
-  // Access env from Cloudflare runtime
-  const runtime = (locals as any).runtime;
-  const env = (runtime?.env || import.meta.env || process.env) as Env;
+  // Access env from Cloudflare runtime (correct way for @astrojs/cloudflare adapter)
+  // See: https://docs.astro.build/en/guides/integrations-guide/cloudflare/#environment-variables-and-secrets
+  const runtime = (locals as { runtime?: { env?: Env } }).runtime;
+  const env = runtime?.env;
+
+  // Debug logging - check what's available in locals
+  console.log('[DEBUG] locals keys:', Object.keys(locals));
+  console.log('[DEBUG] runtime exists:', !!runtime);
+  console.log('[DEBUG] runtime type:', typeof runtime);
+  if (runtime) {
+    console.log('[DEBUG] runtime keys:', Object.keys(runtime));
+  }
+  console.log('[DEBUG] env exists:', !!env);
+  if (env) {
+    console.log('[DEBUG] env keys:', Object.keys(env));
+    console.log('[DEBUG] env vars check:', {
+      GOOGLE_PROJECT_ID: !!env.GOOGLE_PROJECT_ID,
+      GOOGLE_CLIENT_EMAIL: !!env.GOOGLE_CLIENT_EMAIL,
+      GOOGLE_PRIVATE_KEY: !!env.GOOGLE_PRIVATE_KEY,
+      GOOGLE_PRIVATE_KEY_length: env.GOOGLE_PRIVATE_KEY?.length || 0,
+      GOOGLE_PRIVATE_KEY_starts:
+        env.GOOGLE_PRIVATE_KEY?.substring(0, 30) || 'N/A',
+      GOOGLE_CALENDAR_ID: !!env.GOOGLE_CALENDAR_ID,
+      TURNSTILE_SECRET_KEY: !!env.TURNSTILE_SECRET_KEY,
+    });
+  }
 
   if (!env) {
+    console.error('[ERROR] Cloudflare runtime env not available');
     return new Response(
       JSON.stringify({
         error: 'Server configuration error',
-        debug: 'Runtime env not available',
+        debug: 'Cloudflare runtime env not available',
+        localsKeys: Object.keys(locals),
+        runtimeExists: !!runtime,
+        runtimeKeys: runtime ? Object.keys(runtime) : [],
       }),
       { status: 500 }
     );
   }
 
   if (!env.GOOGLE_PRIVATE_KEY || !env.TURNSTILE_SECRET_KEY) {
+    console.error('[ERROR] Missing environment variables', {
+      GOOGLE_PROJECT_ID: !!env.GOOGLE_PROJECT_ID,
+      GOOGLE_CLIENT_EMAIL: !!env.GOOGLE_CLIENT_EMAIL,
+      GOOGLE_PRIVATE_KEY: !!env.GOOGLE_PRIVATE_KEY,
+      GOOGLE_CALENDAR_ID: !!env.GOOGLE_CALENDAR_ID,
+      TURNSTILE_SECRET_KEY: !!env.TURNSTILE_SECRET_KEY,
+    });
     return new Response(
       JSON.stringify({
         error: 'Server configuration error',
         debug: 'Missing environment variables',
+        envCheck: {
+          GOOGLE_PROJECT_ID: !!env.GOOGLE_PROJECT_ID,
+          GOOGLE_CLIENT_EMAIL: !!env.GOOGLE_CLIENT_EMAIL,
+          GOOGLE_PRIVATE_KEY: !!env.GOOGLE_PRIVATE_KEY,
+          GOOGLE_CALENDAR_ID: !!env.GOOGLE_CALENDAR_ID,
+          TURNSTILE_SECRET_KEY: !!env.TURNSTILE_SECRET_KEY,
+        },
+        envKeys: Object.keys(env),
       }),
       { status: 500 }
     );
