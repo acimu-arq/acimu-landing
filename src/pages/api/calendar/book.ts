@@ -157,6 +157,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const client = await auth.getClient();
     const calendarId = env.GOOGLE_CALENDAR_ID;
 
+    console.log('[DEBUG] Calendar ID:', calendarId);
+    console.log('[DEBUG] Calendar ID length:', calendarId.length);
+
     // 5. Check Availability (FreeBusy)
     const startTime = new Date(
       `${validatedData.date}T${validatedData.time}:00`
@@ -174,7 +177,24 @@ export const POST: APIRoute = async ({ request, locals }) => {
       },
     });
 
-    const busySlots = (freeBusyRes.data as any).calendars[calendarId].busy;
+    console.log('[DEBUG] FreeBusy response:', JSON.stringify(freeBusyRes.data));
+
+    const calendarsData = (freeBusyRes.data as any).calendars;
+    if (!calendarsData || !calendarsData[calendarId]) {
+      console.error(
+        '[ERROR] Calendar not found in response. Available calendars:',
+        Object.keys(calendarsData || {})
+      );
+      return new Response(
+        JSON.stringify({
+          error: 'Calendar configuration error',
+          debug: 'Calendar ID not found in Google response',
+        }),
+        { status: 500 }
+      );
+    }
+
+    const busySlots = calendarsData[calendarId].busy;
     if (busySlots && busySlots.length > 0) {
       return new Response(JSON.stringify({ error: 'Horario no disponible' }), {
         status: 409,
