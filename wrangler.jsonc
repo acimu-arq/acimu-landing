@@ -2,9 +2,14 @@
   "name": "acimu",
   "main": "dist/_worker.js/index.js",
   "compatibility_date": "2025-10-22",
-  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
   "assets": {
     "directory": "dist",
     "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": false
   }
 }
