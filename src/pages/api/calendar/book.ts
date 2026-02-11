@@ -26,68 +26,23 @@ interface Env {
 }
 
 export const POST: APIRoute = async ({ request, locals }) => {
-  // Access env from Cloudflare runtime (correct way for @astrojs/cloudflare adapter)
+  // Access env from Cloudflare runtime
   // See: https://docs.astro.build/en/guides/integrations-guide/cloudflare/#environment-variables-and-secrets
   const runtime = (locals as { runtime?: { env?: Env } }).runtime;
   const env = runtime?.env;
 
-  // Debug logging - check what's available in locals
-  console.log('[DEBUG] locals keys:', Object.keys(locals));
-  console.log('[DEBUG] runtime exists:', !!runtime);
-  console.log('[DEBUG] runtime type:', typeof runtime);
-  if (runtime) {
-    console.log('[DEBUG] runtime keys:', Object.keys(runtime));
-  }
-  console.log('[DEBUG] env exists:', !!env);
-  if (env) {
-    console.log('[DEBUG] env keys:', Object.keys(env));
-    console.log('[DEBUG] env vars check:', {
-      GOOGLE_PROJECT_ID: !!env.GOOGLE_PROJECT_ID,
-      GOOGLE_CLIENT_EMAIL: !!env.GOOGLE_CLIENT_EMAIL,
-      GOOGLE_PRIVATE_KEY: !!env.GOOGLE_PRIVATE_KEY,
-      GOOGLE_PRIVATE_KEY_length: env.GOOGLE_PRIVATE_KEY?.length || 0,
-      GOOGLE_PRIVATE_KEY_starts:
-        env.GOOGLE_PRIVATE_KEY?.substring(0, 30) || 'N/A',
-      GOOGLE_CALENDAR_ID: !!env.GOOGLE_CALENDAR_ID,
-      TURNSTILE_SECRET_KEY: !!env.TURNSTILE_SECRET_KEY,
-    });
-  }
-
   if (!env) {
-    console.error('[ERROR] Cloudflare runtime env not available');
+    console.error('Cloudflare runtime env not available');
     return new Response(
-      JSON.stringify({
-        error: 'Server configuration error',
-        debug: 'Cloudflare runtime env not available',
-        localsKeys: Object.keys(locals),
-        runtimeExists: !!runtime,
-        runtimeKeys: runtime ? Object.keys(runtime) : [],
-      }),
+      JSON.stringify({ error: 'Server configuration error' }),
       { status: 500 }
     );
   }
 
   if (!env.GOOGLE_PRIVATE_KEY || !env.TURNSTILE_SECRET_KEY) {
-    console.error('[ERROR] Missing environment variables', {
-      GOOGLE_PROJECT_ID: !!env.GOOGLE_PROJECT_ID,
-      GOOGLE_CLIENT_EMAIL: !!env.GOOGLE_CLIENT_EMAIL,
-      GOOGLE_PRIVATE_KEY: !!env.GOOGLE_PRIVATE_KEY,
-      GOOGLE_CALENDAR_ID: !!env.GOOGLE_CALENDAR_ID,
-      TURNSTILE_SECRET_KEY: !!env.TURNSTILE_SECRET_KEY,
-    });
+    console.error('Missing required environment variables');
     return new Response(
-      JSON.stringify({
-        error: 'Server configuration error',
-        debug: 'Missing environment variables',
-        envCheck: {
-          GOOGLE_PROJECT_ID: !!env.GOOGLE_PROJECT_ID,
-          GOOGLE_CLIENT_EMAIL: !!env.GOOGLE_CLIENT_EMAIL,
-          GOOGLE_PRIVATE_KEY: !!env.GOOGLE_PRIVATE_KEY,
-          GOOGLE_CALENDAR_ID: !!env.GOOGLE_CALENDAR_ID,
-          TURNSTILE_SECRET_KEY: !!env.TURNSTILE_SECRET_KEY,
-        },
-        envKeys: Object.keys(env),
-      }),
+      JSON.stringify({ error: 'Server configuration error' }),
       { status: 500 }
     );
   }
@@ -96,22 +51,13 @@ export const POST: APIRoute = async ({ request, locals }) => {
   // Cloudflare stores \n as literal \\n, so we need to convert them back
   const privateKey = env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
 
-  console.log('[DEBUG] Private key fix applied:', {
-    originalLength: env.GOOGLE_PRIVATE_KEY.length,
-    fixedLength: privateKey.length,
-    hasEscapedNewlines: env.GOOGLE_PRIVATE_KEY.includes('\\n'),
-    hasRealNewlines: privateKey.includes('\n'),
-    startsCorrectly: privateKey.startsWith('-----BEGIN PRIVATE KEY-----'),
-    endsCorrectly: privateKey.trim().endsWith('-----END PRIVATE KEY-----'),
-  });
-
   try {
     const data = await request.json();
 
-    // 2. Validate Data
+    // Validate Data
     const validatedData = bookingSchema.parse(data);
 
-    // 3. Verify Turnstile
+    // Verify Turnstile
     const turnstileFormData = new FormData();
     turnstileFormData.append('secret', env.TURNSTILE_SECRET_KEY);
     turnstileFormData.append('response', validatedData.turnstileToken);
@@ -128,23 +74,16 @@ export const POST: APIRoute = async ({ request, locals }) => {
       }
     );
 
-    const turnstileOutcome = (await turnstileResult.json()) as any;
+    const turnstileOutcome = (await turnstileResult.json()) as {
+      success: boolean;
+    };
     if (!turnstileOutcome.success) {
       return new Response(JSON.stringify({ error: 'Security check failed' }), {
         status: 403,
       });
     }
 
-    // 4. Authenticate Google
-    // Fix: Replace escaped newlines with actual newlines in private key
-    // Cloudflare stores \n as literal \\n, so we need to convert them back
-    const privateKey = env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
-
-    console.log(
-      '[DEBUG] Private key after fix starts with:',
-      privateKey.substring(0, 40)
-    );
-
+    // Authenticate Google
     const auth = new GoogleAuth({
       credentials: {
         client_email: env.GOOGLE_CLIENT_EMAIL,
@@ -157,14 +96,17 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const client = await auth.getClient();
     const calendarId = env.GOOGLE_CALENDAR_ID;
 
-    console.log('[DEBUG] Calendar ID:', calendarId);
-    console.log('[DEBUG] Calendar ID length:', calendarId.length);
+    // Check Availability (FreeBusy)
+    // Ecuador timezone: America/Guayaquil (UTC-5)
+    const TIMEZONE = 'America/Guayaquil';
 
-    // 5. Check Availability (FreeBusy)
-    const startTime = new Date(
-      `${validatedData.date}T${validatedData.time}:00`
-    );
+    // Create datetime string in ISO format with timezone offset for Ecuador (UTC-5)
+    const startDateTime = `${validatedData.date}T${validatedData.time}:00-05:00`;
+    const startTime = new Date(startDateTime);
     const endTime = new Date(startTime.getTime() + 60 * 60 * 1000); // +1 hour
+
+    // Format end time with Ecuador timezone offset
+    const endDateTime = `${validatedData.date}T${String(parseInt(validatedData.time.split(':')[0]) + 1).padStart(2, '0')}:${validatedData.time.split(':')[1]}:00-05:00`;
 
     const freeBusyUrl = `https://www.googleapis.com/calendar/v3/freeBusy`;
     const freeBusyRes = await client.request({
@@ -183,23 +125,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
         ? JSON.parse(freeBusyRes.data)
         : freeBusyRes.data;
 
-    console.log('[DEBUG] FreeBusy response type:', typeof freeBusyRes.data);
-    console.log(
-      '[DEBUG] FreeBusy parsed calendars:',
-      Object.keys(responseData.calendars || {})
-    );
-
     const calendarsData = responseData.calendars;
     if (!calendarsData || !calendarsData[calendarId]) {
-      console.error(
-        '[ERROR] Calendar not found in response. Available calendars:',
-        Object.keys(calendarsData || {})
-      );
+      console.error('Calendar not found in Google response');
       return new Response(
-        JSON.stringify({
-          error: 'Calendar configuration error',
-          debug: 'Calendar ID not found in Google response',
-        }),
+        JSON.stringify({ error: 'Calendar configuration error' }),
         { status: 500 }
       );
     }
@@ -211,38 +141,29 @@ export const POST: APIRoute = async ({ request, locals }) => {
       });
     }
 
-    // 6. Create Event
+    // Create Event
     const eventDescription = `
-      Tipo: ${validatedData.type}
-      ${validatedData.office ? `Oficina: ${validatedData.office}` : ''}
-      Cliente: ${validatedData.name}
-      Email: ${validatedData.email}
-      Teléfono: ${validatedData.phone}
-      Motivo: ${validatedData.reason}
-      ${validatedData.type === 'campo' ? `Sector: ${validatedData.sector}` : ''}
+Tipo: ${validatedData.type}
+${validatedData.office ? `Oficina: ${validatedData.office}` : ''}
+Cliente: ${validatedData.name}
+Email: ${validatedData.email}
+Teléfono: ${validatedData.phone}
+Motivo: ${validatedData.reason}
+${validatedData.type === 'campo' ? `Sector: ${validatedData.sector}` : ''}
     `.trim();
 
-    const eventBody: any = {
+    const eventBody = {
       summary: `Cita ACIMU: ${validatedData.name} (${validatedData.type})`,
       description: eventDescription,
-      start: { dateTime: startTime.toISOString() },
-      end: { dateTime: endTime.toISOString() },
-      // attendees: [{ email: validatedData.email }], // Service accounts cannot invite attendees without Domain-Wide Delegation
+      start: {
+        dateTime: startDateTime,
+        timeZone: TIMEZONE,
+      },
+      end: {
+        dateTime: endDateTime,
+        timeZone: TIMEZONE,
+      },
     };
-
-    // Add Google Meet link if virtual
-    // Note: Service accounts often cannot create Google Meets without G Suite/Workspace licensing and delegation.
-    // We are disabling this to prevent "Invalid conference type value" errors.
-    /*
-    if (validatedData.type === 'virtual') {
-      eventBody.conferenceData = {
-        createRequest: {
-          requestId: Math.random().toString(36).substring(7),
-          conferenceSolutionKey: { type: 'hangoutsMeet' },
-        },
-      };
-    }
-    */
 
     const insertUrl = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events`;
     await client.request({

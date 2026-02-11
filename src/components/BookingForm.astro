@@ -84,9 +84,20 @@ import { turnstileSiteKey } from '@/config';
 
       <!-- Turnstile Widget -->
       <div class="trunstile-container">
-        <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light"></div>
+        <div id="turnstile-widget" class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light"></div>
       </div>
     </form>
+  </div>
+</dialog>
+
+<!-- Info Modal for feedback -->
+<dialog id="info-modal" class="info-modal">
+  <div class="info-container">
+    <div class="info-icon" id="info-icon"></div>
+    <h4 id="info-title"></h4>
+    <p id="info-message"></p>
+    <div id="info-details" class="info-details"></div>
+    <button id="info-accept-btn" class="btn-accept">Aceptar</button>
   </div>
 </dialog>
 
@@ -257,14 +268,246 @@ import { turnstileSiteKey } from '@/config';
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+  /* Info Modal Styles */
+  .info-modal {
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    background: transparent;
+    max-width: 90vw;
+    width: 400px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+  }
+
+  .info-modal::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+  }
+
+  .info-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .info-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+  }
+
+  .info-icon.success {
+    background-color: #dcfce7;
+    color: #166534;
+  }
+
+  .info-icon.unavailable {
+    background-color: #fef3c7;
+    color: #92400e;
+  }
+
+  .info-icon.error {
+    background-color: #fee2e2;
+    color: #991b1b;
+  }
+
+  .info-modal h4 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: var(--color-text);
+  }
+
+  .info-modal p {
+    color: var(--color-text-light);
+    margin: 0 0 1rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .info-details {
+    background: var(--color-background);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    font-size: 0.9rem;
+  }
+
+  .info-details:empty {
+    display: none;
+  }
+
+  .info-details p {
+    margin: 0.25rem 0;
+    color: var(--color-text);
+  }
+
+  .info-details strong {
+    color: var(--color-primary);
+  }
+
+  .btn-accept {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    width: 100%;
+  }
+
+  .btn-accept:hover {
+    opacity: 0.9;
+  }
+
+  .btn-accept.secondary {
+    background-color: #6b7280;
+  }
 </style>
 
 <script>
   // Modal Logic
   const modal = document.getElementById('booking-modal') as HTMLDialogElement;
+  const infoModal = document.getElementById('info-modal') as HTMLDialogElement;
   const closeBtn = document.getElementById('close-modal');
   const officeInput = document.getElementById('office') as HTMLInputElement;
   const officeDisplay = document.getElementById('office-display');
+
+  // Info Modal Elements
+  const infoIcon = document.getElementById('info-icon');
+  const infoTitle = document.getElementById('info-title');
+  const infoMessage = document.getElementById('info-message');
+  const infoDetails = document.getElementById('info-details');
+  const infoAcceptBtn = document.getElementById('info-accept-btn');
+
+  // Store current state for accept button behavior
+  let currentInfoState: 'success' | 'unavailable' | 'error' = 'success';
+
+  // Helper function to format time for display
+  function formatTime(time: string): string {
+    const [hours, minutes] = time.split(':');
+    const hour = parseInt(hours);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const displayHour = hour > 12 ? hour - 12 : hour === 0 ? 12 : hour;
+    return `${displayHour}:${minutes} ${ampm}`;
+  }
+
+  // Helper function to format date for display
+  function formatDate(dateStr: string): string {
+    const date = new Date(dateStr + 'T12:00:00');
+    return date.toLocaleDateString('es-EC', { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+  }
+
+  // Helper function to get appointment type label
+  function getTypeLabel(type: string): string {
+    const labels: Record<string, string> = {
+      'oficina': 'En Oficina',
+      'campo': 'Visita de Campo',
+      'virtual': 'Reunión Virtual'
+    };
+    return labels[type] || type;
+  }
+
+  // Function to show info modal
+  function showInfoModal(
+    state: 'success' | 'unavailable' | 'error',
+    bookingData?: {
+      type: string;
+      date: string;
+      time: string;
+      name: string;
+      office?: string;
+    }
+  ) {
+    currentInfoState = state;
+    
+    // Reset classes
+    infoIcon!.className = 'info-icon';
+    
+    if (state === 'success') {
+      infoIcon!.classList.add('success');
+      infoIcon!.textContent = '✓';
+      infoTitle!.textContent = '¡Cita Agendada!';
+      infoMessage!.textContent = 'Tu cita ha sido registrada exitosamente. En breve un asesor se comunicará contigo para confirmar los detalles.';
+      
+      if (bookingData) {
+        infoDetails!.innerHTML = `
+          <p><strong>Tipo:</strong> ${getTypeLabel(bookingData.type)}</p>
+          <p><strong>Fecha:</strong> ${formatDate(bookingData.date)}</p>
+          <p><strong>Hora:</strong> ${formatTime(bookingData.time)}</p>
+          <p><strong>Cliente:</strong> ${bookingData.name}</p>
+          ${bookingData.office ? `<p><strong>Sede:</strong> ${bookingData.office}</p>` : ''}
+        `;
+      } else {
+        infoDetails!.innerHTML = '';
+      }
+    } else if (state === 'unavailable') {
+      infoIcon!.classList.add('unavailable');
+      infoIcon!.textContent = '⚠';
+      infoTitle!.textContent = 'Horario No Disponible';
+      infoMessage!.textContent = 'El horario seleccionado ya no está disponible. Por favor, selecciona otra fecha u hora para tu cita.';
+      infoDetails!.innerHTML = '';
+    } else {
+      infoIcon!.classList.add('error');
+      infoIcon!.textContent = '✕';
+      infoTitle!.textContent = 'Error al Procesar';
+      infoMessage!.textContent = 'No pudimos procesar tu solicitud en este momento. Por favor, intenta nuevamente más tarde.';
+      infoDetails!.innerHTML = '';
+    }
+
+    infoModal.showModal();
+  }
+
+  // Reset Turnstile token
+  function resetTurnstile() {
+    // @ts-ignore
+    if (window.turnstile) {
+      // @ts-ignore
+      window.turnstile.reset('#turnstile-widget');
+    }
+  }
+
+  // Info modal accept button handler
+  if (infoAcceptBtn && infoModal) {
+    infoAcceptBtn.addEventListener('click', () => {
+      infoModal.close();
+      
+      // If success or error, close both modals and reset form
+      if (currentInfoState === 'success' || currentInfoState === 'error') {
+        const form = document.getElementById('booking-form') as HTMLFormElement;
+        if (form) form.reset();
+        modal.close();
+        resetTurnstile();
+      } else if (currentInfoState === 'unavailable') {
+        // Only close info modal, keep booking modal open for user to change time
+        // Reset turnstile for the next attempt
+        resetTurnstile();
+      }
+    });
+
+    // Prevent closing info modal by clicking backdrop
+    infoModal.addEventListener('click', (e) => {
+      if (e.target === infoModal) {
+        e.preventDefault();
+      }
+    });
+  }
 
   // Expose function to window for external triggering
   (window as any).openBookingModal = (officeName: string) => {
@@ -344,15 +587,15 @@ import { turnstileSiteKey } from '@/config';
         }
 
         const data = {
-          type: formData.get('type'),
-          office: formData.get('office'), // Include office
-          date: formData.get('date'),
-          time: formData.get('time'),
-          name: formData.get('name'),
-          email: formData.get('email'),
-          phone: formData.get('phone'),
-          reason: formData.get('reason'),
-          sector: formData.get('sector'),
+          type: formData.get('type') as string,
+          office: formData.get('office') as string,
+          date: formData.get('date') as string,
+          time: formData.get('time') as string,
+          name: formData.get('name') as string,
+          email: formData.get('email') as string,
+          phone: formData.get('phone') as string,
+          reason: formData.get('reason') as string,
+          sector: formData.get('sector') as string,
           turnstileToken
         };
 
@@ -362,27 +605,34 @@ import { turnstileSiteKey } from '@/config';
           body: JSON.stringify(data)
         });
 
-        const result = await response.json();
+        // We check status codes, not response body
+        await response.json();
 
-        if (!response.ok) {
-          throw new Error(result.error || 'Error al agendar la cita');
+        if (response.ok) {
+          // Success - show success modal with booking details
+          showInfoModal('success', {
+            type: data.type,
+            date: data.date,
+            time: data.time,
+            name: data.name,
+            office: data.office
+          });
+        } else if (response.status === 409) {
+          // Time slot not available
+          showInfoModal('unavailable');
+        } else {
+          // Other errors
+          showInfoModal('error');
         }
 
-        // Success
-        messageDiv!.textContent = '¡Cita agendada con éxito! En breve un asesor se comunicará contigo.';
-        messageDiv!.classList.add('success');
-        form.reset();
-        
-        // Reset Turnstile (needs global TS types or simple ignore)
-        // @ts-ignore
-        if (window.turnstile) window.turnstile.reset();
-        
-        // Close modal after delay
-        setTimeout(() => modal.close(), 3000);
-
       } catch (err: any) {
-        messageDiv!.textContent = err.message;
-        messageDiv!.classList.add('error');
+        // Network or validation errors
+        if (err.message.includes('verificación')) {
+          messageDiv!.textContent = err.message;
+          messageDiv!.classList.add('error');
+        } else {
+          showInfoModal('error');
+        }
       } finally {
         submitBtn.disabled = false;
         btnText.style.display = 'inline';
