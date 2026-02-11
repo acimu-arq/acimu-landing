@@ -17,12 +17,13 @@ const servicesText = [
   'ARQUITECTURA',
   'DISEÑO',
   'INTERIORISMO',
-  'LEGALIZACION',
-  'REMODELACION',
+  'LEGALIZACIÓN',
+  'REMODELACIÓN',
   'CONSULTORIA',
   'SUSTENTABILIDAD',
   'MODELADO 3D',
   'INGENIERIAS',
+  'CONSTRUCCIÓN',
 ];
 ---
 
@@ -70,7 +71,7 @@ const servicesText = [
         <span class="philosophy-label">FILOSOFIA</span>
         <h2 class="philosophy-title">
           Espacios<br />
-          <em>que conectan</em><br />
+          que conectan<br />
           y perduran
         </h2>
       </div>
@@ -395,6 +396,22 @@ const servicesText = [
     }
   }
 
+  @media (max-width: 1600px) {
+    .hero {
+      height: auto;
+      aspect-ratio: 5 / 4;
+    }
+    .slide {
+      min-width: 100%;
+    }
+  }
+
+  @media (max-width: 650px) {
+    .hero {
+      padding-top: 15rem;
+    }
+  }
+
   @media (max-width: 480px) {
     .slide h1 {
       font-size: 2rem;
@@ -410,13 +427,6 @@ const servicesText = [
       font-size: 1.75rem;
     }
   }
-
-  @media (max-width: 1024px) {
-    .slide {
-      min-width: 100%;
-    }
-  }
-
   /* FAQ Invite */
   .faq-invite {
     padding: var(--spacing-xl) var(--spacing-md);
@@ -431,7 +441,7 @@ const servicesText = [
   }
   
   .faq-question {
-    font-size: 1rem;
+    font-size: 3rem;
     color: var(--color-text-light);
     margin-bottom: var(--spacing-lg);
     font-weight: 400;
@@ -496,7 +506,7 @@ const servicesText = [
 
   @media (max-width: 768px) {
     #intro-logo {
-      width: 300px; /* Tamaño "mediano" */
+      width: 300px;
     }
   }
 

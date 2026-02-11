@@ -26,8 +26,8 @@ const teamMembers = [
         <span class="label">EL ESTUDIO</span>
         <h1 class="intro-title">
           Espacios <br/>
-          que <em>conectan</em> <br/>
-          y perduran.
+          que perduran <br/>
+          y conectan.
         </h1>
         </div>
         <div class="intro-text-block">
@@ -115,7 +115,7 @@ const teamMembers = [
       <span class="cta-label">TRABAJEMOS JUNTOS</span>
       <h2 class="cta-title">
         Tu proximo espacio<br />
-        <em>comienza aqui</em>
+        comienza aqui
       </h2>
       <p class="cta-description">
         Nos encantaria escuchar tu proyecto. Cada gran espacio empieza con una conversacion.
@@ -170,7 +170,6 @@ const teamMembers = [
   }
   .intro-title {
     font-size: 3rem;
-    line-height: 1.1;
     font-weight: 700;
     margin: 0;
   }
@@ -190,7 +189,9 @@ const teamMembers = [
   /* Team Image Section */
   .team-image-section {
     width: 100%;
-    height: 80vh;
+    height: auto;
+    aspect-ratio: 3/2;
+    background-position: top;
     overflow: hidden;
     margin-bottom: 0;
     position: relative;
@@ -224,7 +225,7 @@ const teamMembers = [
   }
   .philosophy-item {
     padding: var(--spacing-xl) var(--spacing-lg);
-    min-height: 400px;
+    min-height: 700px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -381,7 +382,6 @@ const teamMembers = [
     line-height: 1.1;
     color: #1a1a1a;
     margin-bottom: var(--spacing-md);
-    font-family: var(--font-sans); /* O serif si el diseño global lo prefiere */
   }
   
   .cta-title em {
