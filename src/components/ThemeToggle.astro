@@ -1,9 +1,16 @@
 ---
 import { Sun, Moon } from 'lucide-astro';
 ---
-<button id="theme-toggle">
-  <Sun class="sun" />
-  <Moon class="moon" />
+<button id="theme-toggle" role="switch" aria-checked="false" aria-label="Toggle dark mode">
+  <span class="switch-track">
+    <span class="switch-icon sun-icon">
+      <Sun size={14} />
+    </span>
+    <span class="switch-icon moon-icon">
+      <Moon size={14} />
+    </span>
+    <span class="switch-thumb"></span>
+  </span>
 </button>
 
 <style>
@@ -15,21 +22,81 @@ import { Sun, Moon } from 'lucide-astro';
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-text);
   }
-  .sun, .moon {
+
+  .switch-track {
+    position: relative;
+    width: 52px;
+    height: 28px;
+    background: var(--color-surface, #e5e7eb);
+    border-radius: 9999px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+  }
+
+  html[data-theme='dark'] .switch-track {
+    background: var(--color-muted);
+  }
+
+  .switch-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
   }
-  html[data-theme='dark'] .sun {
-    display: none;
+
+  html[data-theme='dark'] .switch-thumb {
+    transform: translateX(24px);
   }
-  html:not([data-theme='dark']) .moon {
-    display: none;
+
+  .switch-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .sun-icon {
+    color: #f59e0b;
+    opacity: 1;
+  }
+
+  .moon-icon {
+    color: var(--color-muted);
+    opacity: 0.5;
+  }
+
+  html[data-theme='dark'] .sun-icon {
+    opacity: 0.5;
+  }
+
+  html[data-theme='dark'] .moon-icon {
+    color: #fbbf24;
+    opacity: 1;
   }
 </style>
 
 <script is:inline>
-  document.getElementById('theme-toggle').addEventListener('click', () => {
+  const toggle = document.getElementById('theme-toggle');
+  
+  // Set initial aria-checked state
+  const updateAriaState = () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    toggle.setAttribute('aria-checked', isDark.toString());
+  };
+  
+  updateAriaState();
+  
+  toggle.addEventListener('click', () => {
     const html = document.documentElement;
     const theme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     if (theme === 'light') {
@@ -38,5 +105,6 @@ import { Sun, Moon } from 'lucide-astro';
       html.setAttribute('data-theme', 'dark');
     }
     localStorage.setItem('theme', theme);
+    updateAriaState();
   });
 </script>

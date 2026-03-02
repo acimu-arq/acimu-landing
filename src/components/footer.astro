@@ -1,5 +1,5 @@
 ---
-import { Instagram, Linkedin } from 'lucide-astro';
+import { Instagram, Linkedin, Facebook } from 'lucide-astro';
 import ThemeToggle from './ThemeToggle.astro';
 import { cdn } from '../config.ts';
 ---
@@ -12,8 +12,8 @@ import { cdn } from '../config.ts';
         <img src=`${cdn}/menu-dark.png` alt="ACIMU Logo" class="footer-logo" />
       </div>
 
-      <!-- Sección 2: Sitemap -->
-      <div class="footer-section">
+      <!-- Sección 2: Sitemap y Contacto -->
+      <div class="footer-section sitemap-contact-section">
         <nav class="sitemap">
           <ul>
             <li><a href="/">Inicio</a></li>
@@ -25,17 +25,29 @@ import { cdn } from '../config.ts';
         </nav>
       </div>
 
-      <!-- Sección 3: Contacto -->
-      <div class="footer-section contact-section">
-        <p class="address">Calle Montúfar, Sangolquí, Rumiñahui</p>
-        <p class="phone">Tel: 096 212 2527</p>
-        <p class="email">arquitectos.cinco.mas.uno@gmail.com</p>
-      </div>
-
-      <div class="footer-section">
+      <!-- Sección 3: Redes Sociales -->
+      <div class="footer-section social-section">
         <div class="social">
-          <a href="https://www.linkedin.com/company/arquitectos-cinco-uno" aria-label="Linkedin" target="_blank"><Linkedin size={24} /></a>
-          <a href="https://www.instagram.com/_acimu_" aria-label="Instagram" target="_blank"><Instagram size={24} /></a>
+          <a
+            href="https://www.linkedin.com/company/arquitectos-cinco-uno"
+            aria-label="Linkedin"
+            target="_blank"
+            ><Linkedin size={24} /><p class="social-name">LinkedIn</p></a
+          >
+          <a
+            href="https://www.instagram.com/_acimu_"
+            aria-label="Instagram"
+            target="_blank"
+            ><Instagram size={24} /><p class="social-name">Instagram</p></a
+          >
+          <a
+            href="https://www.facebook.com/profile.php?id=61572375099518"
+            aria-label="Instagram"
+            target="_blank"
+            ><Facebook size={24} /><p class="social-name">Facebook</p></a
+          >
+        </div>
+        <div class="theme-toggle">
           <ThemeToggle />
         </div>
       </div>
@@ -43,18 +55,70 @@ import { cdn } from '../config.ts';
 
     <!-- Footer Bottom: Copyright -->
     <div class="footer-bottom">
-      <p class="copy">
-        &copy; {new Date().getFullYear()} ACIMU. Todos los derechos reservados.
-      </p>
-      <p class="copy">Desarrollado por ACIMU</p>
+      <div>
+        <span>
+          <img
+            src="/payment-methods/deuna.svg"
+            alt="deuna"
+            style="height: 24px; vertical-align: middle;"
+          />
+        </span>
+        <span>
+          <img
+            src="/payment-methods/datafast.svg"
+            alt="deuna"
+            style="height: 24px; vertical-align: middle;"
+          />
+        </span>
+        <span>
+          <img
+            src="/payment-methods/visa.svg"
+            alt="deuna"
+            style="height: 24px; vertical-align: middle;"
+          />
+        </span>
+        <span>
+          <img
+            src="/payment-methods/mastercard.svg"
+            alt="deuna"
+            style="height: 24px; vertical-align: middle;"
+          />
+        </span>
+        <span>
+          <img
+            src="/payment-methods/amex.svg"
+            alt="deuna"
+            style="height: 24px; vertical-align: middle;"
+          />
+        </span>
+        <span>
+          <img
+            src="/payment-methods/diners.svg"
+            alt="deuna"
+            style="height: 24px; vertical-align: middle;"
+          />
+        </span>
+      </div>
+      <div class="copy">
+        <p>
+          &copy; {new Date().getFullYear()} ACIMU. Todos los derechos reservados.
+        </p>
+        <p>
+          Made with ❤️ by <a
+            href="https://github.com/PabloWually"
+            target="_blank">wually</a
+          >
+        </p>
+      </div>
     </div>
   </div>
 </footer>
 
 <style>
   footer {
-    background-color: var(--color-muted);
+    background-color: #2C3E50;
     padding: var(--spacing-xl) 0 1;
+    opacity: 0.95;
   }
 
   .container {
@@ -64,7 +128,7 @@ import { cdn } from '../config.ts';
   }
 
   .footer-content {
-    margin-bottom: var(--spacing-lg);
+    padding-top: var(--spacing-lg);
   }
 
   .footer-section {
@@ -83,6 +147,12 @@ import { cdn } from '../config.ts';
     height: auto;
   }
 
+  /* Sección 2: Sitemap y Contacto */
+  .sitemap-contact-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
   .sitemap {
     margin-bottom: var(--spacing-lg);
   }
@@ -92,29 +162,38 @@ import { cdn } from '../config.ts';
     padding: 0;
     margin: 0;
     display: flex;
+    flex-direction: row;
     gap: var(--spacing-md);
   }
 
   .sitemap li a {
-    color: var(--color-text);
+    color: var(--color-text-footer);
     text-decoration: none;
     transition: color 0.3s ease;
     font-size: 0.95rem;
   }
 
   .sitemap li a:hover {
-    color: var(--color-primary);
+    color: var(--color-muted);
   }
 
   /* Sección 3: Contacto */
   .contact-section {
+    display: flex;
     flex-direction: column;
     align-items: center;
   }
+
   .contact-section p {
     margin: var(--spacing-xs) 0;
-    color: var(--color-text);
+    color: var(--color-text-footer);
     font-size: 0.95rem;
+  }
+
+  /* Sección 4: Redes Sociales */
+  .social-section {
+    flex-direction: column;
+    align-items: center;
   }
 
   .social {
@@ -124,13 +203,14 @@ import { cdn } from '../config.ts';
   }
 
   .social a {
-    color: var(--color-text);
+    width: 120px;
+    color: var(--color-text-footer);
     transition:
       color 0.3s ease,
       transform 0.2s ease;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
   }
 
   .social a:hover {
@@ -138,12 +218,9 @@ import { cdn } from '../config.ts';
     transform: scale(1.1);
   }
 
-  .credits {
-    color: var(--color-text);
-    font-size: 0.85rem;
-    opacity: 0.7;
-    margin: 0;
-    text-align: right;
+  .theme-toggle {
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
   }
 
   /* Footer Bottom */
@@ -154,9 +231,61 @@ import { cdn } from '../config.ts';
   }
 
   .copy {
-    color: var(--color-primary);
+    color: var(--color-muted);
     font-size: 0.9rem;
     margin: 0;
+  }
+  
+  .copy a {
+    color: var(--color-text-footer);
+    text-decoration: linen;
+    font-weight: bold;
+  }
+
+  /* Layout para pantallas medianas y grandes */
+  @media (min-width: 768px) {
+    .footer-content {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: var(--spacing-lg);
+      align-items: center;
+    }
+
+    .logo-section {
+      padding: 0;
+      justify-content: flex-start;
+    }
+
+    .footer-logo {
+      max-width: 250px;
+    }
+
+    .sitemap-contact-section {
+      align-items: center;
+    }
+
+    .sitemap {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .sitemap ul {
+      justify-content: center;
+    }
+
+    .contact-section {
+      align-items: center;
+    }
+
+    .social-section {
+      justify-content: center;
+      align-items: center;
+    }
+
+    .social {
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0;
+    }
   }
 
   @media (max-width: 480px) {
@@ -170,7 +299,15 @@ import { cdn } from '../config.ts';
 
     .sitemap li a,
     .contact-section p {
-      font-size: 0.65rem;
+      font-size: 0.85rem;
+    }
+
+    .social a {
+      width: 30px;
+    }
+
+    .social-name {
+      display: none;
     }
 
     .copy {
