@@ -1,7 +1,7 @@
 ---
 export const prerender = true;
 import Layout from '@/layouts/Layout.astro';
-import { Mail, Phone, MapPin, MessageCircle, ChevronDown } from 'lucide-astro';
+import { Mail, Phone, MapPin, MessageCircleMore, ChevronDown } from 'lucide-astro';
 import faq from '@/data/faq';
 import BookingForm from '@/components/BookingForm.astro';
 ---
@@ -39,24 +39,13 @@ import BookingForm from '@/components/BookingForm.astro';
             href="https://wa.me/593962122527?text=Hola%20ACIMU%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios"
             target="_blank"
             rel="noopener"
-            aria-label="Chatear por WhatsApp"
+            aria-label="WhatsApp"
           >
-            <MessageCircle size={20} /> WhatsApp
+            <MessageCircleMore size={20} /> WhatsApp
           </a>
-          <a
-            class="action-btn call"
-            href="tel:+593962122527"
-            aria-label="Llamar"
-          >
-            <Phone size={20} /> Llamar
-          </a>
-          <a
-            class="action-btn email"
-            href="mailto:arquitectos.cinco.mas.uno@gmail.com"
-            aria-label="Enviar correo"
-          >
-            <Mail size={20} /> Email
-          </a>
+          <button class="booking-trigger" data-office="Sangolquí">
+            Agendar visita
+          </button>
         </div>
       </div>
 
@@ -96,12 +85,6 @@ import BookingForm from '@/components/BookingForm.astro';
                 target="_blank"
                 rel="noopener">Ver en Google Maps</a
               >
-              <button
-                class="booking-trigger"
-                data-office="Sangolquí"
-              >
-                Agendar visita
-              </button>
             </div>
           </div>
         </div>
@@ -114,7 +97,7 @@ import BookingForm from '@/components/BookingForm.astro';
         rel="noopener"
         aria-label="Chat en WhatsApp"
       >
-        <MessageCircle size={24} />
+        <MessageCircleMore size={24} />
       </a>
     </section>
 
@@ -195,7 +178,7 @@ import BookingForm from '@/components/BookingForm.astro';
 
     // Booking Triggers
     const triggers = document.querySelectorAll('.booking-trigger');
-    triggers.forEach(btn => {
+    triggers.forEach((btn) => {
       btn.addEventListener('click', (e) => {
         const target = e.target as HTMLElement;
         const office = target.dataset.office;
