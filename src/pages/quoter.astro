@@ -1,7 +1,25 @@
 ---
 export const prerender = true;
 import Layout from "@/layouts/Layout.astro";
-import { design, electric, hydro, structural, voz, approval, visit } from "@/config";
+import { 
+  design, 
+  electric, 
+  hydro, 
+  structural, 
+  voz, 
+  approval, 
+  visit,
+  obraNegraHormigon,
+  obraNegraMetalica,
+  obraGrisHormigon,
+  obraGrisMetalica,
+  obraBlancaHormigon,
+  obraBlancaMetalica,
+  obraHabitableHormigon,
+  obraHabitableMetalica,
+  llaveManoHormigon,
+  llaveManoMetalica
+} from "@/config";
 
 const prices = {
   levantamiento: 0,
@@ -12,6 +30,16 @@ const prices = {
   planosVoz: voz,
   aprobacion: approval,
   visita: visit,
+  obraNegraHormigon,
+  obraNegraMetalica,
+  obraGrisHormigon,
+  obraGrisMetalica,
+  obraBlancaHormigon,
+  obraBlancaMetalica,
+  obraHabitableHormigon,
+  obraHabitableMetalica,
+  llaveManoHormigon,
+  llaveManoMetalica
 };
 ---
 
@@ -30,6 +58,17 @@ const prices = {
 
     <section class="quote-form-container">
       <form id="quote-form" class="quote-form">
+        <!-- Servicio -->
+        <div class="form-group">
+          <label for="serviceType">Servicio</label>
+          <div class="select-wrapper">
+            <select id="serviceType" name="serviceType" required>
+              <option value="arquitectura" selected>Arquitectura</option>
+              <option value="construccion">Construcción</option>
+            </select>
+          </div>
+        </div>
+
         <!-- Tipo de Proyecto -->
         <div class="form-group">
           <label for="projectType">Tipo de Proyecto</label>
@@ -56,21 +95,83 @@ const prices = {
           />
         </div>
 
-        <!-- Área -->
+        <!-- Dimensiones Grid -->
+        <div class="form-group dimensions-grid">
+          <div class="dimension-item">
+            <label for="largo">Largo (m)</label>
+            <input
+              type="number"
+              id="largo"
+              name="largo"
+              min="0"
+              step="0.01"
+              placeholder="0"
+              required
+            />
+          </div>
+
+          <div class="dimension-item dimension-separator">
+            <span class="multiply-symbol">×</span>
+          </div>
+
+          <div class="dimension-item">
+            <label for="ancho">Ancho (m)</label>
+            <input
+              type="number"
+              id="ancho"
+              name="ancho"
+              min="0"
+              step="0.01"
+              placeholder="0"
+              required
+            />
+          </div>
+
+          <div class="dimension-item dimension-separator">
+            <span class="equals-symbol">=</span>
+          </div>
+
+          <div class="dimension-item">
+            <label for="area">Área (m²)</label>
+            <input
+              type="number"
+              id="area"
+              name="area"
+              min="0"
+              placeholder="0"
+              readonly
+              class="area-readonly"
+            />
+          </div>
+        </div>
+
+        <!-- Número de Pisos -->
         <div class="form-group">
-          <label for="area">Área aproximada (m²)</label>
+          <label for="numPisos">Número de Pisos</label>
           <input
             type="number"
-            id="area"
-            name="area"
+            id="numPisos"
+            name="numPisos"
             min="1"
-            placeholder="0"
+            placeholder="1"
+            value="1"
             required
           />
         </div>
 
-        <!-- Servicios -->
-        <div class="form-group">
+        <!-- Materialidad (solo para Construcción) -->
+        <div class="form-group" id="materialidadGroup" style="display: none;">
+          <label for="materialidad">Materialidad</label>
+          <div class="select-wrapper">
+            <select id="materialidad" name="materialidad">
+              <option value="hormigon" selected>Hormigón Armado</option>
+              <option value="metalica">Estructura Metálica</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Servicios Arquitectura -->
+        <div class="form-group" id="serviciosArquitectura">
           <label class="services-label">Servicios Requeridos</label>
           <div class="checkbox-grid">
             <label class="checkbox-item">
@@ -145,20 +246,99 @@ const prices = {
           </div>
         </div>
 
+        <!-- Servicios Construcción -->
+        <div class="form-group" id="serviciosConstruccion" style="display: none;">
+          <label class="services-label">Opciones de Construcción</label>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input
+                type="radio"
+                name="obraNivel"
+                value="obraNegra"
+                data-price-hormigon={prices.obraNegraHormigon}
+                data-price-metalica={prices.obraNegraMetalica}
+              />
+              <span>
+                <strong>Obra Negra</strong><br/>
+                <small>Cimentación, contrapiso, columnas, vigas, losa</small>
+              </span>
+            </label>
+
+            <label class="radio-item">
+              <input
+                type="radio"
+                name="obraNivel"
+                value="obraGris"
+                data-price-hormigon={prices.obraGrisHormigon}
+                data-price-metalica={prices.obraGrisMetalica}
+              />
+              <span>
+                <strong>Obra Gris</strong><br/>
+                <small>Paredes, enlucidos, masillados</small>
+              </span>
+            </label>
+
+            <label class="radio-item">
+              <input
+                type="radio"
+                name="obraNivel"
+                value="obraBlanca"
+                data-price-hormigon={prices.obraBlancaHormigon}
+                data-price-metalica={prices.obraBlancaMetalica}
+              />
+              <span>
+                <strong>Obra Blanca</strong><br/>
+                <small>Empaste interior y exterior</small>
+              </span>
+            </label>
+
+            <label class="radio-item">
+              <input
+                type="radio"
+                name="obraNivel"
+                value="obraHabitable"
+                data-price-hormigon={prices.obraHabitableHormigon}
+                data-price-metalica={prices.obraHabitableMetalica}
+              />
+              <span>
+                <strong>Obra Habitable</strong><br/>
+                <small>Cerámica cocina y baño, puertas y ventanas exteriores, pintura interior</small>
+              </span>
+            </label>
+
+            <label class="radio-item">
+              <input
+                type="radio"
+                name="obraNivel"
+                value="llaveMano"
+                data-price-hormigon={prices.llaveManoHormigon}
+                data-price-metalica={prices.llaveManoMetalica}
+              />
+              <span>
+                <strong>Llave en Mano</strong>
+                <small>Pintura exterior, puertas interiores, mobiliario fijo(muebles cocina, armario dormitorio), cerámica/piso flotante</small>
+              </span>
+            </label>
+          </div>
+        </div>
+
         <!-- Total -->
         <div class="total-section">
           <h2>Estimado Total</h2>
           <div class="total-amount" id="totalAmount">$0.00</div>
-          <p class="disclaimer">
-            * Este valor es un estimado y está sujeto a validación. Nos adaptamos
-            a tus necesidades y presupuesto.
-          </p>
+          <h2>¿Está fuera de tu presupuesto?</h2>
         </div>
 
         <div class="actions">
           <a href="/contact" class="btn-secondary">
-            ¿Está fuera de tu presupuesto? Contáctanos
+            Contáctanos
           </a>
+        </div>
+        <div class="total-section">
+          <p class="disclaimer">
+            * Este valor es un estimado y está sujeto a validación. Nos adaptamos
+            a tus necesidades y presupuesto.
+          </p>
         </div>
       </form>
     </section>
@@ -167,29 +347,104 @@ const prices = {
 
 <script>
   const form = document.getElementById('quote-form') as HTMLFormElement;
+  const serviceTypeSelect = document.getElementById('serviceType') as HTMLSelectElement;
+  const materialidadSelect = document.getElementById('materialidad') as HTMLSelectElement;
+  const largoInput = document.getElementById('largo') as HTMLInputElement;
+  const anchoInput = document.getElementById('ancho') as HTMLInputElement;
   const areaInput = document.getElementById('area') as HTMLInputElement;
+  const numPisosInput = document.getElementById('numPisos') as HTMLInputElement;
   const checkboxes = document.querySelectorAll(
     'input[name="service"]'
   ) as NodeListOf<HTMLInputElement>;
+  const obraRadios = document.querySelectorAll(
+    'input[name="obraNivel"]'
+  ) as NodeListOf<HTMLInputElement>;
   const totalDisplay = document.getElementById('totalAmount');
+  
+  const serviciosArquitectura = document.getElementById('serviciosArquitectura');
+  const serviciosConstruccion = document.getElementById('serviciosConstruccion');
+  const materialidadGroup = document.getElementById('materialidadGroup');
+
+  // Calcular área automáticamente cuando cambian largo o ancho
+  function calculateArea() {
+    const largo = parseFloat(largoInput.value) || 0;
+    const ancho = parseFloat(anchoInput.value) || 0;
+    const area = largo * ancho;
+    areaInput.value = area > 0 ? area.toFixed(2) : '0';
+    calculateTotal();
+  }
+
+  largoInput.addEventListener('input', calculateArea);
+  anchoInput.addEventListener('input', calculateArea);
+
+  // Manejar cambio de tipo de servicio
+  serviceTypeSelect.addEventListener('change', () => {
+    const serviceType = serviceTypeSelect.value;
+    
+    // Resetear todos los campos del formulario
+    largoInput.value = '';
+    anchoInput.value = '';
+    areaInput.value = '0';
+    numPisosInput.value = '1';
+    
+    // Desmarcar todos los checkboxes de arquitectura
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+    
+    // Desmarcar todos los radio buttons de construcción
+    obraRadios.forEach((radio) => {
+      radio.checked = false;
+    });
+    
+    // Resetear materialidad a hormigón
+    materialidadSelect.value = 'hormigon';
+    
+    if (serviceType === 'arquitectura') {
+      serviciosArquitectura!.style.display = 'block';
+      serviciosConstruccion!.style.display = 'none';
+      materialidadGroup!.style.display = 'none';
+    } else if (serviceType === 'construccion') {
+      serviciosArquitectura!.style.display = 'none';
+      serviciosConstruccion!.style.display = 'block';
+      materialidadGroup!.style.display = 'block';
+    }
+    
+    calculateTotal();
+  });
 
   function calculateTotal() {
+    const serviceType = serviceTypeSelect.value;
     let area = parseFloat(areaInput.value) || 0;
-    let ratePerM2 = 0;
-    let fixedCost = 0;
+    let numPisos = parseFloat(numPisosInput.value) || 1;
+    let total = 0;
 
-    checkboxes.forEach((checkbox) => {
-      if (checkbox.checked) {
-        const price = parseFloat(checkbox.dataset.price || '0');
-        if (checkbox.value === 'visita') {
-          fixedCost += price;
-        } else {
-          ratePerM2 += price;
+    if (serviceType === 'arquitectura') {
+      let ratePerM2 = 0;
+      let fixedCost = 0;
+
+      checkboxes.forEach((checkbox) => {
+        if (checkbox.checked) {
+          const price = parseFloat(checkbox.dataset.price || '0');
+          if (checkbox.value === 'visita') {
+            fixedCost += price;
+          } else {
+            ratePerM2 += price;
+          }
         }
-      }
-    });
+      });
 
-    const total = ratePerM2 * area + fixedCost;
+      total = (ratePerM2 * area * numPisos) + fixedCost;
+    } else if (serviceType === 'construccion') {
+      const materialidad = materialidadSelect.value;
+      const obraSeleccionada = document.querySelector('input[name="obraNivel"]:checked') as HTMLInputElement;
+      
+      if (obraSeleccionada) {
+        const priceAttr = materialidad === 'hormigon' ? 'data-price-hormigon' : 'data-price-metalica';
+        const pricePerM2 = parseFloat(obraSeleccionada.getAttribute(priceAttr) || '0');
+        total = pricePerM2 * area * numPisos;
+      }
+    }
 
     if (totalDisplay) {
       totalDisplay.textContent = total.toLocaleString('en-US', {
@@ -201,16 +456,25 @@ const prices = {
 
   form.addEventListener('input', calculateTotal);
 
-  areaInput.addEventListener('input', () => {
-    if (parseFloat(areaInput.value) < 1) {
-      areaInput.value = '1';
+  // Validar que número de pisos sea al menos 1
+  numPisosInput.addEventListener('input', () => {
+    if (parseFloat(numPisosInput.value) < 1) {
+      numPisosInput.value = '1';
     }
+  });
+
+  // Escuchar cambios en materialidad
+  materialidadSelect.addEventListener('change', calculateTotal);
+
+  // Escuchar cambios en nivel de obra
+  obraRadios.forEach(radio => {
+    radio.addEventListener('change', calculateTotal);
   });
 </script>
 
 <style>
   .container {
-    margin-top: 5rem;
+    margin-top: 10rem;
     padding-bottom: var(--spacing-xl);
   }
 
@@ -268,6 +532,44 @@ const prices = {
     box-shadow: 0 0 0 2px rgba(77, 66, 41, 0.1);
   }
 
+  /* Dimensions Grid Layout */
+  .dimensions-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: var(--spacing-md);
+    align-items: end;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .dimension-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dimension-item label {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .dimension-separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: var(--spacing-md);
+  }
+
+  .multiply-symbol,
+  .equals-symbol {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+  }
+
+  .area-readonly {
+    background-color: var(--color-background-alt);
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
   .checkbox-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -293,6 +595,57 @@ const prices = {
     width: 20px;
     height: 20px;
     accent-color: var(--color-primary);
+  }
+
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .radio-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    font-weight: normal;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    border: 2px solid var(--color-muted);
+    transition: all 0.2s;
+  }
+
+  .radio-item:hover {
+    border-color: var(--color-primary);
+    background-color: var(--color-background);
+  }
+
+  .radio-item input[type='radio']:checked + span {
+    color: var(--color-primary);
+  }
+
+  .radio-item:has(input[type='radio']:checked) {
+    border-color: var(--color-primary);
+    background-color: rgba(77, 66, 41, 0.05);
+  }
+
+  input[type='radio'] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--color-primary);
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .radio-item span {
+    flex: 1;
+  }
+
+  .radio-item small {
+    display: block;
+    color: var(--color-text-light);
+    font-size: 0.85rem;
+    margin-top: 4px;
   }
 
   .total-section {
@@ -343,6 +696,25 @@ const prices = {
     
     .checkbox-grid {
       grid-template-columns: 1fr;
+    }
+
+    .dimensions-grid {
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: var(--spacing-sm);
+    }
+
+    .dimension-item input {
+      font-size: 0.9rem;
+      padding: var(--spacing-sm);
+    }
+
+    .dimension-item label {
+      font-size: 0.85rem;
+    }
+
+    .multiply-symbol,
+    .equals-symbol {
+      font-size: 1.2rem;
     }
 
     h1 {
