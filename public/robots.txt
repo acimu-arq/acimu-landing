@@ -1,0 +1,44 @@
+# robots.txt para ACIMU - Arquitectos y Constructora
+# Optimizado para SEO en Ecuador
+
+User-agent: *
+Allow: /
+
+# Permitir acceso a recursos importantes
+Allow: /servicios/
+Allow: /ubicacion/
+Allow: /portfolio/
+Allow: /blog/
+Allow: /contact
+Allow: /quoter
+Allow: /about
+
+# Bloquear archivos innecesarios
+Disallow: /api/
+Disallow: /_astro/
+Disallow: /.astro/
+Disallow: /admin/
+Disallow: /*.json$
+
+# Permitir crawling de imágenes
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.webp$
+Allow: /*.svg$
+
+# Sitemap
+Sitemap: https://acimu.studio/sitemap.xml
+
+# Configuración específica para bots principales
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Delay para evitar sobrecarga del servidor
+Crawl-delay: 1

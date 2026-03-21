@@ -1,0 +1,651 @@
+---
+export const prerender = true;
+import Layout from '@/layouts/Layout.astro';
+import { cdn } from '@/config';
+import Services from '@/components/Services.astro';
+import { MapPin, Phone, Mail, Clock, Building2 } from 'lucide-astro';
+
+const locationData = {
+  city: 'Sangolquí',
+  province: 'Pichincha',
+  country: 'Ecuador',
+  address: 'Calle Montúfar, Sangolquí, Quito',
+  phone: '+593962122527',
+  email: 'arquitectos.cinco.mas.uno@gmail.com',
+  mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d467.54907209386823!2d-78.44626132658105!3d-0.33015420661073086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d5bd16d36801eb%3A0x418fa040ccbcc435!2sARQUITECTOS%20CINCO%20%2B%20UNO%20(ACIMU)!5e1!3m2!1ses-419!2sec!4v1757714744177!5m2!1ses-419!2sec',
+  directionsUrl: 'https://maps.app.goo.gl/QmC49FoL3RrTswtt8',
+};
+---
+
+<Layout
+  title="Arquitecto en Sangolquí - ACIMU | Diseño y Construcción"
+  description="¿Buscas arquitecto en Sangolquí? ACIMU ofrece diseño arquitectónico, construcción, legalización de planos y aprobaciones municipales. Estudio ubicado en Sangolquí, Valle de los Chillos."
+>
+  <!-- Schema.org Local Business Markup -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ArchitectsOffice",
+    "name": "ACIMU - Arquitectos Cinco + Uno",
+    "image": `${cdn}/equipo.webp`,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Calle Montúfar",
+      "addressLocality": "Sangolquí",
+      "addressRegion": "Pichincha",
+      "addressCountry": "EC"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -0.330154,
+      "longitude": -78.446261
+    },
+    "url": "https://acimu.studio/ubicacion/sangolqui",
+    "telephone": "+593962122527",
+    "email": "arquitectos.cinco.mas.uno@gmail.com",
+    "priceRange": "$$",
+    "areaServed": {
+      "@type": "City",
+      "name": "Sangolquí"
+    },
+    "openingHours": "Mo-Fr 09:00-18:00",
+    "sameAs": [
+      "https://wa.me/593962122527"
+    ]
+  })} />
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-location">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1>Arquitecto en Sangolquí</h1>
+        <p class="hero-subtitle">
+          Estudio de arquitectura y construcción en el Valle de los Chillos
+        </p>
+        <div class="hero-ctas">
+          <a href="/quoter" class="btn-primary">Cotizar Proyecto</a>
+          <a href="#contacto" class="btn-secondary">Visitar Estudio</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Introducción SEO -->
+    <section class="intro-section">
+      <div class="container">
+        <h2>Tu Arquitecto de Confianza en Sangolquí</h2>
+        <div class="intro-content">
+          <p>
+            <strong>ACIMU</strong> es tu estudio de <strong>arquitectura en Sangolquí</strong> especializado 
+            en diseño arquitectónico, construcción y legalización de planos. Con años de experiencia 
+            en el <strong>Valle de los Chillos</strong>, transformamos espacios residenciales y comerciales 
+            en proyectos únicos que conectan y perduran.
+          </p>
+          <p>
+            Nuestro equipo de <strong>arquitectos profesionales</strong> en Sangolquí te acompaña desde 
+            el diseño inicial hasta la entrega final, incluyendo trámites municipales, aprobación de planos 
+            y construcción completa.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Servicios Destacados -->
+    <section class="services-highlight">
+      <div class="container">
+        <h2>Servicios de Arquitectura en Sangolquí</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <Building2 size={40} />
+            <h3>Diseño Arquitectónico</h3>
+            <p>Planos arquitectónicos personalizados para tu proyecto residencial o comercial en Sangolquí.</p>
+            <a href="/quoter" class="service-link">Cotizar diseño →</a>
+          </div>
+
+          <div class="service-card">
+            <Building2 size={40} />
+            <h3>Construcción</h3>
+            <p>Construcción completa desde obra negra hasta llave en mano con materiales de calidad.</p>
+            <a href="/quoter" class="service-link">Ver precios de construcción →</a>
+          </div>
+
+          <div class="service-card">
+            <Building2 size={40} />
+            <h3>Legalización y Aprobación</h3>
+            <p>Tramitamos permisos municipales y aprobación de planos en Sangolquí y Rumiñahui.</p>
+            <a href="/contact#faq" class="service-link">Más información →</a>
+          </div>
+
+          <div class="service-card">
+            <Building2 size={40} />
+            <h3>Remodelaciones</h3>
+            <p>Renovamos y ampliamos espacios existentes con diseño funcional y estético.</p>
+            <a href="/contact" class="service-link">Consultar →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Preguntas Frecuentes Locales -->
+    <section class="local-faq">
+      <div class="container">
+        <h2>Preguntas Frecuentes - Arquitecto Sangolquí</h2>
+        <div class="faq-simple">
+          <div class="faq-item-simple">
+            <h3>¿Cuánto cuesta un arquitecto en Sangolquí?</h3>
+            <p>
+              El costo del diseño arquitectónico varía según el área y complejidad del proyecto. 
+              En ACIMU manejamos tarifas competitivas por m² con presupuestos transparentes. 
+              <a href="/quoter">Usa nuestro cotizador online</a> para obtener un estimado inmediato.
+            </p>
+          </div>
+
+          <div class="faq-item-simple">
+            <h3>¿Cuánto cuesta la aprobación de planos en Sangolquí?</h3>
+            <p>
+              La aprobación de planos en el Municipio de Rumiñahui (Sangolquí) incluye tasas municipales 
+              y nuestros honorarios profesionales. El proceso toma entre 60-90 días laborables. 
+              Contáctanos para un presupuesto detallado según tu proyecto.
+            </p>
+          </div>
+
+          <div class="faq-item-simple">
+            <h3>¿Ofrecen servicio de construcción en Sangolquí?</h3>
+            <p>
+              Sí, ofrecemos construcción completa en Sangolquí y el Valle de los Chillos. 
+              Trabajamos con personal capacitado y supervisamos cada etapa del proyecto. 
+              Consulta nuestros <a href="/quoter">precios por m² según tipo de obra</a>.
+            </p>
+          </div>
+
+          <div class="faq-item-simple">
+            <h3>¿Qué pasa si el municipio me multó por construir sin permiso?</h3>
+            <p>
+              Podemos ayudarte con la regularización de construcciones existentes. El proceso incluye 
+              levantamiento arquitectónico, diseño de planos conformes a normativa vigente y trámites 
+              ante el Municipio de Rumiñahui para levantar multas y obtener permisos.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ubicación y Contacto -->
+    <section class="location-contact" id="contacto">
+      <div class="container">
+        <h2>Visita Nuestro Estudio en Sangolquí</h2>
+        <div class="location-grid">
+          <div class="location-info">
+            <div class="info-item">
+              <MapPin size={24} />
+              <div>
+                <h4>Dirección</h4>
+                <p>{locationData.address}</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <Phone size={24} />
+              <div>
+                <h4>Teléfono</h4>
+                <a href={`tel:${locationData.phone}`}>{locationData.phone}</a>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <Mail size={24} />
+              <div>
+                <h4>Email</h4>
+                <a href={`mailto:${locationData.email}`}>{locationData.email}</a>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <Clock size={24} />
+              <div>
+                <h4>Horario</h4>
+                <p>Lunes a Viernes: 9:00 AM - 6:00 PM</p>
+              </div>
+            </div>
+
+            <div class="cta-buttons">
+              <a 
+                href={`https://wa.me/${locationData.phone.replace(/[^0-9]/g, '')}?text=Hola%20ACIMU%2C%20necesito%20un%20arquitecto%20en%20Sangolqu%C3%AD`}
+                class="btn-whatsapp"
+                target="_blank"
+                rel="noopener"
+              >
+                Chatear por WhatsApp
+              </a>
+              <a href="/contact" class="btn-secondary">
+                Agendar Visita al Estudio
+              </a>
+            </div>
+          </div>
+
+          <div class="location-map">
+            <iframe
+              src={locationData.mapUrl}
+              class="map"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            ></iframe>
+            <a 
+              href={locationData.directionsUrl}
+              target="_blank"
+              rel="noopener"
+              class="map-link"
+            >
+              Abrir en Google Maps →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Llamado a la acción final -->
+    <section class="final-cta">
+      <div class="container">
+        <h2>¿Listo para Iniciar tu Proyecto en Sangolquí?</h2>
+        <p>
+          Obtén una cotización gratuita y personalizada para tu proyecto arquitectónico o de construcción.
+        </p>
+        <div class="cta-buttons-center">
+          <a href="/quoter" class="btn-primary-large">Cotizar mi Proyecto</a>
+          <a href="/contact" class="btn-secondary-large">Agendar Reunión</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  /* Hero Section */
+  .hero-location {
+    height: 60vh;
+    min-height: 500px;
+    position: relative;
+    background-image: url('https://cdn.example.com/equipo.webp');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(77, 66, 41, 0.6));
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    max-width: 800px;
+    padding: 0 var(--spacing-md);
+  }
+
+  .hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: var(--spacing-md);
+    font-weight: 700;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-xl);
+    opacity: 0.95;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  /* Intro Section */
+  .intro-section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--color-background);
+  }
+
+  .intro-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-primary);
+  }
+
+  .intro-content {
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--color-text);
+  }
+
+  .intro-content p {
+    margin-bottom: var(--spacing-md);
+  }
+
+  /* Services Grid */
+  .services-highlight {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--color-background-alt);
+  }
+
+  .services-highlight h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+  }
+
+  .service-card {
+    background: var(--color-background);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-muted);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .service-card h3 {
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-primary);
+  }
+
+  .service-card p {
+    color: var(--color-text-light);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .service-link {
+    display: inline-block;
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .service-link:hover {
+    opacity: 0.7;
+  }
+
+  /* Local FAQ */
+  .local-faq {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--color-background);
+  }
+
+  .local-faq h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .faq-simple {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .faq-item-simple {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-muted);
+  }
+
+  .faq-item-simple:last-child {
+    border-bottom: none;
+  }
+
+  .faq-item-simple h3 {
+    font-size: 1.4rem;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .faq-item-simple p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--color-text-light);
+  }
+
+  .faq-item-simple a {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  /* Location Contact */
+  .location-contact {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--color-background-alt);
+  }
+
+  .location-contact h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .location-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--spacing-xl);
+  }
+
+  .location-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .info-item {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: flex-start;
+  }
+
+  .info-item h4 {
+    margin: 0 0 var(--spacing-xs) 0;
+    color: var(--color-primary);
+  }
+
+  .info-item p,
+  .info-item a {
+    margin: 0;
+    color: var(--color-text-light);
+  }
+
+  .info-item a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .info-item a:hover {
+    color: var(--color-primary);
+  }
+
+  .location-map {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .map {
+    width: 100%;
+    height: 400px;
+    border: 0;
+    border-radius: var(--border-radius);
+    filter: grayscale(20%);
+  }
+
+  .map-link {
+    display: inline-block;
+    text-align: center;
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* Buttons */
+  .btn-primary,
+  .btn-secondary,
+  .btn-whatsapp {
+    display: inline-block;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .btn-secondary:hover {
+    background-color: white;
+    color: var(--color-primary);
+  }
+
+  .btn-whatsapp {
+    background-color: #25d366;
+    color: white;
+  }
+
+  .btn-whatsapp:hover {
+    background-color: #20bd5a;
+  }
+
+  .cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+  }
+
+  /* Final CTA */
+  .final-cta {
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(135deg, var(--color-primary), #5a4e2e);
+    color: white;
+    text-align: center;
+  }
+
+  .final-cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .final-cta p {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-xl);
+    opacity: 0.95;
+  }
+
+  .cta-buttons-center {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary-large,
+  .btn-secondary-large {
+    display: inline-block;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary-large {
+    background-color: white;
+    color: var(--color-primary);
+  }
+
+  .btn-primary-large:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-secondary-large {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .btn-secondary-large:hover {
+    background-color: white;
+    color: var(--color-primary);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+    }
+
+    .intro-section h2,
+    .services-highlight h2,
+    .local-faq h2,
+    .location-contact h2,
+    .final-cta h2 {
+      font-size: 2rem;
+    }
+
+    .location-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

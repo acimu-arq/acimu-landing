@@ -1,0 +1,833 @@
+---
+export const prerender = true;
+import Layout from '@/layouts/Layout.astro';
+import { cdn } from '@/config';
+import { MapPin, Phone, Mail, Clock, Building2, CheckCircle } from 'lucide-astro';
+
+const locationData = {
+  city: 'Quito',
+  province: 'Pichincha',
+  country: 'Ecuador',
+  phone: '+593962122527',
+  email: 'arquitectos.cinco.mas.uno@gmail.com',
+};
+---
+
+<Layout
+  title="Arquitecto en Quito - ACIMU | Diseño Arquitectónico y Construcción"
+  description="Arquitecto profesional en Quito. ACIMU ofrece diseño arquitectónico, construcción, aprobación de planos municipales y legalización. Atención en todo Quito y valles."
+>
+  <!-- Schema.org Service Markup -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "ACIMU - Arquitectos en Quito",
+    "image": `${cdn}/equipo.webp`,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Quito",
+      "addressRegion": "Pichincha",
+      "addressCountry": "EC"
+    },
+    "url": "https://acimu.studio/ubicacion/quito",
+    "telephone": "+593962122527",
+    "email": "arquitectos.cinco.mas.uno@gmail.com",
+    "priceRange": "$$",
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Quito"
+      },
+      {
+        "@type": "City",
+        "name": "Sangolquí"
+      },
+      {
+        "@type": "City",
+        "name": "Valle de los Chillos"
+      }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Servicios de Arquitectura",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Diseño Arquitectónico"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Construcción"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Aprobación de Planos Municipales"
+          }
+        }
+      ]
+    }
+  })} />
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-location">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1>Arquitecto en Quito</h1>
+        <p class="hero-subtitle">
+          Servicios profesionales de arquitectura y construcción en toda la ciudad
+        </p>
+        <div class="hero-ctas">
+          <a href="/quoter" class="btn-primary">Cotizar Ahora</a>
+          <a href="#servicios" class="btn-secondary">Ver Servicios</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Introducción -->
+    <section class="intro-section">
+      <div class="container">
+        <h2>Estudio de Arquitectura en Quito</h2>
+        <div class="intro-content">
+          <p>
+            ¿Buscas un <strong>arquitecto en Quito</strong>? <strong>ACIMU</strong> es tu estudio de 
+            arquitectura y construcción con experiencia comprobada en proyectos residenciales, comerciales 
+            y habitacionales en toda la capital ecuatoriana y sus valles.
+          </p>
+          <p>
+            Ofrecemos servicios integrales desde el <strong>diseño arquitectónico</strong> hasta la 
+            <strong>construcción llave en mano</strong>, incluyendo trámites de <strong>aprobación 
+            de planos</strong> en los diferentes municipios de Quito (DMQ), Rumiñahui, y más.
+          </p>
+          <p>
+            Nuestro equipo de arquitectos e ingenieros te acompaña en cada etapa: visita técnica, 
+            diseño personalizado, presupuesto transparente, construcción supervisada y entrega final.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Zonas de Cobertura -->
+    <section class="coverage-section">
+      <div class="container">
+        <h2>Atendemos Todo Quito y sus Valles</h2>
+        <div class="coverage-grid">
+          <div class="coverage-card">
+            <CheckCircle size={32} />
+            <h3>Norte de Quito</h3>
+            <p>La Carolina, Iñaquito, Carcelén, Calderón, Carapungo, Comité del Pueblo</p>
+          </div>
+
+          <div class="coverage-card">
+            <CheckCircle size={32} />
+            <h3>Centro de Quito</h3>
+            <p>Centro Histórico, La Mariscal, La Floresta, González Suárez</p>
+          </div>
+
+          <div class="coverage-card">
+            <CheckCircle size={32} />
+            <h3>Sur de Quito</h3>
+            <p>Quitumbe, Chillogallo, Guamaní, Turubamba, El Recreo</p>
+          </div>
+
+          <div class="coverage-card">
+            <CheckCircle size={32} />
+            <h3>Valles</h3>
+            <p>Cumbayá, Tumbaco, Los Chillos, Sangolquí, Conocoto, Amaguaña</p>
+          </div>
+
+          <div class="coverage-card">
+            <CheckCircle size={32} />
+            <h3>Valles Occidentales</h3>
+            <p>Mitad del Mundo, Calacalí, San Antonio de Pichincha, Pomasqui</p>
+          </div>
+
+          <div class="coverage-card">
+            <CheckCircle size={32} />
+            <h3>Urbanizaciones</h3>
+            <p>Cumbayá, Tumbaco, La Primavera, Miravalle, San Rafael, y más</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Servicios -->
+    <section class="services-section" id="servicios">
+      <div class="container">
+        <h2>Servicios de Arquitectura en Quito</h2>
+        <div class="services-detailed">
+          
+          <div class="service-detailed">
+            <div class="service-icon">
+              <Building2 size={48} />
+            </div>
+            <div class="service-text">
+              <h3>Diseño Arquitectónico Personalizado</h3>
+              <p>
+                Creamos <strong>planos arquitectónicos</strong> únicos adaptados a tus necesidades, 
+                presupuesto y normativas municipales vigentes. Incluye:
+              </p>
+              <ul>
+                <li>Levantamiento topográfico y arquitectónico</li>
+                <li>Diseño conceptual y planos ejecutivos</li>
+                <li>Planos eléctricos, hidrosanitarios y estructurales</li>
+                <li>Renders 3D y visualización del proyecto</li>
+                <li>Memoria técnica y especificaciones</li>
+              </ul>
+              <a href="/quoter" class="service-cta">Cotizar diseño arquitectónico →</a>
+            </div>
+          </div>
+
+          <div class="service-detailed">
+            <div class="service-icon">
+              <Building2 size={48} />
+            </div>
+            <div class="service-text">
+              <h3>Construcción y Obra</h3>
+              <p>
+                Ejecutamos tu proyecto con <strong>personal capacitado</strong> y supervisión constante. 
+                Opciones según tu presupuesto:
+              </p>
+              <ul>
+                <li><strong>Obra Negra:</strong> Cimentación, estructura, losa ($160-180/m²)</li>
+                <li><strong>Obra Gris:</strong> Paredes, enlucidos, instalaciones ($270-290/m²)</li>
+                <li><strong>Obra Blanca:</strong> Empastes, acabados básicos ($310-330/m²)</li>
+                <li><strong>Obra Habitable:</strong> Cerámica, ventanas, pintura ($360-390/m²)</li>
+                <li><strong>Llave en Mano:</strong> Totalmente terminada y lista ($460-480/m²)</li>
+              </ul>
+              <a href="/quoter" class="service-cta">Ver precios de construcción →</a>
+            </div>
+          </div>
+
+          <div class="service-detailed">
+            <div class="service-icon">
+              <Building2 size={48} />
+            </div>
+            <div class="service-text">
+              <h3>Aprobación de Planos Municipales</h3>
+              <p>
+                Tramitamos <strong>permisos de construcción</strong> y aprobación de planos ante:
+              </p>
+              <ul>
+                <li>Municipio del Distrito Metropolitano de Quito (DMQ)</li>
+                <li>Municipio de Rumiñahui (Sangolquí, Conocoto)</li>
+                <li>Municipio de Mejía</li>
+                <li>Cuerpo de Bomberos</li>
+                <li>EPMAPS (agua potable)</li>
+              </ul>
+              <p>
+                Nos encargamos de toda la gestión: revisiones, correcciones y seguimiento hasta 
+                obtener tu <strong>licencia de construcción</strong>.
+              </p>
+              <a href="/contact#faq" class="service-cta">Más información →</a>
+            </div>
+          </div>
+
+          <div class="service-detailed">
+            <div class="service-icon">
+              <Building2 size={48} />
+            </div>
+            <div class="service-text">
+              <h3>Legalización y Regularización</h3>
+              <p>
+                ¿El <strong>municipio multó tu construcción</strong> por falta de permisos? 
+                Te ayudamos a regularizar:
+              </p>
+              <ul>
+                <li>Levantamiento de construcción existente</li>
+                <li>Diseño de planos conforme a normativa vigente (NEC, RTAU)</li>
+                <li>Trámite de regularización ante el municipio</li>
+                <li>Pago de multas y obtención de permisos retroactivos</li>
+              </ul>
+              <a href="/contact" class="service-cta">Consultar caso →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Preguntas Frecuentes -->
+    <section class="faq-quito">
+      <div class="container">
+        <h2>Preguntas Frecuentes - Arquitecto Quito</h2>
+        <div class="faq-list">
+          
+          <div class="faq-item-simple">
+            <h3>¿Cuánto cuesta contratar un arquitecto en Quito?</h3>
+            <p>
+              El costo del diseño arquitectónico varía según el área del proyecto, complejidad y 
+              servicios requeridos. En promedio, el diseño arquitectónico se cobra por m² de construcción. 
+              Usa nuestro <a href="/quoter">cotizador online</a> para obtener un presupuesto inmediato 
+              y personalizado sin compromiso.
+            </p>
+          </div>
+
+          <div class="faq-item-simple">
+            <h3>¿Cuánto cuesta la construcción por m² en Quito?</h3>
+            <p>
+              Nuestras tarifas de construcción van desde $160/m² (obra negra con hormigón armado) 
+              hasta $480/m² (llave en mano con estructura metálica). El precio final depende del 
+              tipo de estructura, acabados y complejidad del diseño. <a href="/quoter">Cotiza aquí</a>.
+            </p>
+          </div>
+
+          <div class="faq-item-simple">
+            <h3>¿Cuánto cuesta la aprobación de planos en Quito?</h3>
+            <p>
+              La aprobación de planos incluye tasas municipales (variables según área y uso) más 
+              nuestros honorarios profesionales. El proceso toma entre 60-90 días laborables en el 
+              Municipio de Quito. Contáctanos para un presupuesto detallado según tu ubicación específica.
+            </p>
+          </div>
+
+          <div class="faq-item-simple">
+            <h3>¿Qué pasa si construí sin permiso municipal?</h3>
+            <p>
+              El municipio puede paralizar la obra, imponer multas y exigir regularización. 
+              Ofrecemos servicios de <strong>legalización de construcciones</strong> que incluyen: 
+              levantamiento arquitectónico, diseño conforme a normas vigentes, trámites ante el 
+              municipio y levantamiento de multas. <a href="/contact">Contáctanos</a> para evaluar tu caso.
+            </p>
+          </div>
+
+          <div class="faq-item-simple">
+            <h3>¿Ofrecen visitas técnicas gratuitas?</h3>
+            <p>
+              La asesoría inicial vía WhatsApp o teléfono es gratuita. Las visitas técnicas en sitio 
+              (necesarias para levantamiento y evaluación detallada) tienen un costo de $35 en Quito 
+              y valles cercanos. Este valor se descuenta si decides continuar con el proyecto.
+            </p>
+          </div>
+
+          <div class="faq-item-simple">
+            <h3>¿Cuánto tiempo toman los planos arquitectónicos?</h3>
+            <p>
+              Para proyectos residenciales promedio: 10-15 días laborables. Proyectos comerciales 
+              o complejos pueden requerir 20-30 días. El tiempo de aprobación municipal es adicional 
+              (60-90 días según el municipio).
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="contact-section">
+      <div class="container">
+        <h2>Contacta a tu Arquitecto en Quito</h2>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h3>Estudio Principal en Sangolquí</h3>
+            <p>
+              Aunque nuestro estudio principal está en <a href="/ubicacion/sangolqui">Sangolquí</a>, 
+              atendemos proyectos en <strong>todo Quito y sus valles</strong> con el mismo nivel 
+              de profesionalismo y cercanía.
+            </p>
+
+            <div class="contact-details">
+              <div class="contact-item">
+                <Phone size={24} />
+                <div>
+                  <h4>Teléfono / WhatsApp</h4>
+                  <a href={`tel:${locationData.phone}`}>{locationData.phone}</a>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <Mail size={24} />
+                <div>
+                  <h4>Email</h4>
+                  <a href={`mailto:${locationData.email}`}>{locationData.email}</a>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <Clock size={24} />
+                <div>
+                  <h4>Horario de Atención</h4>
+                  <p>Lunes a Viernes: 9:00 AM - 6:00 PM</p>
+                  <p>Sábados: Solo con cita previa</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-actions">
+              <a 
+                href={`https://wa.me/${locationData.phone.replace(/[^0-9]/g, '')}?text=Hola%20ACIMU%2C%20necesito%20un%20arquitecto%20en%20Quito`}
+                class="btn-whatsapp"
+                target="_blank"
+                rel="noopener"
+              >
+                Chatear por WhatsApp
+              </a>
+              <a href="/contact" class="btn-secondary-contact">
+                Agendar Reunión
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-form-cta">
+            <h3>¿Listo para iniciar?</h3>
+            <p>Obtén una cotización personalizada en minutos:</p>
+            <ol class="steps-list">
+              <li>Ingresa las características de tu proyecto</li>
+              <li>Recibe un estimado inmediato</li>
+              <li>Agenda una reunión o visita técnica</li>
+              <li>Iniciamos tu proyecto</li>
+            </ol>
+            <a href="/quoter" class="btn-primary-large">
+              Ir al Cotizador Online
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="final-cta">
+      <div class="container">
+        <h2>Transforma tus Ideas en Realidad</h2>
+        <p>
+          Únete a cientos de clientes satisfechos en Quito que confiaron en ACIMU 
+          para diseñar y construir sus proyectos.
+        </p>
+        <div class="cta-buttons-center">
+          <a href="/quoter" class="btn-primary-large">Cotizar Proyecto</a>
+          <a href="/portfolio" class="btn-secondary-large">Ver Portafolio</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</Layout>
+
+<style>
+  /* Hero */
+  .hero-location {
+    height: 60vh;
+    min-height: 500px;
+    position: relative;
+    background-image: url('https://cdn.example.com/equipo.webp');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(77, 66, 41, 0.6));
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    max-width: 800px;
+    padding: 0 var(--spacing-md);
+  }
+
+  .hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: var(--spacing-md);
+    font-weight: 700;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  /* Intro */
+  .intro-section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--color-background);
+  }
+
+  .intro-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-primary);
+  }
+
+  .intro-content {
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  .intro-content p {
+    margin-bottom: var(--spacing-md);
+  }
+
+  /* Coverage */
+  .coverage-section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--color-background-alt);
+  }
+
+  .coverage-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .coverage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+  }
+
+  .coverage-card {
+    background: var(--color-background);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-muted);
+    text-align: center;
+  }
+
+  .coverage-card h3 {
+    margin: var(--spacing-md) 0 var(--spacing-sm);
+    color: var(--color-primary);
+  }
+
+  .coverage-card p {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* Services Detailed */
+  .services-section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--color-background);
+  }
+
+  .services-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .services-detailed {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+
+  .service-detailed {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background: var(--color-background-alt);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-muted);
+  }
+
+  .service-icon {
+    color: var(--color-primary);
+  }
+
+  .service-text h3 {
+    margin: 0 0 var(--spacing-md);
+    color: var(--color-primary);
+    font-size: 1.5rem;
+  }
+
+  .service-text p {
+    line-height: 1.7;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .service-text ul {
+    margin: var(--spacing-md) 0;
+    padding-left: var(--spacing-lg);
+  }
+
+  .service-text li {
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.6;
+  }
+
+  .service-cta {
+    display: inline-block;
+    margin-top: var(--spacing-md);
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .service-cta:hover {
+    text-decoration: underline;
+  }
+
+  /* FAQ */
+  .faq-quito {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--color-background-alt);
+  }
+
+  .faq-quito h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .faq-list {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .faq-item-simple {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-muted);
+  }
+
+  .faq-item-simple:last-child {
+    border-bottom: none;
+  }
+
+  .faq-item-simple h3 {
+    font-size: 1.4rem;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .faq-item-simple p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .faq-item-simple a {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  /* Contact */
+  .contact-section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--color-background);
+  }
+
+  .contact-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--spacing-xl);
+  }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+  }
+
+  .contact-item {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+
+  .contact-item h4 {
+    margin: 0 0 var(--spacing-xs);
+    color: var(--color-primary);
+  }
+
+  .contact-item a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .contact-item a:hover {
+    color: var(--color-primary);
+  }
+
+  .contact-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .contact-form-cta {
+    background: var(--color-background-alt);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-muted);
+  }
+
+  .contact-form-cta h3 {
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-primary);
+  }
+
+  .steps-list {
+    margin: var(--spacing-lg) 0;
+    padding-left: var(--spacing-lg);
+  }
+
+  .steps-list li {
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.6;
+  }
+
+  /* Final CTA */
+  .final-cta {
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(135deg, var(--color-primary), #5a4e2e);
+    color: white;
+    text-align: center;
+  }
+
+  .final-cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .final-cta p {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .cta-buttons-center {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Buttons */
+  .btn-primary,
+  .btn-secondary,
+  .btn-whatsapp,
+  .btn-secondary-contact,
+  .btn-primary-large,
+  .btn-secondary-large {
+    display: inline-block;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .btn-whatsapp {
+    background-color: #25d366;
+    color: white;
+  }
+
+  .btn-secondary-contact {
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+  }
+
+  .btn-primary-large {
+    background-color: white;
+    color: var(--color-primary);
+    font-size: 1.1rem;
+  }
+
+  .btn-secondary-large {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    font-size: 1.1rem;
+  }
+
+  /* Hover Effects */
+  .btn-primary:hover,
+  .btn-primary-large:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary:hover {
+    background: white;
+    color: var(--color-primary);
+  }
+
+  .btn-whatsapp:hover {
+    background-color: #20bd5a;
+  }
+
+  .btn-secondary-contact:hover {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .btn-secondary-large:hover {
+    background: white;
+    color: var(--color-primary);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: 2.5rem;
+    }
+
+    .coverage-grid,
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .service-detailed {
+      grid-template-columns: 1fr;
+    }
+
+    h2 {
+      font-size: 2rem !important;
+    }
+  }
+</style>

@@ -4,6 +4,7 @@ import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://acimu.studio',
   output: 'server',
   server: {
     allowedHosts: ['cool-nicely-oriole.ngrok-free.app'],

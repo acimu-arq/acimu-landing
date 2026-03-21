@@ -7,9 +7,15 @@ import { cdn } from "@/config";
 interface Props {
   title: string;
   description: string;
+  keywords?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, keywords, canonicalUrl, ogImage } = Astro.props;
+const siteUrl = Astro.site || 'https://acimu.studio';
+const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href;
+const socialImage = ogImage || `${cdn}/equipo.webp`;
 ---
 
 <!doctype html>
@@ -19,7 +25,15 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    {keywords && <meta name="keywords" content={keywords} />}
+    <link rel="canonical" href={currentUrl} />
     <title>{title}</title>
+
+    <!-- Geo Tags para SEO Local -->
+    <meta name="geo.region" content="EC-P" />
+    <meta name="geo.placename" content="Quito" />
+    <meta name="geo.position" content="-0.330154;-78.446261" />
+    <meta name="ICBM" content="-0.330154, -78.446261" />
 
     <link
       rel="icon"
@@ -39,15 +53,19 @@ const { title, description } = Astro.props;
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={currentUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="/placeholder-social.jpg" />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:locale" content="es_EC" />
+    <meta property="og:site_name" content="ACIMU - Arquitectos Cinco + Uno" />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content="/placeholder-social.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={currentUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
 
     <link rel="preconnect" href={cdn} crossorigin />
 

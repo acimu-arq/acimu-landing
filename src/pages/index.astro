@@ -25,9 +25,51 @@ const servicesText = [
   'INGENIERIAS',
   'CONSTRUCCIÓN',
 ];
+
+// Schema.org Organization markup
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ACIMU - Arquitectos Cinco + Uno",
+  "alternateName": "ACIMU",
+  "url": "https://acimu.studio",
+  "logo": `${cdn}/menu-dark.png`,
+  "description": "Estudio de arquitectura y construcción en Quito y Sangolquí, Ecuador. Especialistas en diseño arquitectónico, construcción y legalización de proyectos.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Calle Montúfar",
+    "addressLocality": "Sangolquí",
+    "addressRegion": "Pichincha",
+    "postalCode": "170103",
+    "addressCountry": "EC"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": -0.330154,
+    "longitude": -78.446261
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+593-96-212-2527",
+    "contactType": "customer service",
+    "areaServed": "EC",
+    "availableLanguage": "Spanish"
+  },
+  "sameAs": [
+    "https://wa.me/593962122527"
+  ],
+  "priceRange": "$$"
+};
 ---
 
-<Layout title="ACIMU" description="Espacios que conectan y perduran">
+<Layout 
+  title="ACIMU - Arquitectos en Quito y Sangolquí | Diseño y Construcción" 
+  description="Estudio de arquitectura en Quito y Sangolquí. Diseño arquitectónico, construcción, aprobación de planos y legalización. Cotiza tu proyecto ahora."
+  keywords="arquitecto, arquitecto quito, arquitecto sangolqui, constructora, constructora quito, diseño arquitectónico, aprobación planos, construcción quito"
+>
+  <!-- Schema.org Markup -->
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(organizationSchema)} />
+
   <!-- Intro Animation -->
   <div id="intro-overlay">
     <img src={`${cdn}/menu-dark.png`} alt="ACIMU Logo" id="intro-logo" />
