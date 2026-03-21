@@ -23,8 +23,8 @@ const orientation =
 // Double images for seamless infinite scroll
 const displayImages =
   direction === 'left' || direction === 'up'
-    ? [...images, ...images]
-    : [...images.reverse(), ...images.reverse()];
+    ? [...images, ...images.reverse()]
+    : [...images.reverse() , ...images];
 
 // For 'right' and 'down', we reverse the animation direction in CSS
 // The array is reversed above so the content appears in the correct logical order for the reverse flow

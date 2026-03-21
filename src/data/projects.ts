@@ -21,7 +21,7 @@ const projects = [
       },
       {
         url: `${cdn}/portfolio/loya-residence/1-render-back.webp`,
-        caption: 'Render render posterior de la residencia',
+        caption: 'Render posterior de la residencia',
       },
       {
         url: `${cdn}/portfolio/loya-residence/1-render-lateral.webp`,
