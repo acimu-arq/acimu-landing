@@ -14,14 +14,16 @@ const locationData = {
 ---
 
 <Layout
-  title="Arquitecto en Quito - ACIMU | Diseño Arquitectónico y Construcción"
-  description="Arquitecto profesional en Quito. ACIMU ofrece diseño arquitectónico, construcción, aprobación de planos municipales y legalización. Atención en todo Quito y valles."
+  title="Constructora Quito | Arquitectos Quito - Arquitectura y Construcción ACIMU"
+  description="Constructora Quito y arquitectos Quito de confianza. ACIMU ofrece diseño arquitectónico, construcción de viviendas, aprobación de planos y legalización. Empresa constructora en Quito y valles."
+  keywords="constructora quito, constructora en quito, arquitectos quito, arquitecto quito, empresa constructora quito, construir casa quito, construcción quito, estudios de arquitectura quito, planos quito, aprobación planos quito"
 >
   <!-- Schema.org Service Markup -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "ACIMU - Arquitectos en Quito",
+    "@type": "HomeAndConstructionBusiness",
+    "alternateName": ["ACIMU - Constructora Quito", "ACIMU - Arquitectos en Quito"],
+    "name": "ACIMU - Constructora Quito | Arquitectura y Construcción",
     "image": `${cdn}/equipo.webp`,
     "address": {
       "@type": "PostalAddress",
@@ -47,6 +49,8 @@ const locationData = {
         "name": "Valle de los Chillos"
       }
     ],
+    "openingHours": "Mo-Fr 08:00-17:30",
+    "servesCuisine": "Construction Services",
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Servicios de Arquitectura",
@@ -81,9 +85,9 @@ const locationData = {
     <section class="hero-location">
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <h1>Arquitecto en Quito</h1>
+        <h1>Constructora Quito | Arquitectos Quito - Arquitectura y Construcción</h1>
         <p class="hero-subtitle">
-          Servicios profesionales de arquitectura y construcción en toda la ciudad
+          Constructora Quito con servicios profesionales de arquitectura, construcción y aprobación de planos en toda la ciudad
         </p>
         <div class="hero-ctas">
           <a href="/quoter" class="btn-primary">Cotizar Ahora</a>
@@ -95,21 +99,24 @@ const locationData = {
     <!-- Introducción -->
     <section class="intro-section">
       <div class="container">
-        <h2>Estudio de Arquitectura en Quito</h2>
+        <h2>Constructora Quito - ACIMU Arquitectura y Construcción</h2>
         <div class="intro-content">
           <p>
-            ¿Buscas un <strong>arquitecto en Quito</strong>? <strong>ACIMU</strong> es tu estudio de 
-            arquitectura y construcción con experiencia comprobada en proyectos residenciales, comerciales 
-            y habitacionales en toda la capital ecuatoriana y sus valles.
+            ¿Buscas una <strong>constructora Quito</strong> de confianza? <strong>ACIMU</strong> es tu 
+            <strong>constructora en Quito</strong> con experiencia comprobada en 
+            <strong>construcción de viviendas</strong>, locales comerciales y proyectos habitacionales 
+            en toda la capital ecuatoriana y sus valles.
           </p>
           <p>
-            Ofrecemos servicios integrales desde el <strong>diseño arquitectónico</strong> hasta la 
-            <strong>construcción llave en mano</strong>, incluyendo trámites de <strong>aprobación 
-            de planos</strong> en los diferentes municipios de Quito (DMQ), Rumiñahui, y más.
+            Como <strong>constructora Quito</strong> profesional, ofrecemos servicios integrales desde el 
+            <strong>diseño arquitectónico</strong> hasta la <strong>construcción llave en mano</strong>, 
+            incluyendo trámites de <strong>aprobación de planos</strong> en los municipios de 
+            Quito (DMQ), Rumiñahui, y más.
           </p>
           <p>
-            Nuestro equipo de arquitectos e ingenieros te acompaña en cada etapa: visita técnica, 
-            diseño personalizado, presupuesto transparente, construcción supervisada y entrega final.
+            Nuestro equipo de arquitectos e ingenieros como <strong>constructora Quito</strong> te acompaña 
+            en cada etapa: visita técnica, diseño personalizado, presupuesto transparente, 
+            construcción supervisada y entrega final.
           </p>
         </div>
       </div>
@@ -355,7 +362,7 @@ const locationData = {
                 <Clock size={24} />
                 <div>
                   <h4>Horario de Atención</h4>
-                  <p>Lunes a Viernes: 9:00 AM - 6:00 PM</p>
+                  <p>Lunes a Viernes: 8:00 AM - 5:30 PM</p>
                   <p>Sábados: Solo con cita previa</p>
                 </div>
               </div>
@@ -392,38 +399,22 @@ const locationData = {
         </div>
       </div>
     </section>
-
-    <!-- CTA Final -->
-    <section class="final-cta">
-      <div class="container">
-        <h2>Transforma tus Ideas en Realidad</h2>
-        <p>
-          Únete a cientos de clientes satisfechos en Quito que confiaron en ACIMU 
-          para diseñar y construir sus proyectos.
-        </p>
-        <div class="cta-buttons-center">
-          <a href="/quoter" class="btn-primary-large">Cotizar Proyecto</a>
-          <a href="/portfolio" class="btn-secondary-large">Ver Portafolio</a>
-        </div>
-      </div>
-    </section>
-
   </main>
 </Layout>
 
-<style>
+<style define:vars={{ backgroundImage: `url(${cdn}/portfolio/project-collage/miscellaneous-project-render-22.webp)` }}>
   /* Hero */
   .hero-location {
     height: 60vh;
     min-height: 500px;
     position: relative;
-    background-image: url('https://cdn.example.com/equipo.webp');
-    background-size: cover;
+    background-image: var(--backgroundImage);
+    object-fit: cover;
     background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 5rem;
+    margin-top: 10rem;
   }
 
   .hero-overlay {
@@ -445,11 +436,12 @@ const locationData = {
     font-size: 3.5rem;
     margin-bottom: var(--spacing-md);
     font-weight: 700;
+    color: white;
   }
 
   .hero-subtitle {
     font-size: 1.5rem;
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
   }
 
   .hero-ctas {

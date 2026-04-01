@@ -12,55 +12,94 @@ const locationData = {
   address: 'Calle Montúfar, Sangolquí, Quito',
   phone: '+593962122527',
   email: 'arquitectos.cinco.mas.uno@gmail.com',
-  mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d467.54907209386823!2d-78.44626132658105!3d-0.33015420661073086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d5bd16d36801eb%3A0x418fa040ccbcc435!2sARQUITECTOS%20CINCO%20%2B%20UNO%20(ACIMU)!5e1!3m2!1ses-419!2sec!4v1757714744177!5m2!1ses-419!2sec',
+  mapUrl:
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d467.54907209386823!2d-78.44626132658105!3d-0.33015420661073086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d5bd16d36801eb%3A0x418fa040ccbcc435!2sARQUITECTOS%20CINCO%20%2B%20UNO%20(ACIMU)!5e1!3m2!1ses-419!2sec!4v1757714744177!5m2!1ses-419!2sec',
   directionsUrl: 'https://maps.app.goo.gl/QmC49FoL3RrTswtt8',
 };
 ---
 
 <Layout
-  title="Arquitecto en Sangolquí - ACIMU | Diseño y Construcción"
-  description="¿Buscas arquitecto en Sangolquí? ACIMU ofrece diseño arquitectónico, construcción, legalización de planos y aprobaciones municipales. Estudio ubicado en Sangolquí, Valle de los Chillos."
+  title="Constructora Sangolquí | Arquitectos Sangolquí - Arquitectura y Construcción ACIMU"
+  description="Constructora Sangolquí y arquitectos Sangolquí de confianza. ACIMU ofrece diseño arquitectónico, construcción de casas, legalización de planos y aprobación municipal en Sangolquí y Valle de los Chillos."
+  keywords="constructora sangolqui, constructora en sangolqui, arquitectos sangolqui, arquitecto sangolqui, empresa constructora sangolqui, construir casa sangolqui, construcción sangolqui, estudios de arquitectura sangolqui, planos sangolqui"
 >
   <!-- Schema.org Local Business Markup -->
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "ArchitectsOffice",
-    "name": "ACIMU - Arquitectos Cinco + Uno",
-    "image": `${cdn}/equipo.webp`,
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Calle Montúfar",
-      "addressLocality": "Sangolquí",
-      "addressRegion": "Pichincha",
-      "addressCountry": "EC"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": -0.330154,
-      "longitude": -78.446261
-    },
-    "url": "https://acimu.studio/ubicacion/sangolqui",
-    "telephone": "+593962122527",
-    "email": "arquitectos.cinco.mas.uno@gmail.com",
-    "priceRange": "$$",
-    "areaServed": {
-      "@type": "City",
-      "name": "Sangolquí"
-    },
-    "openingHours": "Mo-Fr 09:00-18:00",
-    "sameAs": [
-      "https://wa.me/593962122527"
-    ]
-  })} />
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'HomeAndConstructionBusiness',
+      alternateName: [
+        'ACIMU - Constructora Sangolquí',
+        'ACIMU - Arquitectos Sangolquí',
+      ],
+      name: 'ACIMU - Constructora Sangolquí | Arquitectura y Construcción',
+      image: `${cdn}/equipo.webp`,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Calle Montúfar',
+        addressLocality: 'Sangolquí',
+        addressRegion: 'Pichincha',
+        addressCountry: 'EC',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: -0.330154,
+        longitude: -78.446261,
+      },
+      url: 'https://acimu.studio/ubicacion/sangolqui',
+      telephone: '+593962122527',
+      email: 'arquitectos.cinco.mas.uno@gmail.com',
+      priceRange: '$$',
+      servesCuisine: 'Construction Services',
+      areaServed: {
+        '@type': 'City',
+        name: 'Sangolquí',
+      },
+      openingHours: 'Mo-Fr 08:00-17:30',
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Servicios de Arquitectura',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Diseño Arquitectónico',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Construcción',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Aprobación de Planos Municipales',
+            },
+          },
+        ],
+      },
+      sameAs: ['https://wa.me/593962122527'],
+    })}
+  />
 
   <main>
     <!-- Hero Section -->
     <section class="hero-location">
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <h1>Arquitecto en Sangolquí</h1>
+        <h1>
+          Constructora Sangolquí | Arquitectos Sangolquí - Arquitectura y
+          Construcción
+        </h1>
         <p class="hero-subtitle">
-          Estudio de arquitectura y construcción en el Valle de los Chillos
+          Constructora Sangolquí con estudio de arquitectura y construcción en
+          el Valle de los Chillos
         </p>
         <div class="hero-ctas">
           <a href="/quoter" class="btn-primary">Cotizar Proyecto</a>
@@ -72,18 +111,26 @@ const locationData = {
     <!-- Introducción SEO -->
     <section class="intro-section">
       <div class="container">
-        <h2>Tu Arquitecto de Confianza en Sangolquí</h2>
+        <h2>Constructora Sangolquí - ACIMU Arquitectura y Construcción</h2>
         <div class="intro-content">
           <p>
-            <strong>ACIMU</strong> es tu estudio de <strong>arquitectura en Sangolquí</strong> especializado 
-            en diseño arquitectónico, construcción y legalización de planos. Con años de experiencia 
-            en el <strong>Valle de los Chillos</strong>, transformamos espacios residenciales y comerciales 
-            en proyectos únicos que conectan y perduran.
+            ¿Buscas una <strong>constructora Sangolquí</strong> de confianza? <strong
+              >ACIMU</strong
+            > es tu
+            <strong>constructora en Sangolquí</strong> especializada en
+            <strong>diseño arquitectónico</strong>, <strong
+              >construcción de viviendas</strong
+            > y legalización de planos. Con años de experiencia en el <strong
+              >Valle de los Chillos</strong
+            >, transformamos espacios residenciales y comerciales en proyectos
+            únicos.
           </p>
           <p>
-            Nuestro equipo de <strong>arquitectos profesionales</strong> en Sangolquí te acompaña desde 
-            el diseño inicial hasta la entrega final, incluyendo trámites municipales, aprobación de planos 
-            y construcción completa.
+            Como <strong>constructora Sangolquí</strong> profesional, nuestro equipo
+            de arquitectos e ingenieros te acompaña desde el diseño inicial hasta
+            la entrega final, incluyendo trámites municipales ante el <strong
+              >Municipio de Rumiñahui</strong
+            >, aprobación de planos y construcción completa.
           </p>
         </div>
       </div>
@@ -97,28 +144,42 @@ const locationData = {
           <div class="service-card">
             <Building2 size={40} />
             <h3>Diseño Arquitectónico</h3>
-            <p>Planos arquitectónicos personalizados para tu proyecto residencial o comercial en Sangolquí.</p>
+            <p>
+              Planos arquitectónicos personalizados para tu proyecto residencial
+              o comercial en Sangolquí.
+            </p>
             <a href="/quoter" class="service-link">Cotizar diseño →</a>
           </div>
 
           <div class="service-card">
             <Building2 size={40} />
             <h3>Construcción</h3>
-            <p>Construcción completa desde obra negra hasta llave en mano con materiales de calidad.</p>
-            <a href="/quoter" class="service-link">Ver precios de construcción →</a>
+            <p>
+              Construcción completa desde obra negra hasta llave en mano con
+              materiales de calidad.
+            </p>
+            <a href="/quoter" class="service-link"
+              >Ver precios de construcción →</a
+            >
           </div>
 
           <div class="service-card">
             <Building2 size={40} />
             <h3>Legalización y Aprobación</h3>
-            <p>Tramitamos permisos municipales y aprobación de planos en Sangolquí y Rumiñahui.</p>
+            <p>
+              Tramitamos permisos municipales y aprobación de planos en
+              Sangolquí y Rumiñahui.
+            </p>
             <a href="/contact#faq" class="service-link">Más información →</a>
           </div>
 
           <div class="service-card">
             <Building2 size={40} />
             <h3>Remodelaciones</h3>
-            <p>Renovamos y ampliamos espacios existentes con diseño funcional y estético.</p>
+            <p>
+              Renovamos y ampliamos espacios existentes con diseño funcional y
+              estético.
+            </p>
             <a href="/contact" class="service-link">Consultar →</a>
           </div>
         </div>
@@ -133,36 +194,44 @@ const locationData = {
           <div class="faq-item-simple">
             <h3>¿Cuánto cuesta un arquitecto en Sangolquí?</h3>
             <p>
-              El costo del diseño arquitectónico varía según el área y complejidad del proyecto. 
-              En ACIMU manejamos tarifas competitivas por m² con presupuestos transparentes. 
-              <a href="/quoter">Usa nuestro cotizador online</a> para obtener un estimado inmediato.
+              El costo del diseño arquitectónico varía según el área y
+              complejidad del proyecto. En ACIMU manejamos tarifas competitivas
+              por m² con presupuestos transparentes.
+              <a href="/quoter">Usa nuestro cotizador online</a> para obtener un estimado
+              inmediato.
             </p>
           </div>
 
           <div class="faq-item-simple">
             <h3>¿Cuánto cuesta la aprobación de planos en Sangolquí?</h3>
             <p>
-              La aprobación de planos en el Municipio de Rumiñahui (Sangolquí) incluye tasas municipales 
-              y nuestros honorarios profesionales. El proceso toma entre 60-90 días laborables. 
-              Contáctanos para un presupuesto detallado según tu proyecto.
+              La aprobación de planos en el Municipio de Rumiñahui (Sangolquí)
+              incluye tasas municipales y nuestros honorarios profesionales. El
+              proceso toma entre 60-90 días laborables. Contáctanos para un
+              presupuesto detallado según tu proyecto.
             </p>
           </div>
 
           <div class="faq-item-simple">
             <h3>¿Ofrecen servicio de construcción en Sangolquí?</h3>
             <p>
-              Sí, ofrecemos construcción completa en Sangolquí y el Valle de los Chillos. 
-              Trabajamos con personal capacitado y supervisamos cada etapa del proyecto. 
-              Consulta nuestros <a href="/quoter">precios por m² según tipo de obra</a>.
+              Sí, ofrecemos construcción completa en Sangolquí y el Valle de los
+              Chillos. Trabajamos con personal capacitado y supervisamos cada
+              etapa del proyecto. Consulta nuestros <a href="/quoter"
+                >precios por m² según tipo de obra</a
+              >.
             </p>
           </div>
 
           <div class="faq-item-simple">
-            <h3>¿Qué pasa si el municipio me multó por construir sin permiso?</h3>
+            <h3>
+              ¿Qué pasa si el municipio me multó por construir sin permiso?
+            </h3>
             <p>
-              Podemos ayudarte con la regularización de construcciones existentes. El proceso incluye 
-              levantamiento arquitectónico, diseño de planos conformes a normativa vigente y trámites 
-              ante el Municipio de Rumiñahui para levantar multas y obtener permisos.
+              Podemos ayudarte con la regularización de construcciones
+              existentes. El proceso incluye levantamiento arquitectónico,
+              diseño de planos conformes a normativa vigente y trámites ante el
+              Municipio de Rumiñahui para levantar multas y obtener permisos.
             </p>
           </div>
         </div>
@@ -195,7 +264,8 @@ const locationData = {
               <Mail size={24} />
               <div>
                 <h4>Email</h4>
-                <a href={`mailto:${locationData.email}`}>{locationData.email}</a>
+                <a href={`mailto:${locationData.email}`}>{locationData.email}</a
+                >
               </div>
             </div>
 
@@ -203,12 +273,12 @@ const locationData = {
               <Clock size={24} />
               <div>
                 <h4>Horario</h4>
-                <p>Lunes a Viernes: 9:00 AM - 6:00 PM</p>
+                <p>Lunes a Viernes: 8:00 AM - 5:30 PM</p>
               </div>
             </div>
 
             <div class="cta-buttons">
-              <a 
+              <a
                 href={`https://wa.me/${locationData.phone.replace(/[^0-9]/g, '')}?text=Hola%20ACIMU%2C%20necesito%20un%20arquitecto%20en%20Sangolqu%C3%AD`}
                 class="btn-whatsapp"
                 target="_blank"
@@ -216,7 +286,7 @@ const locationData = {
               >
                 Chatear por WhatsApp
               </a>
-              <a href="/contact" class="btn-secondary">
+              <a href="/contact" class="btn-secondary-contact">
                 Agendar Visita al Estudio
               </a>
             </div>
@@ -228,9 +298,8 @@ const locationData = {
               class="map"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
-              allowfullscreen
-            ></iframe>
-            <a 
+              allowfullscreen></iframe>
+            <a
               href={locationData.directionsUrl}
               target="_blank"
               rel="noopener"
@@ -242,36 +311,26 @@ const locationData = {
         </div>
       </div>
     </section>
-
-    <!-- Llamado a la acción final -->
-    <section class="final-cta">
-      <div class="container">
-        <h2>¿Listo para Iniciar tu Proyecto en Sangolquí?</h2>
-        <p>
-          Obtén una cotización gratuita y personalizada para tu proyecto arquitectónico o de construcción.
-        </p>
-        <div class="cta-buttons-center">
-          <a href="/quoter" class="btn-primary-large">Cotizar mi Proyecto</a>
-          <a href="/contact" class="btn-secondary-large">Agendar Reunión</a>
-        </div>
-      </div>
-    </section>
   </main>
 </Layout>
 
-<style>
+<style
+  define:vars={{
+    backgroundImage: `url(${cdn}/portfolio/project-collage/miscellaneous-project-render-22.webp)`,
+  }}
+>
   /* Hero Section */
   .hero-location {
     height: 60vh;
     min-height: 500px;
     position: relative;
-    background-image: url('https://cdn.example.com/equipo.webp');
-    background-size: cover;
+    background-image: var(--backgroundImage);
+    object-fit: cover;
     background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 5rem;
+    margin-top: 10rem;
   }
 
   .hero-overlay {
@@ -280,7 +339,11 @@ const locationData = {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(77, 66, 41, 0.6));
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.7),
+      rgba(77, 66, 41, 0.6)
+    );
   }
 
   .hero-content {
@@ -293,14 +356,15 @@ const locationData = {
   }
 
   .hero-content h1 {
-    font-size: 3.5rem;
+    font-size: 3rem;
     margin-bottom: var(--spacing-md);
     font-weight: 700;
+    color: white;
   }
 
   .hero-subtitle {
     font-size: 1.5rem;
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
     opacity: 0.95;
   }
 
@@ -366,7 +430,9 @@ const locationData = {
     padding: var(--spacing-lg);
     border-radius: var(--border-radius);
     border: 1px solid var(--color-muted);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
   }
 
   .service-card:hover {
@@ -518,6 +584,7 @@ const locationData = {
   /* Buttons */
   .btn-primary,
   .btn-secondary,
+  .btn-secondary-contact,
   .btn-whatsapp {
     display: inline-block;
     padding: var(--spacing-md) var(--spacing-xl);
@@ -553,8 +620,19 @@ const locationData = {
     color: white;
   }
 
+  btn-secondary-contact {
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+  }
+
   .btn-whatsapp:hover {
     background-color: #20bd5a;
+  }
+
+  .btn-secondary-contact:hover {
+    background-color: var(--color-primary);
+    color: white;
   }
 
   .cta-buttons {
@@ -646,6 +724,11 @@ const locationData = {
 
     .services-grid {
       grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 425px) {
+    .hero-content h1 {
+      font-size: 1.5rem;
     }
   }
 </style>
