@@ -36,16 +36,21 @@ const socialIcons: Record<string, any> = {
           <header class="profile-header">
             <h1 class="name">{member.name}</h1>
             <p class="role">{member.rol}</p>
-            <p class="approach">{member.approach}</p>
           </header>
 
           <div class="details-section">
-            <div class="detail-item">
-              <span class="value">{member.degree}</span>
-            </div>
-            <div class="detail-item">
-              <span class="value">{member.university}</span>
-            </div>
+            {member.education.map((edu, index) => (
+              <div class="education-item">
+                <div class="timeline-node">
+                  <div class="circle"></div>
+                  {index < member.education.length - 1 && <div class="line"></div>}
+                </div>
+                <div class="education-content">
+                  <span class="degree">{edu.degree}</span>
+                  <span class="university">{edu.university}</span>
+                </div>
+              </div>
+            ))}
           </div>
 
           <div class="about-section">
@@ -141,21 +146,63 @@ const socialIcons: Record<string, any> = {
   }
 
   .details-section {
-    display: grid;
-    gap: var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
     font-family: var(--century-gothic);
   }
 
-  .detail-item {
+  .education-item {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-xs);
+    gap: var(--spacing-md);
+    position: relative;
   }
 
-  .label {
-    font-weight: bold;
-    color: var(--color-primary);
+  .timeline-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .line {
+    width: 2px;
+    flex: 1;
+    background-color: var(--color-primary);
+    margin-top: var(--spacing-xs);
+    min-height: 40px;
+  }
+
+  .education-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    padding-top: 0;
+  }
+
+  .degree {
+    font-weight: 600;
+    color: var(--color-text);
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  .university {
+    color: var(--color-text-light);
+    font-size: 0.85rem;
+    line-height: 1.4;
   }
 
   .about-section {

@@ -1,9 +1,12 @@
 ---
 import { Layers, Menu, X } from "lucide-astro";
 import { cdn } from "@/config";
+
+const currentPath = Astro.url.pathname;
+const isPortfolio = currentPath.includes('/portfolio');
 ---
 
-<header>
+<header class:list={[{ 'bottom-border': isPortfolio }]}>
   <nav class="container">
     <a href="/" class="logo">
       <div class="name-container">
@@ -63,6 +66,10 @@ import { cdn } from "@/config";
     top: 0;
     border-radius: 0;
     background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-muted);
+  }
+
+  header.bottom-border {
     border-bottom: 1px solid var(--color-muted);
   }
 
