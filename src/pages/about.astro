@@ -4,12 +4,10 @@ import Layout from '@/layouts/Layout.astro';
 import { cdn } from '@/config';
 
 const teamMembers = [
-  { name: 'Lizeth Narvaez', image: 'lizeth_narvaez.webp', link: '/team/lizeth-narvaez' },
   { name: 'Dayana Chiguano', image: 'dayana_chiguano.webp', link: '/team/dayana-chiguano' },
+  { name: 'Lizeth Narvaez', image: 'lizeth_narvaez.webp', link: '/team/lizeth-narvaez' },
   { name: 'Tatiana Paucar', image: 'tatiana_paucar.webp', link: '/team/tatiana-paucar' },
   { name: 'Esteban Caiza', image: 'esteban_caiza.webp', link: '/team/esteban-caiza' },
-  { name: 'Byron Peralta', image: 'byron_peralta.webp', link: '/team/byron-peralta' },
-  { name: 'Bryan Silva', image: 'bryan_silva.webp', link: '' },
 ];
 ---
 
@@ -32,7 +30,7 @@ const teamMembers = [
         <div class="intro-text-block">
           <p>
             En <strong>ARQUITECTOS CINCO+UNO</strong> buscamos plasmar las ideas de nuestros clientes
-            en espacios únicos. Somos un equipo de seis profesionales
+            en espacios únicos. Somos un equipo de cuatro profesionales
             enfocados en crear soluciones eficientes e innovadoras que se ajusten a
             los requerimientos de cada persona.
           </p>
@@ -203,7 +201,7 @@ const teamMembers = [
     width: 100%;
     height: 130%; /* Taller than container for parallax effect */
     object-fit: cover;
-    object-position: top center;
+    object-position: center;
     position: absolute;
     top: -15%; /* Center the overflow */
     left: 0;
